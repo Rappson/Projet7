@@ -1,7 +1,7 @@
 function Header() {
     return <header>
         <div id="connect" className="d-flex flex-row align-items-center bg-success p-3">
-            <a href="../../public/index.html"><img src="../images/icon.png" alt='logo' id="icon-connect" /></a>
+            <a href="../../public/index.html"><img src="images/icon.png" alt='logo' id="icon-connect"/></a>
 
             <form className="d-flex flex-row">
             <div id="connect-input" className='m-2'>
