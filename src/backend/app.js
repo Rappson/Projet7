@@ -33,15 +33,4 @@ connection.query(
 )
 
 
-
-/* const emailConnect = document.getElementById('email');
-const passwordConnect = document.getElementById('password')
-
-const connexion = connection.query(
-    `select * from user where email = ${emailConnect.value}`,
-    function(err, result, fields){
-        console.log(result);
-    }
-) */
-
 module.exports = app;
