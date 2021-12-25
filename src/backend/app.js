@@ -9,7 +9,7 @@ const env = process.env;
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: `${env.DATABASE_PASS}`,
+    password: `${process.env.DATABASE_PASS}`,
     database: 'groupomania'
   });
 
@@ -25,12 +25,15 @@ app.use((req, res, next) => {
     next();
 });
 
-connection.query(
+
+// EXEMPLE DE REZQUETE
+
+/* connection.query(
     'SELECT * FROM user',
     function(err, result, fields){
         console.log(result);
     }
 )
-
+ */
 
 module.exports = app;
