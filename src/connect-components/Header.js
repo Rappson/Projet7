@@ -16,7 +16,7 @@ function Header() {
     const handleSubmit = async (event) => {
         event.preventDefault()
         //function to submit
-        const response = await fetch('http://localhost:3000/api/users/signup', 
+        const response = await fetch('http://localhost:3000/api/users/connect', 
         {method: 'POST',
          headers: {'accept': 'application/json', 'content-type' : 'applcation/json'},
          body: JSON.stringify(state)
@@ -32,7 +32,7 @@ function Header() {
 
 
     return <header>
-        <div id="connect" className="d-flex flex-row align-items-center bg-success p-3">
+        <div id="connect" className="d-flex flex-row align-items-center p-3">
             <a href="localhost:3001"><img src="images/icon.png" alt='logo' id="icon-connect" /></a>
 
             <form className="d-flex flex-row" onSubmit={handleSubmit}>

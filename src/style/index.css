@@ -20,3 +20,27 @@ code {
 #welcome-icon{
   height: 30rem;
 }
+
+#connect {
+  border: 1px solid black;
+
+  background-color: #6c757d;
+}
+
+#sign-in{
+  border: 1px solid black;
+
+  background-color: #6c757d;
+}
+
+#complete{
+  background-color: #00cdcd;
+}
+
+input{
+  margin: 4px;
+}
+
+#message{
+  text-shadow: 3.5px 3.5px rgb(78 78 78);
+}
