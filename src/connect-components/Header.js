@@ -13,9 +13,21 @@ function Header() {
             [ event.target.name ]: event.target.value
         }));
     }
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
-        console.log(state);
+        //function to submit
+        const response = await fetch('http://localhost:3000/api/users/signup', 
+        {method: 'POST',
+         headers: {'accept': 'application/json', 'content-type' : 'applcation/json'},
+         body: JSON.stringify(state)
+        })
+        const json = await response.json()
+        if (response.ok){
+            console.log(response);
+        }
+        else {
+            console.log('erreur');
+        }
     }
 
 

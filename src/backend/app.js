@@ -5,6 +5,9 @@ const mysql = require('mysql2');
 const dotenv = require('dotenv').config();
 const env = process.env;
 
+//ROUTES
+const userRoutes = require('./routes/user');
+
 
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -35,5 +38,7 @@ app.use((req, res, next) => {
     }
 )
  */
+
+app.use('/api/users', userRoutes);
 
 module.exports = app;
