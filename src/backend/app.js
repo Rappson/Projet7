@@ -9,7 +9,7 @@ const env = process.env;
 const userRoutes = require('./routes/user');
 
 
-const connection = mysql.createConnection({
+exports.connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: `${process.env.DATABASE_PASS}`,
@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 });
 
 
-// EXEMPLE DE REZQUETE
+// EXEMPLE DE REQUETE
 
 /* connection.query(
     'SELECT * FROM user',

@@ -7,10 +7,10 @@ function Header() {
         password: ""
     });
 
-    const handleChange = (event) => {
+    const handleChange = (e) => {
         setState((prevProps) => ({
             ...prevProps,
-            [ event.target.name ]: event.target.value
+            [ e.target.name ]: e.target.value
         }));
     }
     const handleSubmit = async (event) => {
