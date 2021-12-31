@@ -8,14 +8,6 @@ const env = process.env;
 //ROUTES
 const userRoutes = require('./routes/user');
 
-
-exports.connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: `${process.env.DATABASE_PASS}`,
-    database: 'groupomania'
-  });
-
 const app = express();
 
 app.use(express.json());
