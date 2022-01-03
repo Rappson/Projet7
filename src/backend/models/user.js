@@ -18,6 +18,9 @@ class User {
 
         return db.execute(sql);
     }
+    connect(){
+        let sql = `select * from user where email = ${this.email}`
+    }
 
 }
 

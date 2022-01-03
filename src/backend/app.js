@@ -3,7 +3,6 @@ const mysql = require('mysql2');
 
 // VARIABLES D'ENVIRONNEMENT
 const dotenv = require('dotenv').config();
-const env = process.env;
 
 //ROUTES
 const userRoutes = require('./routes/user');
@@ -31,6 +30,6 @@ app.use((req, res, next) => {
 )
  */
 
-app.use('/api/users', userRoutes);
+app.use('/api/auth', userRoutes);
 
 module.exports = app;
