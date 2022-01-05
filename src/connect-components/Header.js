@@ -1,4 +1,5 @@
-import react, { useState } from 'react';
+import { urlBase } from '../url';
+import { useState } from 'react';
 
 function Header() {
 
@@ -16,12 +17,11 @@ function Header() {
     const handleSubmit = async (event) => {
         event.preventDefault()
         //function to submit
-        const response = await fetch('http://localhost:3000/api/users/connect', 
+        const response = await fetch(urlBase + '/auth/login', 
         {method: 'POST',
          headers: {'accept': 'application/json', 'content-type' : 'applcation/json'},
          body: JSON.stringify(state)
         })
-        const json = await response.json()
         if (response.ok){
             console.log(response);
         }

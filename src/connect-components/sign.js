@@ -1,10 +1,11 @@
+import { urlBase } from "../url";
 import { useState } from "react";
 
 function SignIn() {
 
     const [state, setState] = useState({
-        nom: "",
-        prenom: "",
+        name: "",
+        firstName: "",
         email: "",
         birthday: "",
         password: ""
@@ -17,7 +18,7 @@ function SignIn() {
         }));
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
         let data = JSON.stringify(state)
         console.log(data);
@@ -29,10 +30,11 @@ function SignIn() {
             },
             body: JSON.stringify({ ...state })
         };
-        const response = await fetch('http://localhost:3000/api/users/signup', init)
-        const json = await response.json()
+        const response = fetch(urlBase + `/auth/signup`, init)
         if (response.ok) {
-            response.send()
+            // react-router-dom
+
+            // reaction lorsque l'envoi a la base de donnée est un succé 
         } else {
             console.log("erreur");
         }
@@ -47,11 +49,11 @@ function SignIn() {
             <form className="mx-5" onSubmit={handleSubmit}>
 
                 <div id="name" className="mt-3">
-                    <label htmlFor="nom" className="text-white">Nom&ensp;</label>
-                    <input type="text" id="nom" className="mr-1" name="nom" value={state.nom} onChange={handleChange} />
+                    <label htmlFor="name" className="text-white">Nom&ensp;</label>
+                    <input type="text" id="name" className="mr-1" name="name" value={state.name} onChange={handleChange} />
 
-                    <label htmlFor='prenom' className="text-white">Prénom&ensp;</label>
-                    <input type="text" id="prenom" name="prenom" value={state.prenom} onChange={handleChange} />
+                    <label htmlFor='firstName' className="text-white">Prénom&ensp;</label>
+                    <input type="text" id="firstName" name="firstName" value={state.firstName} onChange={handleChange} />
                 </div>
 
                 <div id="email" className="mt-2 mb-2">
