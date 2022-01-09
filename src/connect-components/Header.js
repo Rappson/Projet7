@@ -20,22 +20,24 @@ function Header() {
     }
 
     //function to submit
-    const handleSubmit = async (event) => {
-        event.preventDefault()
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        let init = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'accept': 'application/json'
+            },
+            body: JSON.stringify(state)};
 
-        const response = await fetch(urlBase + '/auth/login',
-            {
-                method: 'POST',
-                headers: { 'accept': 'application/json', 'content-type': 'applcation/json' },
-                body: JSON.stringify(state)
-            })
+        const response = fetch(urlBase + `/auth/login`, init)
 
         // reaction lorsque l'envoi a la base de donnée est un succé
         if (response.ok) {
-            console.log(response);
+            console.log('cool');
         }
         else {
-            console.log('erreur');
+            console.log('not cool');
         }
     }
 

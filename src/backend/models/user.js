@@ -22,10 +22,17 @@ class User {
 
         return db.execute(sql);
     }
-/* fonction sql : 
-verifier si les données renseignées pas l'utilisateur correspondent à une donnée dans la BDD */
-    connect(){
+
+    /* fonction sql : 
+    verifier si les données renseignées pas l'utilisateur correspondent à une donnée dans la BDD 
+    
+    
+    ETAPES :
+    je dois envoyer les données du body et les comparer avec l'élément correspondabt de la BDD
+    */
+    findOne() {
         let sql = `select * from user where email = ${this.email}`
+        return db.execute(sql);
     }
 
 }

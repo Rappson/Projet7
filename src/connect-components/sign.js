@@ -23,15 +23,13 @@ function SignIn() {
     //function to submit
     const handleSubmit = (e) => {
         e.preventDefault()
-        let data = JSON.stringify(state)
-        console.log(data);
         let init = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'accept': 'application/json'
             },
-            body: data
+            body: JSON.stringify(state)
         };
         const response = fetch(urlBase + `/auth/signup`, init)
         if (response.ok) {
