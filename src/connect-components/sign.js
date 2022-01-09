@@ -2,8 +2,8 @@ import { urlBase } from "../url";
 import { useState } from "react";
 
 function SignIn() {
-
-    const [state, setState] = useState({
+    // initialisation de state
+    const [ state, setState ] = useState({
         name: "",
         firstName: "",
         email: "",
@@ -11,13 +11,16 @@ function SignIn() {
         password: ""
     })
 
+    /* variable pour recuperer les données et les envoyer dans le state
+ lorsque l'input detecte un changement*/
     const handleChange = (e) => {
         setState((prevProps) => ({
             ...prevProps,
-            [e.target.name]: [e.target.value]
+            [ e.target.name ]: e.target.value
         }));
     }
 
+    //function to submit
     const handleSubmit = (e) => {
         e.preventDefault()
         let data = JSON.stringify(state)
@@ -28,7 +31,7 @@ function SignIn() {
                 'Content-Type': 'application/json',
                 'accept': 'application/json'
             },
-            body: JSON.stringify({ ...state })
+            body: data
         };
         const response = fetch(urlBase + `/auth/signup`, init)
         if (response.ok) {
@@ -45,7 +48,7 @@ function SignIn() {
         <div className='p-5'>
             <div id="message" className="h2 mx-5 text-white">S'inscrire</div>
 
-
+            {/* formulaire */}
             <form className="mx-5" onSubmit={handleSubmit}>
 
                 <div id="name" className="mt-3">

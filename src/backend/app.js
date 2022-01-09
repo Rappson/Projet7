@@ -8,10 +8,9 @@ const dotenv = require('dotenv').config();
 const userRoutes = require('./routes/user');
 
 const app = express();
-
 app.use(express.json());
 
-
+// systeme CORS
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -20,16 +19,7 @@ app.use((req, res, next) => {
 });
 
 
-// EXEMPLE DE REQUETE
-
-/* connection.query(
-    'SELECT * FROM user',
-    function(err, result, fields){
-        console.log(result);
-    }
-)
- */
-
+// routes de connexion/inscription
 app.use('/api/auth', userRoutes);
 
 module.exports = app;

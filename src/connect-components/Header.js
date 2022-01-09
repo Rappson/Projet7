@@ -3,26 +3,35 @@ import { useState } from 'react';
 
 function Header() {
 
+    // initialisation de state
     const [ state, setState ] = useState({
         email: "",
         password: ""
     });
 
+    /* variable pour recuperer les données
+     et les envoyer dans le state
+     lorsque l'input detecte un changement*/
     const handleChange = (e) => {
         setState((prevProps) => ({
             ...prevProps,
             [ e.target.name ]: e.target.value
         }));
     }
+
+    //function to submit
     const handleSubmit = async (event) => {
         event.preventDefault()
-        //function to submit
-        const response = await fetch(urlBase + '/auth/login', 
-        {method: 'POST',
-         headers: {'accept': 'application/json', 'content-type' : 'applcation/json'},
-         body: JSON.stringify(state)
-        })
-        if (response.ok){
+
+        const response = await fetch(urlBase + '/auth/login',
+            {
+                method: 'POST',
+                headers: { 'accept': 'application/json', 'content-type': 'applcation/json' },
+                body: JSON.stringify(state)
+            })
+
+        // reaction lorsque l'envoi a la base de donnée est un succé
+        if (response.ok) {
             console.log(response);
         }
         else {
@@ -35,6 +44,7 @@ function Header() {
         <div id="connect" className="d-flex flex-row align-items-center p-3">
             <a href="localhost:3001"><img src="images/icon.png" alt='logo' id="icon-connect" /></a>
 
+            {/* formulaire */}
             <form className="d-flex flex-row" onSubmit={handleSubmit}>
                 <div id="connect-input" className='m-2'>
                     <label htmlFor="email" className='m-2 text-white'>Email</label>
