@@ -30,8 +30,8 @@ class User {
     ETAPES :
     je dois envoyer les données du body et les comparer avec l'élément correspondabt de la BDD
     */
-    findOne() {
-        let sql = `select * from user where email = ${this.email}`
+    connect(email) {
+        let sql = `select * from user where email = '${email}'`
         return db.execute(sql);
     }
 

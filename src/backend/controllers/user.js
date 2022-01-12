@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const db = require('../config/db')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -36,19 +37,27 @@ exports.login = (req, res, next) => {
     /* findOne va recuperer le body que l'utilisateur a indiquer dans les champs connect 
     et FO va envoyer les données au BDD,
     avec bcrypt on va comparer les données  */
-    User.findOne({ email : req.body.email })
+
+    console.log(req.body.email);
+
+    let sql = `select * from user where email = '${req.body.email}'`;
+    db.execute(sql)
     .then(user => {
+        const acount = JSON.stringify(user)
         /* SI aucun utilisateur n'a été trouvé */
-        if(!user){
+        if(!acount){
+            console.log("probleme dans l'email");
             return res.status(401).json({ error : 'email incorrect !'});
         }
 
         /* SINON comparer les deux mdp */
-        bcrypt.compare(req.body.password, user.password)
+        let userPassword = user[0][0].password;
+        bcrypt.compare(req.body.password, userPassword)
         .then(valid => {
 
             /* SI le mdp n'est pas valide */
             if(!valid){
+                console.log("probleme dans le mot de passe");
                 return res.status(401).json({ error : 'mot de passe incorrect !' });
             }
             res.status(200).json({
@@ -60,8 +69,14 @@ exports.login = (req, res, next) => {
                 )
             });
         })
-        .catch(error => res.status(500).json({ error }))
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({ error })
+        })
     })
-    .catch(error => res.status(500).json({ error }))
+    .catch(error => {
+        console.log(error);
+        res.status(500).json({ error })
+    })
 }
 
