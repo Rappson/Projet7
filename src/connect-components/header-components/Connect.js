@@ -1,5 +1,8 @@
 import { urlBase } from '../../url';
 import { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes as Switch, Link } from "react-router-dom";
+
+const axios = require('axios');
 
 function Connect() {
 
@@ -30,7 +33,10 @@ function Connect() {
             },
             body: JSON.stringify(state)};
 
-        const response = fetch(urlBase + `/auth/login`, init)
+/*         const response = axios.post(urlBase + `/auth/login`,{
+            state
+        }) */
+       const response = fetch(urlBase + `/auth/login`, init);
 
         // reaction lorsque l'envoi a la base de donnée est un succé
         if (response.ok) {
