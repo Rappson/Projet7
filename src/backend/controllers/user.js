@@ -38,45 +38,45 @@ exports.login = (req, res, next) => {
     et FO va envoyer les données au BDD,
     avec bcrypt on va comparer les données  */
 
-    console.log(req.body.email);
 
     let sql = `select * from user where email = '${req.body.email}'`;
     db.execute(sql)
-    .then(user => {
-        const acount = JSON.stringify(user)
-        /* SI aucun utilisateur n'a été trouvé */
-        if(!acount){
-            console.log("probleme dans l'email");
-            return res.status(401).json({ error : 'email incorrect !'});
-        }
+        .then(([ rows ]) => {
+            const user = rows[ 0 ]
 
-        /* SINON comparer les deux mdp */
-        let userPassword = user[0][0].password;
-        bcrypt.compare(req.body.password, userPassword)
-        .then(valid => {
-
-            /* SI le mdp n'est pas valide */
-            if(!valid){
-                console.log("probleme dans le mot de passe");
-                return res.status(401).json({ error : 'mot de passe incorrect !' });
+            /* SI aucun utilisateur n'a été trouvé */
+            if (!user) {
+                console.log("probleme dans l'email");
+                return res.status(401).json({ error: 'email incorrect !' });
             }
-            res.status(200).json({
-                userId : user.id,
-                token : jwt.sign(
-                    {userId: user.id},
-                    `${process.env.TOKEN_SECRET}`,
-                    { expiresIn: '24h' }
-                )
-            });
+
+            /* SINON comparer les deux mdp */
+            let userPassword = user.password;
+            bcrypt.compare(req.body.password, userPassword)
+                .then(valid => {
+
+                    /* SI le mdp n'est pas valide */
+                    if (!valid) {
+                        console.log("probleme dans le mot de passe");
+                        return res.status(401).json({ error: 'mot de passe incorrect !' });
+                    }
+                    res.status(200).json({
+                        userId: user.id,
+                        token: jwt.sign(
+                            { userId: user.id },
+                            `${process.env.TOKEN_SECRET}`,
+                            { expiresIn: '24h' }
+                        )
+                    });
+                })
+                .catch(error => {
+                    console.log(error);
+                    res.status(500).json({ error })
+                })
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({ error })
+            res.status(500).json({ error : "serveur introuvable !" })
         })
-    })
-    .catch(error => {
-        console.log(error);
-        res.status(500).json({ error })
-    })
 }
 
