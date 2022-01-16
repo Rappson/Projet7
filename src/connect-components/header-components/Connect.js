@@ -1,7 +1,10 @@
 import { urlBase } from '../../url';
 import { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes as Switch, Link } from "react-router-dom";
+import { connectUrl } from '../../url';
 
+// eslint-disable-next-line
+import { BrowserRouter as Router, Route, Routes as Switch, Link } from "react-router-dom";
+// eslint-disable-next-line
 const axios = require('axios');
 
 function Connect() {
@@ -35,22 +38,29 @@ function Connect() {
 
 /*         const response = axios.post(urlBase + `/auth/login`,{
             state
-        }) */
-       const response = fetch(urlBase + `/auth/login`, init);
-
-        // reaction lorsque l'envoi a la base de donnée est un succé
+        }) 
+        
+        test.url@test.com
+        */
+       fetch(urlBase + `/auth/login`, init)
+       .then(response => {
+           console.log(response.ok);
+            // reaction lorsque l'envoi a la base de donnée est un succés
         if (response.ok) {
-            console.log('cool');
+            document.location.href='http://localhost:3000/homepage';
         }
         else {
-            console.log('not cool');
+            document.location.href='http://localhost:3000/error';
         }
+       })
+
+       
     }
 
 
     return <header>
         <div id="connect" className="d-flex flex-row align-items-center p-3">
-            <a href="localhost:3001"><img src="images/icon.png" alt='logo' id="icon-connect" /></a>
+            <a href={connectUrl}><img src="images/icon-left-font-monochrome-white.png" alt='logo' id="icon-connect" /></a>
 
             {/* formulaire */}
             <form className="d-flex flex-row" onSubmit={handleSubmit}>
