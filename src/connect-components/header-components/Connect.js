@@ -28,33 +28,14 @@ function Connect() {
     //function to submit
     const handleSubmit = (e) => {
         e.preventDefault()
-        let init = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'accept': 'application/json'
-            },
-            body: JSON.stringify(state)};
 
-/*         const response = axios.post(urlBase + `/auth/login`,{
-            state
-        }) 
-        
-        test.url@test.com
-        */
-       fetch(urlBase + `/auth/login`, init)
-       .then(response => {
-           console.log(response.ok);
-            // reaction lorsque l'envoi a la base de donnée est un succés
-        if (response.ok) {
-            document.location.href='http://localhost:3000/homepage';
-        }
-        else {
-            document.location.href='http://localhost:3000/error';
-        }
-       })
+        axios.post(urlBase + `/auth/login`, state)
+        .then(() => {
+            document.location.href = 'http://localhost:3000/homepage';
+        })
+        .catch(() => document.location.href = 'http://localhost:3000/error')
 
-       
+        /*       test.url@test.com      */
     }
 
 

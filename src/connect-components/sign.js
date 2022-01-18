@@ -1,5 +1,6 @@
 import { urlBase } from "../url";
 import { useState } from "react";
+const axios = require('axios')
 
 function SignIn() {
     // initialisation de sign
@@ -23,22 +24,13 @@ function SignIn() {
     //function to submit
     const handleSubmit = (e) => {
         e.preventDefault()
-        let init = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'accept': 'application/json'
-            },
-            body: JSON.stringify(sign)
-        };
-        const response = fetch(urlBase + `/auth/signup`, init)
-        if (response.ok) {
-            // react-router-dom
-
-            // reaction lorsque l'envoi a la base de donnée est un succé 
-        } else {
-            console.log("erreur");
-        }
+        axios.post(urlBase + `/auth/signup`, sign)
+        .then(() => {
+            document.location.href = 'http://localhost:3000/homepage';
+        })
+        .catch((error) => {
+            console.log(error);
+        })
 
     }
 
