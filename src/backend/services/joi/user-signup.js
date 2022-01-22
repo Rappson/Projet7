@@ -5,14 +5,14 @@ module.exports = Joi.object({
     .alphanum()
     .required(),
 
-    firstName:Joi.string
+    firstName:Joi.string()
     .alphanum()
     .required(),
 
-    mail: Joi.string()
+    email: Joi.string()
     .pattern(/[^+-<>{}()]/)
     .email()
-    .required,
+    .required(),
     
     birthday: Joi.required(),
 

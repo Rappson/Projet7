@@ -4,22 +4,22 @@ import { connectUrl } from '../../url';
 
 // eslint-disable-next-line
 import { BrowserRouter as Router, Route, Routes as Switch, Link } from "react-router-dom";
-// eslint-disable-next-line
+
 const axios = require('axios');
 
 function Connect() {
 
     // initialisation de state
-    const [ state, setState ] = useState({
+    const [ log, setlog ] = useState({
         email: "",
         password: ""
     });
 
     /* variable pour recuperer les données
-     et les envoyer dans le state
+     et les envoyer dans le log
      lorsque l'input detecte un changement*/
     const handleChange = (e) => {
-        setState((prevProps) => ({
+        setlog((prevProps) => ({
             ...prevProps,
             [ e.target.name ]: e.target.value
         }));
@@ -29,7 +29,7 @@ function Connect() {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        axios.post(urlBase + `/auth/login`, state)
+        axios.post(urlBase + `/auth/login`, log)
         .then(() => {
             document.location.href = 'http://localhost:3000/homepage';
         })
@@ -47,12 +47,12 @@ function Connect() {
             <form className="d-flex flex-row" onSubmit={handleSubmit}>
                 <div id="connect-input" className='m-2'>
                     <label htmlFor="email" className='m-2 text-white'>Email</label>
-                    <input type="text" id="email" name="email" value={state.email} onChange={handleChange} />
+                    <input type="text" id="email" name="email" value={log.email} onChange={handleChange} />
                 </div>
 
                 <div>
                     <label htmlFor="password" className='m-2 text-white'>Mot de passe</label>
-                    <input type="password" id="password" name="password" value={state.password} onChange={handleChange} />
+                    <input type="password" id="password" name="password" value={log.password} onChange={handleChange} />
 
                     <input type="submit" value="Se connecter" id="connect-button" className='m-2 btn btn-primary border border-dark' />
                 </div>

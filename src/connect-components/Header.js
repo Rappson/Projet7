@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import { BrowserRouter as Router, Route, Routes as Switch, Link } from "react-router-dom";
 
 import Connect from './header-components/Connect';

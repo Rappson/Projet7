@@ -3,27 +3,41 @@ const db = require('../config/db')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+/* SERVICES */
+const Joi = require('joi');
+const joiConnect = require('../services/joi/user-connect')
+const joiSignup = require('../services/joi/user-signup');
+
 exports.signup = (req, res, next) => {
+    const logValidate = joiSignup.validate({
+        name : req.body.name,
+        firstName : req.body.firstName,
+        email : req.body.email,
+        birthday : req.body.birthday,
+        password : req.body.password
+    })
     // recuperation des données utilisateur et hashage du mdp
-    bcrypt.hash(req.body.password, 10)
+    bcrypt.hash(logValidate.value.password, 10)
         .then(hash => {
             // creation d'un nouveau utilisateur
             let user = new User(
-                req.body.name,
-                req.body.firstName,
-                req.body.email,
-                req.body.birthday,
+                logValidate.value.name,
+                logValidate.value.firstName,
+                logValidate.value.email,
+                logValidate.value.birthday,
                 hash
             );
-
-            // sauvegarde du nouveau utilisateur dans la base de donnée
-            user.save()
-
+            if(logValidate.error){
+                res.status(401).json({ message : logValidate.error.details[0].message })
+            } else{
+                // sauvegarde du nouvel utilisateur dans la base de donnée
+                user.save()
                 .then(() => res.status(201).json({ message: 'User created' }))
                 .catch(error => {
                     console.log(error);
                     res.status(400).json({ error })
                 })
+            }
         })
         .catch(error => {
             console.log(error);
@@ -34,15 +48,18 @@ exports.signup = (req, res, next) => {
 }
 
 exports.login = (req, res, next) => {
-    /* findOne va recuperer le body que l'utilisateur a indiquer dans les champs connect 
-    et FO va envoyer les données au BDD,
-    avec bcrypt on va comparer les données  */
 
+/* FAIRE LA VALIDATION DE DONNEES JOI */
+const logValidate = joiConnect.validate({
+    email : req.body.email,
+    password : req.body.password
+})
 
-    let sql = `select * from user where email = '${req.body.email}'`;
+    let sql = `select * from user where email = '${logValidate.value.email}'`;
     db.execute(sql)
         .then(([ rows ]) => {
             const user = rows[ 0 ]
+            let userPassword = user.password;
 
             /* SI aucun utilisateur n'a été trouvé */
             if (!user) {
@@ -51,8 +68,7 @@ exports.login = (req, res, next) => {
             }
 
             /* SINON comparer les deux mdp */
-            let userPassword = user.password;
-            bcrypt.compare(req.body.password, userPassword)
+            bcrypt.compare(logValidate.value.password, userPassword)
                 .then(valid => {
 
                     /* SI le mdp n'est pas valide */
@@ -76,7 +92,7 @@ exports.login = (req, res, next) => {
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({ error : "serveur introuvable !" })
+            res.status(500).json({ error: "serveur introuvable !" })
         })
 }
 
