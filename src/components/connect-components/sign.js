@@ -1,4 +1,4 @@
-import { urlBase } from "../url";
+import { urlBase } from "../../url";
 import { useState } from "react";
 const axios = require('axios')
 

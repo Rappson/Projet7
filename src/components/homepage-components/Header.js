@@ -13,11 +13,11 @@ function Homepage() {
             <nav className="navbar navbar-expand-lg navbar-light">
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
+                        Menu
                     </a>
 
                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a className="dropdown-item" href="#">Action</a>
+                        <a className="dropdown-item" href="#">Profile</a>
                         <a className="dropdown-item" href="#">Another action</a>
                         <div className="dropdown-divider"></div>
                         <a className="dropdown-item" href={'http://' + connectUrl}>Deconnexion</a>

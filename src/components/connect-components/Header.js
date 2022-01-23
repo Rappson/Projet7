@@ -3,11 +3,12 @@ import { useState } from 'react';
 import { connectUrl } from '../../url';
 
 // eslint-disable-next-line
-import { BrowserRouter as Router, Route, Routes as Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes as Switch, Link, useNavigate } from "react-router-dom";
 
 const axios = require('axios');
 
 function Connect() {
+    const navigate = useNavigate ();
 
     // initialisation de state
     const [ log, setlog ] = useState({
@@ -30,10 +31,14 @@ function Connect() {
         e.preventDefault()
 
         axios.post(urlBase + `/auth/login`, log)
-        .then(() => {
-            document.location.href = 'http://localhost:3000/homepage';
-        })
-        .catch(() => document.location.href = 'http://localhost:3000/error')
+            .then((response) => {
+
+                localStorage.setItem('jwtToken', response.data.token)
+
+                navigate(`/homepage`)
+
+            })
+        // .catch(() => document.location.href = 'http://localhost:3000/error')
 
         /*       test.url@test.com      */
     }
