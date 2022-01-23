@@ -7,8 +7,9 @@ import { BrowserRouter as Router, Route, Routes as Switch, Link } from "react-ro
 /* reuse components */
 import errorPage from './components/error';
 
-/* Components */
+/* pages */
 import connectPage from './pages/ConnectPage'
+import Homepage from './pages/homePage'
 
 
 
@@ -18,6 +19,8 @@ ReactDOM.render(
       <Router>
         <Switch>
           <Route path='/' element={connectPage()} />
+
+          <Route path='/homepage' element={Homepage()} />
 
           <Route path='/error' element={errorPage()} />
         </Switch>
