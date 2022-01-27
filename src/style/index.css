@@ -2,10 +2,36 @@
   opacity: 0;
 }
 .visible{
-  opacity: 1;
+  animation-name: goingVisible;
+  animation-duration: 3s;
 }
 
+/* KEYFRAME ANIMATION */
+@keyframes unroll {
+  from {
+    height: 3rem;
+  }
+  to{
+    height: 18rem;
+  }
+}
+@keyframes rolled {
+  from{
+    height: 18rem
+  }
+  to{
+    height: 3rem;
+  }
+}
 
+@keyframes goingVisible {
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
 
 body {
   margin: 0;
@@ -152,7 +178,7 @@ div.text a:hover {
   background-color: #0d6efd;
 }
 
-.fa-plus-circle{
+.fa-plus-circle, .fa-times-circle{
   font-size: 2rem;
 }
 #new-post-link{
@@ -163,12 +189,22 @@ div.text a:hover {
 
 /* FORM NEW POST */
 
+
 .new-post-form{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-right: 2rem;
+  color: #FFFFFF;
+}
+
+.default-menu{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 3rem;
 }
 
 .rolled-up{
@@ -176,14 +212,21 @@ div.text a:hover {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 3rem;
+  animation-name: rolled;
+  animation-duration: 1s;
+  animation-fill-mode: both;
 }
 .unroll{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 18rem;
+  animation-name: unroll;
+  animation-duration: 1s;
+}
+
+.btn-send-new-post{
+  background-color: #0d6efd;
 }
 
 /* search */
@@ -192,7 +235,6 @@ div.text a:hover {
   height: 40px;
   border-radius: 50%;
 }
-
 
 
 /* POST */

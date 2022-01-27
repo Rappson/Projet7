@@ -1,35 +1,16 @@
 import { connectUrl } from "../../url";
+import createNewPost from "../formNewPost";
 
 /*
 logo de croix d'annulation
-<i class="fas fa-times-circle"></i>  */
+<i className="fas fa-times-circle"></i>  
+
+logo de new
+<i className="fas fa-plus-circle"></i>
+*/
 
 function Header() {
 
-    const createNewPost = () => {
-        /*.new-post-form: opacity 1 */
-        /* header-center: heigth 10rem */
-        let headerCenter = document.querySelector('.rolled-up')
-        let postForm = document.querySelector('.new-post-form')
-
-        postForm.innerHTML = `<label htmlFor="post-title">Titre</label>
-    <input style={{ width: 285 }} type='text' id="post-title" name="post-title"></input>
-
-    <label htmlFor="post-body">Votre message</label>
-    <textarea id="post-body" cols="35" rows="3"></textarea>
-    <button type="submit">Envoyer</button>`
-        if (headerCenter) {
-            headerCenter.classList.replace('rolled-up', 'unroll')
-            postForm.classList.replace('not-visible', 'visible')
-        } else {
-            headerCenter = document.querySelector('.unroll')
-            headerCenter.classList.replace('unroll', 'rolled-up')
-            postForm.classList.replace('visible', 'not-visible')
-
-        }
-
-
-    }
 
     return <header>
         {/* Logo */}
@@ -37,7 +18,7 @@ function Header() {
             <a href={'http://' + connectUrl + '/homepage'}><img src="images/icon-left-font-monochrome-white.png" alt='logo' id="icon-connect" /></a>
 
             {/* Bouton de recherche */}
-            <div id="header-center" className="rolled-up">
+            <div id="header-center" className="default-menu">
                 <form className="form-inline d-flex flex-row my-2 my-lg-0">
                     <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
                     <button id="search-btn" className="btn btn-outline-primary my-2 my-sm-0" type="submit"><i className="fas fa-search"></i></button>
