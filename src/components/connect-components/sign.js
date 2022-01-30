@@ -2,7 +2,12 @@ import { urlBase } from "../../url";
 import { useState } from "react";
 const axios = require('axios')
 
+// eslint-disable-next-line
+import { BrowserRouter as Router, Route, Routes as Switch, Link, useNavigate } from "react-router-dom";
+
 function SignIn() {
+const navigate = useNavigate();
+
     // initialisation de sign
     const [ sign, setSign ] = useState({
         name: "",
@@ -26,7 +31,7 @@ function SignIn() {
         e.preventDefault()
         axios.post(urlBase + `/auth/signup`, sign)
         .then(() => {
-            document.location.href = 'http://localhost:3000/homepage';
+            navigate('/homepage')
         })
         .catch((error) => {
             console.log(error);

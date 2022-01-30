@@ -3,13 +3,6 @@ const createNewPost = () => {
     let postForm = document.querySelector('.new-post-form')
     let btnNewPost = document.querySelector('#new-post-link')
 
-    postForm.innerHTML = `<label htmlFor="post-title">Titre</label>
-<input style={{ width: 285 }} type='text' id="post-title" name="post-title"></input>
-
-<label htmlFor="post-body">Votre message</label>
-<textarea id="post-body" cols="35" rows="3"></textarea>
-<button class="btn-send-new-post" type="submit">Envoyer</button>`
-
     if (headerCenter) {
         headerCenter.classList.replace('default-menu', 'unroll')
         postForm.classList.replace('not-visible', 'visible')
@@ -30,9 +23,15 @@ const createNewPost = () => {
         /* si le champs de new post est visible */
         if (postForm.classList.contains('visible')) {
             postForm.classList.replace('visible', 'not-visible')
-            
+            postForm.innerHTML = ''
         } else {
             postForm.classList.replace('not-visible', 'visible')
+            postForm.innerHTML = `<label htmlFor="post-title">Titre</label>
+            <input style={{ width: 285 }} type='text' id="post-title" name="title" onChange={handleChange}></input>
+
+            <label htmlFor="post-body">Votre message</label>
+            <textarea id="post-body" name='body' onChange={handleChange} cols="35" rows="3"></textarea>
+            <input class="btn-send-new-post" type="submit" value='envoyer' />`
         }
 
     }

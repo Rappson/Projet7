@@ -1,16 +1,28 @@
+import { useState } from "react/cjs/react.development";
 import { connectUrl } from "../../url";
 import createNewPost from "../formNewPost";
 
-/*
-logo de croix d'annulation
-<i className="fas fa-times-circle"></i>  
-
-logo de new
-<i className="fas fa-plus-circle"></i>
-*/
+const axios = require('axios');
 
 function Header() {
 
+    const [ post, setPost ] = useState({
+        title: '',
+        body: ''
+    })
+
+
+    const handleChange = (e) => {
+        setPost((prevProps) => ({
+            ...prevProps,
+            [ e.target.name ]: e.target.value
+        }));
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(post);
+    }
 
     return <header>
         {/* Logo */}
@@ -25,7 +37,14 @@ function Header() {
                 </form>
                 <a id="new-post-link" onClick={createNewPost}><i className="fas fa-plus-circle"></i></a>
 
-                <form className="new-post-form not-visible"></form>
+                <form className="new-post-form not-visible" onSubmit={handleSubmit}>
+                    <label htmlFor="post-title">Titre</label>
+                    <input style={{ width: 285 }} type='text' id="post-title" name="title" onChange={handleChange}></input>
+
+                    <label htmlFor="post-body">Votre message</label>
+                    <textarea id="post-body" name='body' onChange={handleChange} cols="35" rows="3"></textarea>
+                    <input className="btn-send-new-post" type="submit" value='envoyer' />
+                </form>
             </div>
 
             {/* Menu */}

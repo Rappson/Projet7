@@ -8,8 +8,8 @@ function Post() {
                 </input>
                 <div className="container-btn">
                     <button className="btn-post-comment"><i className="fas fa-comment-medical"></i></button>
-                    <button className="post-like">{like} <i className="far fa-heart"></i></button>
-                    <button className="post-dislike">{dislike} <i className="fas fa-heart-broken"></i></button>
+                    <button className="post-likes">{like} <i className="far fa-heart"></i></button>
+                    <button className="post-dislikes">{dislike} <i className="fas fa-heart-broken"></i></button>
                 </div>
             </section>
         )
@@ -30,9 +30,9 @@ function Post() {
             <div className="body-post" name="body-post"> coucou !</div>
 
             <div className="container-btn">
-                <button className="post-like"><i className="far fa-heart"></i></button>
+                <button className="post-likes"><i className="far fa-heart"></i></button>
                 <button className="btn-post-comment"><i className="fas fa-comment-medical"></i></button>
-                <button className="post-dislike"><i className="fas fa-heart-broken"></i></button>
+                <button className="post-dislikes"><i className="fas fa-heart-broken"></i></button>
             </div>
         </section>
     </article>

@@ -12,13 +12,19 @@ constructor(titre, body, likes, comment, dislikes){
 
 
 save(){
-    let sql = 'requete sql'
+    let sql = `INSERT INTO post (titre, body, likes, comment, dislikes) 
+    VALUES('${this.titre}',
+    ' ${this.body}',
+     '${this.likes}', 
+     '${this.comment}', 
+     '${this.dislikes}')`;
+
+    return db.execute(sql);
 }
 
 
 get(){
     let sql = 'requete sql'
-
 }
 
 }

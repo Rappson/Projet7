@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const db = require('../config/db')
+const db = require('../config/db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -92,7 +92,7 @@ const logValidate = joiConnect.validate({
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({ error: "serveur introuvable !" })
+            res.status(500).json({ error: "  introuvable !" })
         })
 }
 
