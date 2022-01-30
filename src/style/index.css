@@ -3,26 +3,10 @@
 }
 .visible{
   animation-name: goingVisible;
-  animation-duration: 3s;
+  animation-duration: 2s;
 }
 
 /* KEYFRAME ANIMATION */
-@keyframes unroll {
-  from {
-    height: 3rem;
-  }
-  to{
-    height: 18rem;
-  }
-}
-@keyframes rolled {
-  from{
-    height: 18rem
-  }
-  to{
-    height: 3rem;
-  }
-}
 
 @keyframes goingVisible {
   from{
@@ -189,6 +173,11 @@ div.text a:hover {
 
 /* FORM NEW POST */
 
+.container-form-newPost{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .new-post-form{
   display: flex;
@@ -197,32 +186,6 @@ div.text a:hover {
   align-items: center;
   margin-right: 2rem;
   color: #FFFFFF;
-}
-
-.default-menu{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  height: 3rem;
-}
-
-.rolled-up{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  animation-name: rolled;
-  animation-duration: 1s;
-  animation-fill-mode: both;
-}
-.unroll{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  animation-name: unroll;
-  animation-duration: 1s;
 }
 
 .btn-send-new-post{
