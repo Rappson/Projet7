@@ -15,7 +15,7 @@ class User {
     save() {
         let sql = `INSERT INTO user (nom, prenom, email, birthday, password) 
         VALUES('${this.name}',
-        ' ${this.firstName}',
+        '${this.firstName}',
          '${this.email}', 
          '${this.birthday}', 
          '${this.password}')`;

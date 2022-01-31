@@ -4,13 +4,16 @@
 
 <i class="fas fa-plus-circle"></i>
 */
+import axios from "axios";
 import { useState } from "react/cjs/react.development";
+import { urlBase } from "../../url";
 
 function CreateNewPost() {
 
     const [ Post, setPost ] = useState({
         title: '',
         body: '',
+        token: localStorage.getItem('jwtToken')
     })
 
     const [ IsVisible, setIsVisible ] = useState(false);
@@ -24,8 +27,9 @@ function CreateNewPost() {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault()
         console.log(Post);
+        e.preventDefault();
+        axios.post(urlBase + '/post/newPost', Post)
     }
 
     const MakeVisible = () => {
@@ -41,11 +45,11 @@ function CreateNewPost() {
             {IsVisible &&
                 <form className="new-post-form visible" onSubmit={handleSubmit}>
                     <label htmlFor="post-title">Titre</label>
-                    <input style={{ width: 285 }} type='text' id="post-title" name="title" onChange={handleChange}></input>
+                    <input style={{ width: 285 }} type='text' id="post-title" name="title" onChange={handleChange} value={Post.title}></input>
 
                     <label htmlFor="post-body">Votre message</label>
-                    <textarea id="post-body" name='body' onChange={handleChange} cols="35" rows="3"></textarea>
-                    <input className="btn-send-new-post" type="submit" value='envoyer' />
+                    <textarea id="post-body" name='body' onChange={handleChange} cols="35" rows="3" value={Post.body}></textarea>
+                    <input className="btn-send-new-post" type="submit" value="Envoyer"></input>
                 </form>}
         </div>
     )

@@ -189,6 +189,10 @@ div.text a:hover {
 }
 
 .btn-send-new-post{
+  background-color: #77aeff;
+}
+
+.btn-send-new-post:hover{
   background-color: #0d6efd;
 }
 

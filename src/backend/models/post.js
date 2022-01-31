@@ -1,9 +1,10 @@
 const db = require('../config/db')
 
 
-class post {
-    constructor(titre, body, likes, comment, dislikes) {
-        this.titre = titre,
+class Post {
+    constructor(userId, title, body, likes, comment, dislikes) {
+        this.userId = userId,
+            this.title = title,
             this.body = body,
             this.likes = likes,
             this.comment = comment,
@@ -12,11 +13,10 @@ class post {
 
 
     save() {
-        let sql = `INSERT INTO post (userId, titre, body, likes, comment, dislikes) 
-    VALUES('
-   '${this.userId}',
-    ${this.titre}',
-    ' ${this.body}',
+        let sql = `INSERT INTO post (user_id, title, body, likes, comment, dislikes) 
+    VALUES('${this.userId}',
+    '${this.title}',
+    '${this.body}',
      '${this.likes}', 
      '${this.comment}', 
      '${this.dislikes}')`;
@@ -32,4 +32,4 @@ class post {
 
 }
 
-module.exports = post;
+module.exports = Post;

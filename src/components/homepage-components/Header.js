@@ -17,6 +17,7 @@ function Header() {
                     <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
                     <button id="search-btn" className="btn btn-outline-primary my-2 my-sm-0" type="submit"><i className="fas fa-search"></i></button>
                 </form>
+                
                 <CreateNewPost />
 
             </div>
