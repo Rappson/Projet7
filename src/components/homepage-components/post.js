@@ -1,8 +1,13 @@
+import axios from "axios";
+import { urlBase } from "../../url";
+
 function Post() {
-    const postContent = (title, body, comment, like, dislike) => {
+    const PostContent = (title, body, comment, like, dislike) => {
+        const list = axios.get(urlBase + '/post/getPost')
+        console.log(list);
         return (
             <section className="container-post">
-                <label for="body-post" className="title-post">{title}</label>
+                <h4 for="body-post" className="title-post">{title}</h4>
                 <input type='text' name='body-post' className="body-post">
                     {body}
                 </input>
@@ -15,6 +20,9 @@ function Post() {
         )
     };
     return <article className="post">
+        {/* <PostContent /> */}
+
+
         {/* composition d'un post: 
         TITRE
         BODY
@@ -25,7 +33,7 @@ function Post() {
         BTN DISLIKES
          */}
         <section className="container-post">
-            <label htmlFor='body-post' className="title-post">TEST D'UN POST</label>
+            <h4 htmlFor='body-post' className="title-post">TEST D'UN POST</h4>
 
             <div className="body-post" name="body-post"> coucou !</div>
 

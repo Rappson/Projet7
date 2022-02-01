@@ -17,17 +17,17 @@ class Post {
     VALUES('${this.userId}',
     '${this.title}',
     '${this.body}',
-     '${this.likes}', 
-     '${this.comment}', 
+     '${this.likes}',
+     '${this.comment}',
      '${this.dislikes}')`;
 
         return db.execute(sql);
     }
 
 
-    get() {
+    find() {
         /* date de creation pour trier */
-        let sql = 'requete sql'
+       
     }
 
 }
