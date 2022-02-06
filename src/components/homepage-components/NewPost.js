@@ -23,9 +23,10 @@ function CreateNewPost() {
     }
 
     const handleSubmit = (e) => {
-        console.log(Post);
         e.preventDefault();
         axios.post(urlBase + '/post/newPost', Post)
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error))
     }
 
     const MakeVisible = () => {

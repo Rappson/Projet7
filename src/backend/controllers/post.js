@@ -17,7 +17,10 @@ exports.createNewPost = (req, res, next) => {
     */
 
 
-    /* FAIRE LES VALEURS PAR DEFAUT (LIKES, DISLIKES, COMMENT) */
+    /* FAIRE LES VALEURS PAR DEFAUT (LIKES, DISLIKES, COMMENT) 
+    
+    direct dans la column bdd*/
+    console.log('test');
     let post = new Post(
         req.body.userId,
         req.body.title,
@@ -26,6 +29,7 @@ exports.createNewPost = (req, res, next) => {
         0,
         0
     )
+    console.log('test test');
     post.save()
         .then(() => res.status(201).json({ message: 'publication crée !' }))
         .catch((error) => {

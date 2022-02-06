@@ -1,25 +1,27 @@
 import axios from "axios";
 import { urlBase } from "../../url";
-import '../../style/homepage/post.css'
+// import '../../style/homepage/post.css'
 
 function Post() {
     const PostContent = () => {
-        axios.get(urlBase + '/post/getPost')
+        return axios.get(urlBase + '/post/getPost')
         .then((response) => {
             let listOfPost = JSON.parse(response.request.response)[0];
 
             const component = listOfPost.map((item) => {
+                /* faire la boucle dans le render et utiliser usestate 
+                enregister listOfPost dans le state */
                  return (<section className="container-post">
-                        <h4 for="body-post" className="title-post">{item.title}</h4>
-                        <input type='text' name='body-post' className="body-post">
-                            {item.body}
-                        </input>
-                        <div className="container-btn">
-                            <button className="btn-post-comment"><i className="fas fa-comment-medical"></i></button>
-                            <button className="post-likes">{item.like} <i className="far fa-heart"></i></button>
-                            <button className="post-dislikes">{item.dislike} <i className="fas fa-heart-broken"></i></button>
-                        </div>
-                    </section>)
+                 <h4 for="body-post" className="title-post">{item.title}</h4>
+                 <input type='text' name='body-post' className="body-post">
+                     {item.body}
+                 </input>
+                 <div className="container-btn">
+                     <button className="btn-post-comment"><i className="fas fa-comment-medical"></i></button>
+                     <button className="post-likes">{item.like} <i className="far fa-heart"></i></button>
+                     <button className="post-dislikes">{item.dislike} <i className="fas fa-heart-broken"></i></button>
+                 </div>
+             </section>)
             })
             console.log(component);
             return component
@@ -39,9 +41,9 @@ function Post() {
             </section>
         )
  */    };
- PostContent();
+// PostContent();
     return <article className="post">
-      <PostContent />
+      {/* <PostContent /> */}
 
 
         {/* composition d'un post: 

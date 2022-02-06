@@ -9,8 +9,9 @@ module.exports = (req, res, next) => {
         const userId = decodedToken.userId;
         // req.body.onlineUser = userId
         // console.log(req.body.onlineUser);
-
+        
         req.body.userId = userId
+        next()
 
        /*  if(req.body.userId && req.body.userId !== userId){
             throw 'Invalid user ID';
@@ -18,6 +19,7 @@ module.exports = (req, res, next) => {
             
             next();
         } */
+        
     } catch{
         res.status(401).json({
             error: new Error ('Invalid request !')

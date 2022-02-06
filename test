@@ -1,19 +1,7 @@
- <nav className="navbar navbar-expand-lg navbar-light">
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Menu
-                            </a>
+            faire la correction de font awesome
+            envoyer le token dans le header et pas dans le body
+            verifier la validation du token, aller chercher le fail
+            affichage des post comme dans l'exemple
+            actualisation des post (eviter le reload de la page)
 
-                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a className="dropdown-item" href="#">Profile</a>
-                                <a className="dropdown-item" href="#">Another action</a>
-                                <div className="dropdown-divider"></div>
-                                <a className="dropdown-item" href={'http://' + connectUrl}>Deconnexion</a>
-                            </div>
-                        </li>
-                    </ul>
-
-                </div>
-            </nav>
+            validation de données dans creation de post
