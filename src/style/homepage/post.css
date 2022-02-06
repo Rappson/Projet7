@@ -1,0 +1,28 @@
+/* POST */
+.post{
+    display: flex;
+    justify-content: center;
+    }
+    
+    .title-post{
+      margin-bottom: 15px;
+      margin-top: 10px;
+    }
+    
+    .body-post{
+      border: 1px solid black;
+      padding: 5px;
+      width: 100%;
+      height: 5rem;
+    }
+    
+    .container-post{
+      display: flex;
+      flex-direction: column;
+      width: 30rem;
+    }
+    
+    .container-btn{
+      display: flex;
+      justify-content: space-between;
+    }

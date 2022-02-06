@@ -1,12 +1,8 @@
-/* 
-
-<i class="fas fa-times-circle"></i>
-
-<i class="fas fa-plus-circle"></i>
-*/
 import axios from "axios";
 import { useState } from "react/cjs/react.development";
 import { urlBase } from "../../url";
+import "../../style/homepage/header.css"
+
 
 function CreateNewPost() {
 
@@ -39,7 +35,7 @@ function CreateNewPost() {
     return (
         <div className="container-form-newPost">
             {/* create nw post */}
-            < a id="new-post-link" onClick={MakeVisible} > <i className={IsVisible ? "fas fa-times-circle" : "fas fa-plus-circle"}></i></a >
+            <a id="new-post-link" onClick={MakeVisible} > <i className={IsVisible ? "fas fa-times-circle" : "fas fa-plus-circle"}></i></a >
 
 
             {IsVisible &&

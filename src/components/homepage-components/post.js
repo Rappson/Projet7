@@ -1,11 +1,31 @@
 import axios from "axios";
 import { urlBase } from "../../url";
+import '../../style/homepage/post.css'
 
 function Post() {
-    const PostContent = (title, body, comment, like, dislike) => {
-        const list = axios.get(urlBase + '/post/getPost')
-        console.log(list);
-        return (
+    const PostContent = () => {
+        axios.get(urlBase + '/post/getPost')
+        .then((response) => {
+            let listOfPost = JSON.parse(response.request.response)[0];
+
+            const component = listOfPost.map((item) => {
+                 return (<section className="container-post">
+                        <h4 for="body-post" className="title-post">{item.title}</h4>
+                        <input type='text' name='body-post' className="body-post">
+                            {item.body}
+                        </input>
+                        <div className="container-btn">
+                            <button className="btn-post-comment"><i className="fas fa-comment-medical"></i></button>
+                            <button className="post-likes">{item.like} <i className="far fa-heart"></i></button>
+                            <button className="post-dislikes">{item.dislike} <i className="fas fa-heart-broken"></i></button>
+                        </div>
+                    </section>)
+            })
+            console.log(component);
+            return component
+        })
+        .catch((error) => console.log(error))
+/*         return (
             <section className="container-post">
                 <h4 for="body-post" className="title-post">{title}</h4>
                 <input type='text' name='body-post' className="body-post">
@@ -18,9 +38,10 @@ function Post() {
                 </div>
             </section>
         )
-    };
+ */    };
+ PostContent();
     return <article className="post">
-        {/* <PostContent /> */}
+      <PostContent />
 
 
         {/* composition d'un post: 

@@ -16,6 +16,8 @@ exports.createNewPost = (req, res, next) => {
     
     */
 
+
+    /* FAIRE LES VALEURS PAR DEFAUT (LIKES, DISLIKES, COMMENT) */
     let post = new Post(
         req.body.userId,
         req.body.title,
@@ -36,7 +38,7 @@ exports.createNewPost = (req, res, next) => {
 exports.getAllPosts = (req, res, next) => {
     let sql = 'SELECT * FROM post';
     return db.execute(sql)
-        .then(() => res.status(200).json({ message: 'request success' }))
+        .then((post) => res.status(200).json(post))
         .catch((error) => {
             console.log(error);
             req.status(500).json({ error })

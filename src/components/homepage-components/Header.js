@@ -1,6 +1,6 @@
 import { connectUrl } from "../../url";
 import CreateNewPost from "./NewPost";
-// import "../../style/index.css"
+ import "../../style/homepage/header.css"
 
 // const axios = require('axios');
 
