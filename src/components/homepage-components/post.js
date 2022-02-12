@@ -10,7 +10,7 @@ function Post() {
         axios.get(urlBase + '/post/getPost').then((response) => {
             setListOfPosts(response.data[0]);
         })
-    })
+    }, [])
     return <article className="post">
         {/* composition d'un post: 
         TITRE
@@ -25,6 +25,7 @@ function Post() {
              return (
                 <section className="container-post">
                 <h4 htmlFor='body-post' className="title-post">{value.title}</h4>
+                <div className="username">Rappson</div>
     
                 <div className="body-post" name="body-post"> {value.body}</div>
     
