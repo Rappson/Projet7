@@ -29,7 +29,6 @@ exports.createNewPost = (req, res, next) => {
         0,
         0
     )
-    console.log('test test');
     post.save()
         .then(() => res.status(201).json({ message: 'publication crée !' }))
         .catch((error) => {

@@ -1,7 +1,9 @@
 /* POST */
 .post{
-    display: flex;
-    justify-content: center;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
     }
     
     .title-post{
