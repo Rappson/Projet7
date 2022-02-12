@@ -24,10 +24,7 @@ exports.createNewPost = (req, res, next) => {
     let post = new Post(
         req.body.userId,
         req.body.title,
-        req.body.body,
-        0,
-        0,
-        0
+        req.body.body
     )
     post.save()
         .then(() => res.status(201).json({ message: 'publication crée !' }))

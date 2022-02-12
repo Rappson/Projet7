@@ -2,24 +2,18 @@ const db = require('../config/db')
 
 
 class Post {
-    constructor(userId, title, body, likes, comment, dislikes) {
+    constructor(userId, title, body) {
         this.userId = userId,
             this.title = title,
-            this.body = body,
-            this.likes = likes,
-            this.comment = comment,
-            this.dislikes = dislikes
+            this.body = body
     }
 
 
     save() {
-        let sql = `INSERT INTO post (user_id, title, body, likes, comment, dislikes) 
+        let sql = `INSERT INTO post (user_id, title, body) 
     VALUES('${this.userId}',
     '${this.title}',
-    '${this.body}',
-     '${this.likes}',
-     '${this.comment}',
-     '${this.dislikes}')`;
+    '${this.body}')`;
 
         return db.execute(sql);
     }

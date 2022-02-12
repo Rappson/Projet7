@@ -6,6 +6,8 @@
             Rajouter les dates de créations dans la BDD pour les posts
             mettre la date de creation dans l'affichage des posts
             rajouter le nom de l'utilisateur qui a poster le post
+            changer l'ordre d'apparition des posts
+
             actualisation des post (eviter le reload de la page)
             faire les likes
 
