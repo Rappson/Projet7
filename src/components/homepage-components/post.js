@@ -7,8 +7,10 @@ function Post() {
     const [ listOfPosts, setListOfPosts ] = useState([]);
 
     useEffect(() => {
+        /*crontroler le reupload des posts:
+        annalyser la taille des posts dans la BDD */
         axios.get(urlBase + '/post/getPost').then((response) => {
-            setListOfPosts(response.data[0]);
+            setListOfPosts(response.data);
         })
     }, [])
     return <article className="post">
@@ -23,6 +25,7 @@ function Post() {
          */}
          {listOfPosts.map((value, key) => {
              return (
+                 
                 <section className="container-post">
                 <h4 htmlFor='body-post' className="title-post">{value.title}</h4>
                 <div className="username">Rappson</div>

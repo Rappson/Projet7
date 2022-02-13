@@ -38,7 +38,8 @@ exports.createNewPost = (req, res, next) => {
 exports.getAllPosts = (req, res, next) => {
     let sql = 'SELECT * FROM post';
     return db.execute(sql)
-        .then((post) => res.status(200).json(post))
+        .then((post) => {
+            res.status(200).json(post[0])})
         .catch((error) => {
             console.log(error);
             req.status(500).json({ error })

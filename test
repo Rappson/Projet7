@@ -1,14 +1,14 @@
-            //faire la correction de font awesome
-            //envoyer le token dans le header et pas dans le body
-            //verifier la validation du token, aller chercher le fail
-            //affichage des post comme dans l'exemple
-
             Rajouter les dates de créations dans la BDD pour les posts
             mettre la date de creation dans l'affichage des posts
             rajouter le nom de l'utilisateur qui a poster le post
             changer l'ordre d'apparition des posts
+            deplacer le formulaire new post dans la section des posts
+
+            renommer les commentaires en nbr commentaires
 
             actualisation des post (eviter le reload de la page)
+
+            
             faire les likes
 
             validation de données dans creation de post
