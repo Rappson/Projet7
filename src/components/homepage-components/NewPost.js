@@ -12,6 +12,7 @@ function CreateNewPost() {
         token: localStorage.getItem('jwtToken')
     })
 
+
     const [ IsVisible, setIsVisible ] = useState(false);
 
 
@@ -25,7 +26,9 @@ function CreateNewPost() {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post(urlBase + '/post/newPost', Post)
-        .then((response) => console.log(response))
+        .then((response) => {
+            console.log(response)
+        })
         .catch((error) => console.log(error))
     }
 

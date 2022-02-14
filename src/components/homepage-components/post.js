@@ -1,16 +1,18 @@
 import axios from "axios";
 import { urlBase } from "../../url";
+import CreateNewPost from "./NewPost";
+
 import {useEffect, useState} from "react";
 import '../../style/homepage/post.css'
 
 function Post() {
     const [ listOfPosts, setListOfPosts ] = useState([]);
-    let tabPosts = [];
 
     useEffect(() => {
         /*crontroler le reupload des posts:
         annalyser la taille des posts dans la BDD */
         axios.get(urlBase + '/post/getPost').then((response) => {
+            console.log(response.data);
             setListOfPosts(response.data);
         })
     }, [])
@@ -24,9 +26,10 @@ function Post() {
         BTN LIKES
         BTN DISLIKES
          */}
+         <CreateNewPost />
+
          {listOfPosts.map((value, key) => {
              return (
-                 
                 <section className="container-post">
                 <h4 htmlFor='body-post' className="title-post">{value.title}</h4>
                 <div className="username">Rappson</div>

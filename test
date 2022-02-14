@@ -13,7 +13,8 @@
 
             validation de données dans creation de post
 
-
+            SECONDAIRE
+            verifier des caracteres speciaux dans l'ajout d'un post avec joi 
 
             ATTENTION !!!!
             lors du transfet de pc verifier les importations des css 

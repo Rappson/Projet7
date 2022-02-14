@@ -1,5 +1,4 @@
 import { connectUrl } from "../../url";
-import CreateNewPost from "./NewPost";
 import "../../style/homepage/header.css"
 
 // const axios = require('axios');
@@ -18,8 +17,6 @@ function Header() {
                     <button id="search-btn" className="btn btn-outline-primary my-2 my-sm-0" type="submit"><i className="fas fa-search"></i></button>
                 </form>
                 
-                <CreateNewPost />
-
             </div>
 
             {/* Menu */}
