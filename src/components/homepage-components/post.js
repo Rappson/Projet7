@@ -5,6 +5,7 @@ import '../../style/homepage/post.css'
 
 function Post() {
     const [ listOfPosts, setListOfPosts ] = useState([]);
+    let tabPosts = [];
 
     useEffect(() => {
         /*crontroler le reupload des posts:
@@ -34,7 +35,7 @@ function Post() {
     
                 <div className="container-btn">
                     <button className="post-likes"><i className="far fa-heart">{value.likes}</i></button>
-                    <button className="btn-post-comment"><i className="fas fa-comment-medical">{value.comment}</i></button>
+                    <button className="btn-post-comment"><i className="fas fa-comment-medical">{value.nbr_comment}</i></button>
                     <button className="post-dislikes"><i className="fas fa-heart-broken">{value.dislikes}</i></button>
                 </div>
             </section>
