@@ -30,9 +30,9 @@ function Post() {
 
          {listOfPosts.map((value, key) => {
              return (
-                <section className="container-post">
+                <section className="container-post" key={key}>
                 <h4 htmlFor='body-post' className="title-post">{value.title}</h4>
-                <div className="username">Rappson</div>
+                <div className="username">CMwa</div>
     
                 <div className="body-post" name="body-post"> {value.body}</div>
     

@@ -39,7 +39,7 @@ exports.createNewPost = (req, res, next) => {
         res.status(401).json({ message: newPostValidate.error.details[0].message })
     } else {
         post.save()
-            .then(() => res.status(201).json({ message: 'publication crée !' }))
+            .then(() => res.status(201).json(post))
             .catch((error) => {
                 console.log(error);
                 res.status(500).json({ message: "une erreur s'est produite" })
@@ -49,7 +49,7 @@ exports.createNewPost = (req, res, next) => {
 
 
 exports.getAllPosts = (req, res, next) => {
-    let sql = 'SELECT * FROM post';
+    let sql = 'SELECT * FROM post order by created_at DESC;';
     return db.execute(sql)
         .then((post) => {
             res.status(200).json(post[0])
