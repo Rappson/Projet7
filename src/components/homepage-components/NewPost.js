@@ -1,16 +1,20 @@
 import axios from "axios";
-import { useState } from "react/cjs/react.development";
+import { useState, useEffect } from "react/cjs/react.development";
 import { urlBase } from "../../url";
 import "../../style/homepage/header.css"
 
 
-function CreateNewPost() {
+function CreateNewPost(props) {
 
     const [ Post, setPost ] = useState({
         title: '',
         body: '',
         token: localStorage.getItem('jwtToken')
     })
+
+    useEffect(() => {
+        props.handleTab("unTruc")
+    }, [])
 
 
     const [ IsVisible, setIsVisible ] = useState(false);
@@ -27,7 +31,8 @@ function CreateNewPost() {
         e.preventDefault();
         axios.post(urlBase + '/post/newPost', Post)
         .then((response) => {
-            console.log(response)
+            console.log(response.data)
+            setIsVisible(prevProps => (!prevProps))
         })
         .catch((error) => console.log(error))
     }

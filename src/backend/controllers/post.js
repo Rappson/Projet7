@@ -19,11 +19,6 @@ exports.createNewPost = (req, res, next) => {
     faire une liste des utilisateurs qui ont commenter
     
     */
-
-
-    /* FAIRE LES VALEURS PAR DEFAUT (LIKES, DISLIKES, COMMENT) 
-    
-    direct dans la column bdd*/
     const newPostValidate = joiNewPost.validate({
         userId: req.body.userId,
         title: req.body.title,

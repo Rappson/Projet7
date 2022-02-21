@@ -44,7 +44,6 @@ exports.signup = (req, res, next) => {
             res.status(500).json({ error })
         })
 
-    //return un token et le stocker dans le localstorage
 }
 
 exports.login = (req, res, next) => {

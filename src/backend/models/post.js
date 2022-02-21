@@ -12,22 +12,20 @@ class Post {
 
     save() {
         let d = new Date();
+
         let DD = d.getDate();
         let MM = d.getMonth() + 1;
         let YYYY = d.getFullYear();
         let hh = d.getHours();
         let mm = d.getMinutes();
-
-        let created_at = `${YYYY}-${MM}-${DD}`
-        
-        let testHours = `${YYYY}-${MM}-${DD} ${hh}:${mm}`
-        console.log(testHours);
+    
+        let created_at = `${YYYY}-${MM}-${DD} ${hh}:${mm}`
 
         let sql = `INSERT INTO post (user_id, title, body, created_at) 
     VALUES('${this.userId}',
     '${this.title}',
     '${this.body}',
-    '${testHours}')`;
+    '${created_at}')`;
 
         return db.execute(sql);
     }
