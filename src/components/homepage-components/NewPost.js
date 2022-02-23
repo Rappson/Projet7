@@ -8,14 +8,8 @@ function CreateNewPost(props) {
 
     const [ Post, setPost ] = useState({
         title: '',
-        body: '',
-        token: localStorage.getItem('jwtToken')
+        body: ''
     })
-
-    useEffect(() => {
-        props.handleTab("unTruc")
-    }, [])
-
 
     const [ IsVisible, setIsVisible ] = useState(false);
 
@@ -31,6 +25,7 @@ function CreateNewPost(props) {
         e.preventDefault();
         axios.post(urlBase + '/post/newPost', Post)
         .then((response) => {
+            props.handleTab(response.data)
             console.log(response.data)
             setIsVisible(prevProps => (!prevProps))
         })

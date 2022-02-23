@@ -8,12 +8,13 @@ import '../../style/homepage/post.css'
 function Post() {
     const [listOfPosts, setListOfPosts] = useState([]);
 
-    const displayValue = (value) => {
-        console.log(value);
+    const displayValue = (target, value) => {
+        target = value
     }
 
+    // A EXPORTER
     const putDate = (initialValue) => {
-        let d = new Date (initialValue)
+        let d = new Date(initialValue)
 
         let DD = d.getDate();
         let MM = d.getMonth() + 1;
@@ -21,22 +22,22 @@ function Post() {
         let hh = d.getHours();
         let mm = d.getMinutes();
 
-        let value = `${DD}-${MM}-${YYYY} ${hh}:${mm}`
+        let fullDate = `${DD}-${MM}-${YYYY} ${hh}:${mm}`
 
-        return value
+        return fullDate
     }
 
     useEffect(() => {
-        /*crontroler le reupload des posts:
-        annalyser la taille des posts dans la BDD */
         axios.get(urlBase + '/post/getPost').then((response) => {
             console.log(response.data);
+            let positionNewPost = response.data.length;
+            displayValue(response.data[positionNewPost]);
             setListOfPosts(response.data);
         })
     }, [])
     return <article className="post">
 
-        <CreateNewPost test="un truc" handleTab={displayValue}/>
+        <CreateNewPost test="un truc" handleTab={displayValue} />
 
         {listOfPosts.map((value, key) => {
             return (
@@ -46,7 +47,7 @@ function Post() {
 
                     <div className="container-body">
                         <div className="body-post" name="body-post"> {value.body}</div>
-                        
+
                         <div className="created-date">{putDate(value.created_at)}</div>
                     </div>
 

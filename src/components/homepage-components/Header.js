@@ -1,7 +1,6 @@
 import { connectUrl } from "../../url";
 import "../../style/homepage/header.css"
 
-// const axios = require('axios');
 
 function Header() {
 

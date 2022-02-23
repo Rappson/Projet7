@@ -17,6 +17,7 @@
 
 
             SECONDAIRE
+            supprimer le token dans l'ajout d'un post
             faire les likes
             verifier des caracteres speciaux dans l'ajout d'un post avec joi 
 
