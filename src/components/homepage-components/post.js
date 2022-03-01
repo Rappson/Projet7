@@ -1,14 +1,10 @@
-import axios from "axios";
-import { urlBase } from "../../url";
-import CreateNewPost from "./NewPost";
-
 import { useEffect, useState } from "react";
-import '../../style/homepage/post.css'
+import '../../style/homepage/post.css';
+import CreateNewPost from "./NewPost";
+import { getAllPost } from '../services/callAPI';
 
 function Post() {
     const [ listOfPosts, setListOfPosts ] = useState([]);
-
-
 
     const putDate = (initialValue) => {
         let d = new Date(initialValue)
@@ -24,22 +20,28 @@ function Post() {
         return fullDate
     }
 
-    const updatePost = () => {
-        axios.get(urlBase + '/post/getPost', {
-            headers: { Authorization: localStorage.getItem('jwtToken') }
-        })
+    const getPost = () => {
+        getAllPost()
             .then((response) => {
                 console.log(response.data);
                 setListOfPosts(response.data);
             })
     }
-    
-    useEffect(()=>{
-        updatePost()
+
+    useEffect(() => {
+        getPost()
     }, [])
 
-    const onPostCreated = () => {
-        updatePost()
+    const onPostCreated = (newData) => {
+        const handleTab = listOfPosts
+        
+        newData.likes = 0;
+        newData.dislikes = 0;
+        newData.nbr_comment = 0;
+
+        handleTab.push(newData)
+        setListOfPosts(handleTab)
+        console.log(listOfPosts);
     }
 
     return <article className="post">

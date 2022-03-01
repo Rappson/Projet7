@@ -1,7 +1,6 @@
-import axios from "axios";
-import { useState, useEffect } from "react/cjs/react.development";
-import { urlBase } from "../../url";
-import "../../style/homepage/header.css"
+import { useState } from "react/cjs/react.development";
+import "../../style/homepage/header.css";
+import { newPostRequest } from '../services/callAPI';
 
 
 function CreateNewPost({onPostCreated}) {
@@ -23,11 +22,10 @@ function CreateNewPost({onPostCreated}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post(urlBase + '/post/newPost', Post, {
-            headers: {Authorization: localStorage.getItem('jwtToken')}
-        })
-        .then(() => {
-            onPostCreated()
+        newPostRequest(Post)
+        .then((response) => {
+            console.log(response.data.id);
+            onPostCreated(response.data)
             setIsVisible(prevProps => (!prevProps))
         })
         .catch((error) => console.log(error))

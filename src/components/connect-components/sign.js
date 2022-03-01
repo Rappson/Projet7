@@ -1,6 +1,5 @@
-import { urlBase } from "../../url";
 import { useState } from "react";
-const axios = require('axios')
+import { signupRequest } from "../services/callAPI";
 
 // eslint-disable-next-line
 import { BrowserRouter as Router, Route, Routes as Switch, Link, useNavigate } from "react-router-dom";
@@ -29,7 +28,7 @@ const navigate = useNavigate();
     //function to submit
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post(urlBase + `/auth/signup`, sign)
+        signupRequest(sign)
         .then(() => {
             navigate('/homepage')
         })
