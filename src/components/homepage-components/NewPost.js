@@ -24,7 +24,6 @@ function CreateNewPost({onPostCreated}) {
         e.preventDefault();
         newPostRequest(Post)
         .then((response) => {
-            console.log(response.data.id);
             onPostCreated(response.data)
             setIsVisible(prevProps => (!prevProps))
         })

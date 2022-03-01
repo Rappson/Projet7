@@ -2,23 +2,10 @@ import { useEffect, useState } from "react";
 import '../../style/homepage/post.css';
 import CreateNewPost from "./NewPost";
 import { getAllPost } from '../services/callAPI';
+import { putDate } from '../services/time'
 
 function Post() {
     const [ listOfPosts, setListOfPosts ] = useState([]);
-
-    const putDate = (initialValue) => {
-        let d = new Date(initialValue)
-
-        let DD = d.getDate();
-        let MM = d.getMonth() + 1;
-        let YYYY = d.getFullYear();
-        let hh = d.getHours();
-        let mm = d.getMinutes();
-
-        let fullDate = `${DD}-${MM}-${YYYY} ${hh}:${mm}`
-
-        return fullDate
-    }
 
     const getPost = () => {
         getAllPost()
@@ -32,23 +19,22 @@ function Post() {
         getPost()
     }, [])
 
+    const handleTab = listOfPosts
     const onPostCreated = (newData) => {
-        const handleTab = listOfPosts
         
         newData.likes = 0;
         newData.dislikes = 0;
         newData.nbr_comment = 0;
+        newData.id = 0;
 
         handleTab.push(newData)
-        setListOfPosts(handleTab)
-        console.log(listOfPosts);
     }
 
     return <article className="post">
 
         <CreateNewPost onPostCreated={onPostCreated} />
 
-        {listOfPosts.map((value, key) => {
+        {handleTab.map((value, key) => {
             return (
                 <section className="container-post" key={key}>
                     <h4 htmlFor='body-post' className="title-post">{value.title}</h4>
