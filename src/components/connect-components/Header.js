@@ -32,7 +32,6 @@ function Connect() {
 
         axios.post(urlBase + `/auth/login`, log)
             .then((response) => {
-
                 localStorage.setItem('jwtToken', response.data.token)
 
                 navigate(`/homepage`)

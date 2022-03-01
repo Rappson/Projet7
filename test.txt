@@ -13,13 +13,20 @@
             /!\deplacer le formulaire creation post dans la section des posts
             
             faire les props pour l'affichage
+
+            voir comment stocker et gerer les likes
+
             
 
 
             SECONDAIRE
-            supprimer le token dans l'ajout d'un post
-            faire les likes
+                REORG
+                 -faire un fichier qui stockera les calls API
+                 -faire un fonction a exporter pour l'ajout du token dans le headers de la requete
+                 
             verifier des caracteres speciaux dans l'ajout d'un post avec joi 
+            faire l'interceptor https://github.com/axios/axios#interceptors
+            gerer le cas d'erreur dans la connexion
 
             ATTENTION !!!!
             lors du transfet de pc verifier les importations des css 

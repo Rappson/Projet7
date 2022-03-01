@@ -4,7 +4,7 @@ import { urlBase } from "../../url";
 import "../../style/homepage/header.css"
 
 
-function CreateNewPost(props) {
+function CreateNewPost({onPostCreated}) {
 
     const [ Post, setPost ] = useState({
         title: '',
@@ -23,10 +23,11 @@ function CreateNewPost(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post(urlBase + '/post/newPost', Post)
-        .then((response) => {
-            props.handleTab(response.data)
-            console.log(response.data)
+        axios.post(urlBase + '/post/newPost', Post, {
+            headers: {Authorization: localStorage.getItem('jwtToken')}
+        })
+        .then(() => {
+            onPostCreated()
             setIsVisible(prevProps => (!prevProps))
         })
         .catch((error) => console.log(error))

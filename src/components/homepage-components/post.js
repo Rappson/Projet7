@@ -6,13 +6,10 @@ import { useEffect, useState } from "react";
 import '../../style/homepage/post.css'
 
 function Post() {
-    const [listOfPosts, setListOfPosts] = useState([]);
+    const [ listOfPosts, setListOfPosts ] = useState([]);
 
-    const displayValue = (target, value) => {
-        target = value
-    }
 
-    // A EXPORTER
+
     const putDate = (initialValue) => {
         let d = new Date(initialValue)
 
@@ -27,17 +24,27 @@ function Post() {
         return fullDate
     }
 
-    useEffect(() => {
-        axios.get(urlBase + '/post/getPost').then((response) => {
-            console.log(response.data);
-            let positionNewPost = response.data.length;
-            displayValue(response.data[positionNewPost]);
-            setListOfPosts(response.data);
+    const updatePost = () => {
+        axios.get(urlBase + '/post/getPost', {
+            headers: { Authorization: localStorage.getItem('jwtToken') }
         })
+            .then((response) => {
+                console.log(response.data);
+                setListOfPosts(response.data);
+            })
+    }
+    
+    useEffect(()=>{
+        updatePost()
     }, [])
+
+    const onPostCreated = () => {
+        updatePost()
+    }
+
     return <article className="post">
 
-        <CreateNewPost test="un truc" handleTab={displayValue} />
+        <CreateNewPost onPostCreated={onPostCreated} />
 
         {listOfPosts.map((value, key) => {
             return (
