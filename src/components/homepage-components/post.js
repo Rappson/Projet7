@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import '../../style/homepage/post.css';
 import CreateNewPost from "./NewPost";
 import { getAllPost } from '../services/callAPI';
-import { putDate } from '../services/time'
+import { createDate, putDate } from '../services/time'
 
 function Post() {
     const [ listOfPosts, setListOfPosts ] = useState([]);
@@ -10,7 +10,6 @@ function Post() {
     const getPost = () => {
         getAllPost()
             .then((response) => {
-                console.log(response.data);
                 setListOfPosts(response.data);
             })
     }
@@ -19,26 +18,25 @@ function Post() {
         getPost()
     }, [])
 
-    const handleTab = listOfPosts
-    const onPostCreated = (newData) => {
-        
-        newData.likes = 0;
-        newData.dislikes = 0;
-        newData.nbr_comment = 0;
-        newData.id = 0;
 
-        handleTab.push(newData)
+    let tabNewPost = []
+
+    const onPostCreated = (newData) => {
+        newData.created_at = createDate();
+        tabNewPost.push(newData, ...listOfPosts)
+        setListOfPosts(tabNewPost)
     }
+
 
     return <article className="post">
 
         <CreateNewPost onPostCreated={onPostCreated} />
 
-        {handleTab.map((value, key) => {
+        {listOfPosts.map((value, key) => {
             return (
                 <section className="container-post" key={key}>
                     <h4 htmlFor='body-post' className="title-post">{value.title}</h4>
-                    <div className="username">CMwa</div>
+                    <div className="username">{value.nom + value.prenom}</div>
 
                     <div className="container-body">
                         <div className="body-post" name="body-post"> {value.body}</div>

@@ -1,12 +1,14 @@
-const { date } = require('joi');
 const db = require('../config/db')
 
 
 class Post {
-    constructor(userId, title, body) {
+    constructor(userId, title, body, likes, nbr_comment, dislikes) {
         this.userId = userId,
             this.title = title,
-            this.body = body
+            this.body = body,
+            this.likes = likes,
+            this.nbr_comment = nbr_comment,
+            this.dislikes = dislikes
     }
 
 
@@ -21,20 +23,18 @@ class Post {
     
         let created_at = `${YYYY}-${MM}-${DD} ${hh}:${mm}`
 
-        let sql = `INSERT INTO post (user_id, title, body, created_at) 
+        let sql = `INSERT INTO post (user_id, title, body, created_at, likes, nbr_comment, dislikes)
     VALUES('${this.userId}',
     '${this.title}',
     '${this.body}',
-    '${created_at}')`;
+    '${created_at}',
+    '${this.likes}',
+    '${this.nbr_comment}',
+    '${this.dislikes}')`;
 
         return db.execute(sql);
     }
 
-
-    find() {
-        /* date de creation pour trier */
-
-    }
 
 }
 

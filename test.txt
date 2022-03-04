@@ -4,6 +4,7 @@
             //renommer les commentaires en nbr commentaires
             //faire l'affichage des dates
             //mettre la date de creation dans l'affichage des posts
+            //faire les props pour l'affichage
 
             
             rajouter le nom de l'utilisateur qui a poster le post
@@ -12,10 +13,9 @@
             /!\actualisation des post (eviter le reload de la page)
             /!\deplacer le formulaire creation post dans la section des posts
             
-            faire les props pour l'affichage
 
             voir comment stocker et gerer les likes
-
+            ajouter le nom d'utilisateur dans la creation de post
             
 
 
