@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import '../../style/homepage/post.css';
 import CreateNewPost from "./NewPost";
 import { getAllPost } from '../services/callAPI';
-import { createDate, putDate } from '../services/time'
+import { putDate } from '../services/time'
+import { Navigate } from "react-router-dom";
 
 function Post() {
     const [ listOfPosts, setListOfPosts ] = useState([]);
@@ -26,6 +27,11 @@ function Post() {
         setListOfPosts(tabNewPost)
     }
 
+    const handleClick = (key) =>{
+        console.log('tamer');
+        // Navigate(`/post?id:${key}`)
+    }
+
 
     return <article className="post">
 
@@ -37,7 +43,7 @@ function Post() {
                     <h4 htmlFor='body-post' className="title-post">{value.title}</h4>
                     <div className="username">{value.nom + value.prenom}</div>
 
-                    <div className="container-body">
+                    <div className="container-body" onClick={handleClick(value.id)}>
                         <div className="body-post" name="body-post"> {value.body}</div>
 
                         <div className="created-date">{putDate(value.created_at)}</div>

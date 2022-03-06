@@ -5,28 +5,28 @@
             //faire l'affichage des dates
             //mettre la date de creation dans l'affichage des posts
             //faire les props pour l'affichage
+            //ajouter le nom d'utilisateur dans la creation de post
+            //rajouter le nom de l'utilisateur qui a poster le post
+            //faire la jointure pour le get des posts entre le post et user
+            //actualisation des post (eviter le reload de la page)
+            //deplacer le formulaire creation post dans la section des posts
 
             
-            rajouter le nom de l'utilisateur qui a poster le post
-            faire la jointure pour le get des posts entre le post et user
-
-            /!\actualisation des post (eviter le reload de la page)
-            /!\deplacer le formulaire creation post dans la section des posts
-            
-
+            faire getOnePost
+            faire la gestion des commentaires
             voir comment stocker et gerer les likes
-            ajouter le nom d'utilisateur dans la creation de post
-            
+
+            s'informer sur la gestion d'admin
 
 
             SECONDAIRE
+            //faire l'interceptor https://github.com/axios/axios#interceptors
                 REORG
                  -faire un fichier qui stockera les calls API
                  -faire un fonction a exporter pour l'ajout du token dans le headers de la requete
                  
             verifier des caracteres speciaux dans l'ajout d'un post avec joi 
-            faire l'interceptor https://github.com/axios/axios#interceptors
-            gerer le cas d'erreur dans la connexion
+            gerer le cas d'erreur dans la connexion: faire un message d'erreur general
 
             ATTENTION !!!!
             lors du transfet de pc verifier les importations des css 
