@@ -22,7 +22,6 @@ function Post() {
     let tabNewPost = []
 
     const onPostCreated = (newData) => {
-        newData.created_at = createDate();
         tabNewPost.push(newData, ...listOfPosts)
         setListOfPosts(tabNewPost)
     }

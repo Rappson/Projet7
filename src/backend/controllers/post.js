@@ -27,7 +27,7 @@ exports.createNewPost = (req, res, next) => {
         nbr_comment: 0,
         dislikes: 0
     })
-    
+
     let post = new Post(
         newPostValidate.value.userId,
         newPostValidate.value.title,
@@ -37,11 +37,17 @@ exports.createNewPost = (req, res, next) => {
         newPostValidate.value.dislikes
     );
     if (newPostValidate.error) {
-        res.status(401).json({ message: newPostValidate.error.details[0].message })
+        res.status(401).json({ message: newPostValidate.error.details[ 0 ].message })
     } else {
         post.save()
-            .then(() =>{
-                res.status(201).json( post )
+            .then((response) => {
+                let sql = `SELECT post.id, title, body, created_at, nom, prenom, likes, nbr_comment, dislikes, user_id
+                 FROM post INNER JOIN user ON user.id = post.user_id WHERE post.id = ${response[0].insertId}`
+                db.execute(sql)
+                    .then((user) => {
+                        res.status(200).json( user[0][0] )
+                    })
+                    .catch(() => res.status(500).json({message: 'Accès impossible aux données'}))
             })
             .catch((error) => {
                 console.log(error);
@@ -54,7 +60,7 @@ exports.createNewPost = (req, res, next) => {
 exports.getAllPosts = (req, res, next) => {
     let sql = 'SELECT * FROM post INNER JOIN user ON post.user_id = user.id order by created_at DESC;';
     return db.execute(sql)
-        .then((post) => res.status(200).json(post[0]))
+        .then((post) => res.status(200).json(post[ 0 ]))
         .catch((error) => {
             console.log(error);
             req.status(500).json({ error })

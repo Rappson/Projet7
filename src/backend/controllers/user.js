@@ -32,7 +32,7 @@ exports.signup = (req, res, next) => {
             } else{
                 // sauvegarde du nouvel utilisateur dans la base de donnée
                 user.save()
-                .then(() => res.status(201).json({ message: 'User created' }))
+                .then(() => res.status(201).json({ user }))
                 .catch(error => {
                     console.log(error);
                     res.status(400).json({ error })
