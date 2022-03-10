@@ -227,6 +227,8 @@ justify-content: center;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
+  text-decoration: none;
+  color: black;
 }
 
 .container-post{

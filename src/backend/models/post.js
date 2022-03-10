@@ -25,8 +25,8 @@ class Post {
 
         let sql = `INSERT INTO post (user_id, title, body, created_at, likes, nbr_comment, dislikes)
     VALUES('${this.userId}',
-    '${this.title}',
-    '${this.body}',
+    "${this.title}",
+    "${this.body}",
     '${created_at}',
     '${this.likes}',
     '${this.nbr_comment}',

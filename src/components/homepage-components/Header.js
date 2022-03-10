@@ -3,6 +3,9 @@ import "../../style/homepage/header.css"
 
 
 function Header() {
+    const deleteToken = () => {
+        localStorage.removeItem('jwtToken');
+    }
 
     return <header>
         {/* Logo */}
@@ -23,7 +26,7 @@ function Header() {
 
                 <a className="bar-item">Profil</a>
                 <a className="bar-item">Paramètres</a>
-                <a href={'http://' + connectUrl} className="bar-item">Déconnexion</a>
+                <a href={'http://' + connectUrl} onClick={deleteToken} className="bar-item">Déconnexion</a>
             </div>
         </div>
     </header>

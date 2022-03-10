@@ -27,6 +27,8 @@
                  
             verifier des caracteres speciaux dans l'ajout d'un post avec joi 
             gerer le cas d'erreur dans la connexion: faire un message d'erreur general
+            |-> Probleme rencontré : Comment faire un token pour l'inscription ?
+            |-> Rajouter un message d'erreur general indiqant que les informations sotn incorrect
 
             ATTENTION !!!!
             lors du transfet de pc verifier les importations des css 

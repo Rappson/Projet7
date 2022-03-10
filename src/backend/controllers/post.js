@@ -58,7 +58,7 @@ exports.createNewPost = (req, res, next) => {
 
 
 exports.getAllPosts = (req, res, next) => {
-    let sql = 'SELECT * FROM post INNER JOIN user ON post.user_id = user.id order by created_at DESC;';
+    let sql = 'SELECT post.id, title, body, created_at, nom, prenom, likes, nbr_comment, dislikes, user_id FROM post INNER JOIN user ON post.user_id = user.id order by created_at DESC;';
     return db.execute(sql)
         .then((post) => res.status(200).json(post[ 0 ]))
         .catch((error) => {

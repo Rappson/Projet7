@@ -72,8 +72,7 @@ const logValidate = joiConnect.validate({
 
                     /* SI le mdp n'est pas valide */
                     if (!valid) {
-                        console.log("probleme dans le mot de passe");
-                        return res.status(401).json({ error: 'mot de passe incorrect !' });
+                        return res.status(401).json( error );
                     }
                     res.status(200).json({
                         userId: user.id,

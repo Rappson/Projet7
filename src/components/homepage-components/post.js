@@ -27,10 +27,6 @@ function Post() {
         setListOfPosts(tabNewPost)
     }
 
-    const handleClick = (key) =>{
-        console.log('tamer');
-        // Navigate(`/post?id:${key}`)
-    }
 
 
     return <article className="post">
@@ -38,12 +34,17 @@ function Post() {
         <CreateNewPost onPostCreated={onPostCreated} />
 
         {listOfPosts.map((value, key) => {
+
+            const handleClick = () => {
+                let onePostId = listOfPosts[key].id
+                return <Navigate to={`/post?id:${onePostId}`} />
+            }
             return (
                 <section className="container-post" key={key}>
                     <h4 htmlFor='body-post' className="title-post">{value.title}</h4>
                     <div className="username">{value.nom + value.prenom}</div>
 
-                    <div className="container-body" onClick={handleClick(value.id)}>
+                    <div className="container-body" onClick={handleClick}>
                         <div className="body-post" name="body-post"> {value.body}</div>
 
                         <div className="created-date">{putDate(value.created_at)}</div>
