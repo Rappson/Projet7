@@ -9,29 +9,33 @@
             //rajouter le nom de l'utilisateur qui a poster le post
             //faire la jointure pour le get des posts entre le post et user
             //actualisation des post (eviter le reload de la page)
-            //deplacer le formulaire creation post dans la section des posts
+            //deplacer le formulaire creation post dans la section des posts            
+            //gerer le cas d'erreur dans la connexion: faire un message d'erreur general
+
+            //|-> Probleme rencontré : Comment faire un token pour l'inscription ?
+            -faire une page de connexion apres l'inscription (facilité)
+            -ou refaire la manip jwt dans la section inscription (plus difficile)
 
             
-            faire getOnePost
+            faire les infos dans getOnePost
             faire la gestion des commentaires
             voir comment stocker et gerer les likes
+            regelr le probleme de la premiere connexion
 
             s'informer sur la gestion d'admin
 
 
+
             SECONDAIRE
             //faire l'interceptor https://github.com/axios/axios#interceptors
-                REORG
-                 -faire un fichier qui stockera les calls API
-                 -faire un fonction a exporter pour l'ajout du token dans le headers de la requete
+
+            Faire le css pour les differents types de taille d'ecran
+            |-> page de connexion : le header mettrre le flexbox en column
+            |-> Page d'accueil : ajouter un bouton pour faire défiler les parametres
+
+            Faire le réarengmenet du css
                  
             verifier des caracteres speciaux dans l'ajout d'un post avec joi 
-            gerer le cas d'erreur dans la connexion: faire un message d'erreur general
-            |-> Probleme rencontré : Comment faire un token pour l'inscription ?
-            |-> Rajouter un message d'erreur general indiqant que les informations sotn incorrect
 
-            ATTENTION !!!!
-            lors du transfet de pc verifier les importations des css 
-            dans les différentes pages
 
             --------------------------------------------------------------------

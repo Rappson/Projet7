@@ -7,6 +7,10 @@ import { BrowserRouter as Router, Route, Routes as Switch, Link, useNavigate } f
 function SignIn() {
 const navigate = useNavigate();
 
+const [ isSuccess, setIsSuccess ] = useState({
+    message: '',
+    success: null
+})
     // initialisation de sign
     const [ sign, setSign ] = useState({
         name: "",
@@ -30,13 +34,23 @@ const navigate = useNavigate();
         e.preventDefault()
         signupRequest(sign)
         .then(() => {
-            navigate('/homepage')
+            setIsSuccess({
+                message: 'Votre inscription à été validé ! Vous pouvez dorénavant vous connecter',
+                success: true
+            })
         })
-        .catch((error) => {
-            console.log(error);
+        .catch((response) => {
+            setIsSuccess({
+                message: 'Un probleme est survenue, merci de vérifier les informations',
+                success: false
+            })
         })
 
     }
+
+    /* SI le message est null rien faire
+    SINON appeler la fonction "" qui retournera un message d'ereur ou de succée en fonction du résultat */
+    
 
     return <div id="sign-in">
         <div className='p-5'>
@@ -70,8 +84,9 @@ const navigate = useNavigate();
 
                 <input type="submit" value="S'inscrire" className='btn btn-primary my-2 border border-dark'></input>
             </form>
-
-
+        </div>
+        <div id="success-message" className={isSuccess.success ? "text-success" : "text-danger"}>
+            <p>{isSuccess.message}</p>
         </div>
     </div>
 }

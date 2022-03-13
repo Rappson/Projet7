@@ -7,6 +7,9 @@ import { BrowserRouter as Router, Route, Routes as Switch, Link, useNavigate } f
 function Connect() {
     const navigate = useNavigate ();
 
+    const [ IsVisible, setIsVisible ] = useState(false);
+
+
     // initialisation de state
     const [ log, setlog ] = useState({
         email: "",
@@ -31,7 +34,9 @@ function Connect() {
                 localStorage.setItem('jwtToken', response.data.token)
                 navigate(`/homepage`)
             })
-        // .catch(() => document.location.href = 'http://localhost:3000/error')
+         .catch(() => {
+            setIsVisible(prevProps => !prevProps)
+         })
 
         /*       test.url@test.com      */
     }
@@ -42,7 +47,7 @@ function Connect() {
             <a href={connectUrl}><img src="images/icon-left-font-monochrome-white.png" alt='logo' id="icon-connect" /></a>
 
             {/* formulaire */}
-            <form className="d-flex flex-row" onSubmit={handleSubmit}>
+            <form id='form-connect' className="d-flex flex-row" onSubmit={handleSubmit}>
                 <div id="connect-input" className='m-2'>
                     <label htmlFor="email" className='m-2 text-white'>Email</label>
                     <input type="text" id="email" name="email" value={log.email} onChange={handleChange} />
@@ -54,6 +59,8 @@ function Connect() {
 
                     <input type="submit" value="Se connecter" id="connect-button" className='m-2 btn btn-primary border border-dark' />
                 </div>
+
+                <div id='error-content' className={IsVisible ? "visible" : "not-visible"}>L'utilisateur est introuvable ! merci de verifier le mail et/ou le mot de passe</div>
             </form>
         </div>
     </header>

@@ -10,6 +10,7 @@ import errorPage from './components/error';
 /* pages */
 import connectPage from './pages/ConnectPage'
 import Homepage from './pages/homePage'
+import onePost from './components/onePost/onepost'
 
 
 
@@ -21,6 +22,8 @@ ReactDOM.render(
           <Route path='/' element={connectPage()} />
 
           <Route path='/homepage' element={Homepage()} />
+
+          <Route path='/post/:id' element={onePost()}/>
 
           <Route path='/error' element={errorPage()} />
         </Switch>

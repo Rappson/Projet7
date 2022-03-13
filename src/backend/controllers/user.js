@@ -10,11 +10,11 @@ const joiSignup = require('../services/joi/user-signup');
 
 exports.signup = (req, res, next) => {
     const logValidate = joiSignup.validate({
-        name : req.body.name,
-        firstName : req.body.firstName,
-        email : req.body.email,
-        birthday : req.body.birthday,
-        password : req.body.password
+        name: req.body.name,
+        firstName: req.body.firstName,
+        email: req.body.email,
+        birthday: req.body.birthday,
+        password: req.body.password
     })
     // recuperation des données utilisateur et hashage du mdp
     bcrypt.hash(logValidate.value.password, 10)
@@ -27,16 +27,18 @@ exports.signup = (req, res, next) => {
                 logValidate.value.birthday,
                 hash
             );
-            if(logValidate.error){
-                res.status(401).json({ message : logValidate.error.details[0].message })
-            } else{
+            if (logValidate.error) {
+                res.status(401).json({ error: logValidate.error.details[ 0 ].message })
+            } else {
                 // sauvegarde du nouvel utilisateur dans la base de donnée
                 user.save()
-                .then(() => res.status(201).json({ user }))
-                .catch(error => {
-                    console.log(error);
-                    res.status(400).json({ error })
-                })
+                    .then(() => {
+                        res.status(201).json({ user })
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        res.status(400).json({ error })
+                    })
             }
         })
         .catch(error => {
@@ -48,11 +50,11 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
 
-/* FAIRE LA VALIDATION DE DONNEES JOI */
-const logValidate = joiConnect.validate({
-    email : req.body.email,
-    password : req.body.password
-})
+    /* FAIRE LA VALIDATION DE DONNEES JOI */
+    const logValidate = joiConnect.validate({
+        email: req.body.email,
+        password: req.body.password
+    })
 
     let sql = `select * from user where email = '${logValidate.value.email}'`;
     db.execute(sql)
@@ -72,7 +74,7 @@ const logValidate = joiConnect.validate({
 
                     /* SI le mdp n'est pas valide */
                     if (!valid) {
-                        return res.status(401).json( error );
+                        return res.status(401).json(error);
                     }
                     res.status(200).json({
                         userId: user.id,
