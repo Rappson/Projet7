@@ -32,3 +32,19 @@
     text-shadow: 3.5px 3.5px rgb(78 78 78);
   }
   
+  #error-content{
+    width: 15rem;
+    color: red;
+  }
+  
+  #sign-in{
+    display: flex;
+    flex-direction: row;
+    align-items: center
+  }
+  
+  #success-message{
+    font-size: large;
+    font-weight: bold
+  }
+  

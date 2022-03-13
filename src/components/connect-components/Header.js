@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { connectUrl } from '../../url';
 import { connectRequest } from '../services/callAPI';
+import "../../style/connect.css"
+
 // eslint-disable-next-line
 import { BrowserRouter as Router, Route, Routes as Switch, Link, useNavigate } from "react-router-dom";
 

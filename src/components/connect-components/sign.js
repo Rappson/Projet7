@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signupRequest } from "../services/callAPI";
+import "../../style/connect.css"
 
 // eslint-disable-next-line
 import { BrowserRouter as Router, Route, Routes as Switch, Link, useNavigate } from "react-router-dom";

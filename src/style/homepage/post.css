@@ -36,3 +36,29 @@
       display: flex;
       justify-content: space-between;
     }
+    
+  /* FORM NEW POST */
+  
+  .container-form-newPost{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .new-post-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 2rem;
+    color: black;
+  }
+  
+  .btn-send-new-post{
+    background-color: #77aeff;
+  }
+  
+  .btn-send-new-post:hover{
+    background-color: #0d6efd;
+  }
