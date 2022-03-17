@@ -8,10 +8,10 @@ import { BrowserRouter as Router, Route, Routes as Switch, Link } from "react-ro
 import errorPage from './components/error';
 
 /* pages */
-import connectPage from './pages/ConnectPage'
+import ConnectPage from './pages/ConnectPage'
 import Homepage from './pages/homePage'
-import onePost from './components/onePost/onepost'
-
+import OnePost from './components/onePost/Onepost'
+// const { OnePost } = require('./components/onePost/Onepost')
 
 
 ReactDOM.render(
@@ -19,11 +19,11 @@ ReactDOM.render(
     <div>
       <Router>
         <Switch>
-          <Route path='/' element={connectPage()} />
+          <Route path='/' element={ConnectPage()} />
 
           <Route path='/homepage' element={Homepage()} />
 
-          <Route path='/post/:id' element={onePost()}/>
+          <Route path='/post/:id' element={OnePost()}/>
 
           <Route path='/error' element={errorPage()} />
         </Switch>

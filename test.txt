@@ -19,10 +19,13 @@
             
             faire les infos dans getOnePost
             faire la gestion des commentaires
-            voir comment stocker et gerer les likes
             regelr le probleme de la premiere connexion
 
+
+            PRISE D'INFORMATIONS:
             s'informer sur la gestion d'admin
+
+            voir comment stocker et gerer les likes:
 
 
 

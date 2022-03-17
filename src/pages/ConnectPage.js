@@ -3,6 +3,8 @@ import Header from '../components/connect-components/Header';
 import Welcome from '../components/connect-components/Welcome';
 import SignIn from '../components/connect-components/sign';
 import Footer from '../components/connect-components/Footer';
+import "../style/index.css"
+
 
 
 

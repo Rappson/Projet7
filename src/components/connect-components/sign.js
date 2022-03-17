@@ -6,7 +6,6 @@ import "../../style/connect.css"
 import { BrowserRouter as Router, Route, Routes as Switch, Link, useNavigate } from "react-router-dom";
 
 function SignIn() {
-const navigate = useNavigate();
 
 const [ isSuccess, setIsSuccess ] = useState({
     message: '',
