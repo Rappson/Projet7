@@ -23,7 +23,7 @@ ReactDOM.render(
 
           <Route path='/homepage' element={Homepage()} />
 
-          <Route path='/post/:id' element={OnePost()}/>
+          <Route path='post/:id' element={<OnePost/>}/>
 
           <Route path='/error' element={errorPage()} />
         </Switch>

@@ -66,3 +66,10 @@ exports.getAllPosts = (req, res, next) => {
             req.status(500).json({ error })
         })
 }
+
+exports.getOnePost = (req, res, next) =>{
+    let sql = `SELECT post.id, title, body, created_at, nom, prenom, likes, nbr_comment, dislikes, user_id FROM post INNER JOIN user ON post.user_id = user.id WHERE post.id = ${req.params.id}`
+    return db.execute(sql)
+    .then((post) => res.status(200).json(post))
+    .catch((error) => res.status(404).json(error))
+}

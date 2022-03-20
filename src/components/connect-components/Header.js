@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { connectUrl } from '../../url';
 import { connectRequest } from '../services/callAPI';
 import "../../style/connect.css"
+import { React } from 'react'
+
 
 // eslint-disable-next-line
 import { BrowserRouter as Router, Route, Routes as Switch, Link, useNavigate } from "react-router-dom";
@@ -10,7 +12,6 @@ function Connect() {
     const navigate = useNavigate ();
 
     const [ IsVisible, setIsVisible ] = useState(false);
-
 
     // initialisation de state
     const [ log, setlog ] = useState({

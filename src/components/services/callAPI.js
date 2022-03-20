@@ -13,6 +13,10 @@ const getAllPost = () => {
    return axios.get(urlBase + '/post/getPost', tokenHeaders)
 }
 
+const getOnePost = (id) => {
+   return axios.get(urlBase + `/post/getOnePost/${id}`)
+}
+
 // CONNECT / SIGNUP 
 const connectRequest = (body) => {
    return axios.post(urlBase + `/auth/login`, body)
@@ -22,4 +26,5 @@ const signupRequest = (body) => {
    return axios.post(urlBase + `/auth/signup`, body)
 }
 
-export {newPostRequest, getAllPost, connectRequest, signupRequest};
+
+export { newPostRequest, getAllPost, getOnePost, connectRequest, signupRequest };

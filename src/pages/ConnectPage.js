@@ -9,6 +9,7 @@ import "../style/index.css"
 
 
 function connectPage() {
+
     return (
       <div>
         <Header />
