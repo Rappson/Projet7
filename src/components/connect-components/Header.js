@@ -34,6 +34,7 @@ function Connect() {
         e.preventDefault()
         connectRequest(log)
             .then((response) => {
+                // utiliser useContext
                 localStorage.setItem('jwtToken', response.data.token)
                 navigate(`/homepage`)
             })

@@ -16,16 +16,23 @@
             -faire une page de connexion apres l'inscription (facilité)
             -ou refaire la manip jwt dans la section inscription (plus difficile)
 
-            
+            IMPORTANT:
+            Faire le transfert de dossier(mettre le dossier backend au meme niveau que le front)
+
+
             faire les infos dans getOnePost
             faire la gestion des commentaires
             regelr le probleme de la premiere connexion
+            faire la gestion des likes
+            s'informer pour mettre en place useContext pour init le token avant la redirection : 
+            https://medium.com/geekculture/how-to-use-context-api-and-jwt-to-maintain-user-sessions-eb5602e83a03
 
 
             PRISE D'INFORMATIONS:
             s'informer sur la gestion d'admin
 
             voir comment stocker et gerer les likes:
+            gerer les doubles clicks
 
 
 
