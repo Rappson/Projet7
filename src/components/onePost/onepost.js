@@ -29,16 +29,16 @@ const OnePost = () => {
         </div>
 
         <div className='right-side'>
-        <div className='container-likes'>
-            <button className='likes'><i className="far fa-heart">{postObject.likes}</i></button>
-            <button className='comments'><i className="fas fa-comment-medical">{postObject.nbr_comment}</i></button>
-            <button className='dislikes'><i className="fas fa-heart-broken">{postObject.dislikes}</i></button>
+            <div className='container-likes'>
+                <button className='likes'><i className="far fa-heart">{postObject.likes}</i></button>
+                <button className='comments'><i className="fas fa-comment-medical">{postObject.nbr_comment}</i></button>
+                <button className='dislikes'><i className="fas fa-heart-broken">{postObject.dislikes}</i></button>
+            </div>
+            <div className='container-all-comments'>
+                <p>il n'y a aucun commentaires pour le moment !</p>
+            </div>
         </div>
-        <div className='container-all-comments'>
-            <p>il n'y a aucun commentaires pour le moment !</p>
-        </div>
-        </div>
-        
+
     </div>
 }
 

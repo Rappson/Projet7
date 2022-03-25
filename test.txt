@@ -18,6 +18,7 @@
 
             IMPORTANT:
             Faire le transfert de dossier(mettre le dossier backend au meme niveau que le front)
+            Lors du transfert verifier qu'il y a un fichier pckg.json par dossier
 
 
             faire les infos dans getOnePost
