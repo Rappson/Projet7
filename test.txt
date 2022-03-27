@@ -1,27 +1,9 @@
-            //validation de données dans creation de post
-            //Rajouter les dates de créations dans la BDD pour les posts
-            //changer l'ordre d'apparition des posts
-            //renommer les commentaires en nbr commentaires
-            //faire l'affichage des dates
-            //mettre la date de creation dans l'affichage des posts
-            //faire les props pour l'affichage
-            //ajouter le nom d'utilisateur dans la creation de post
-            //rajouter le nom de l'utilisateur qui a poster le post
-            //faire la jointure pour le get des posts entre le post et user
-            //actualisation des post (eviter le reload de la page)
-            //deplacer le formulaire creation post dans la section des posts            
-            //gerer le cas d'erreur dans la connexion: faire un message d'erreur general
-
-            //|-> Probleme rencontré : Comment faire un token pour l'inscription ?
-            -faire une page de connexion apres l'inscription (facilité)
-            -ou refaire la manip jwt dans la section inscription (plus difficile)
-
             IMPORTANT:
             Faire le transfert de dossier(mettre le dossier backend au meme niveau que le front)
             Lors du transfert verifier qu'il y a un fichier pckg.json par dossier
 
 
-            faire les infos dans getOnePost
+            //faire les infos dans getOnePost
             faire la gestion des commentaires
             regelr le probleme de la premiere connexion
             faire la gestion des likes
