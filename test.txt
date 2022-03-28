@@ -9,6 +9,7 @@
             faire la gestion des likes
             s'informer pour mettre en place useContext pour init le token avant la redirection : 
             https://medium.com/geekculture/how-to-use-context-api-and-jwt-to-maintain-user-sessions-eb5602e83a03
+            Probleme dans la page onePost: le logo se charge pas alors que le chemin est redirigé vers le fichier de l'image
 
 
             PRISE D'INFORMATIONS:

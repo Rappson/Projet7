@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connectUrl } from '../../url';
 import { connectRequest } from '../services/callAPI';
 import "../../style/connect.css"
@@ -12,6 +12,10 @@ function Connect() {
     const navigate = useNavigate ();
 
     const [ IsVisible, setIsVisible ] = useState(false);
+    
+    useEffect(() => {
+        localStorage.removeItem('jwtToken')
+    }, [])
 
     // initialisation de state
     const [ log, setlog ] = useState({

@@ -1,5 +1,14 @@
+.likes:hover, .likes-active{
+    background-color: aqua;
+}
+
+.dislikes:hover, .dislikes-active{
+    background-color: rgb(248, 115, 62);
+}
+
 .container-onePost{
     display: flex;
+    margin: 35px;
     flex-direction: row;
     justify-content: center;
 }
@@ -19,6 +28,7 @@
 
 .left-side{
     display: flex;
+    width: 50rem;
     flex-direction: column;
     align-items: center;
     border: 5px solid rgb(56, 197, 253);

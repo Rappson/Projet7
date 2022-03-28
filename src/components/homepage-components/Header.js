@@ -18,14 +18,11 @@ function Header() {
                     <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
                     <button id="search-btn" className="btn btn-outline-primary my-2 my-sm-0" type="submit"><i className="fas fa-search"></i></button>
                 </form>
-                
+
             </div>
 
             {/* Menu */}
             <div id="menu">
-
-                <a className="bar-item">Profil</a>
-                <a className="bar-item">Paramètres</a>
                 <a href={'http://' + connectUrl} onClick={deleteToken} className="bar-item">Déconnexion</a>
             </div>
         </div>

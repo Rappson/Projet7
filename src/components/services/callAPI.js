@@ -14,7 +14,11 @@ const getAllPost = () => {
 }
 
 const getOnePost = (id) => {
-   return axios.get(urlBase + `/post/getOnePost/${id}`)
+   return axios.get(urlBase + `/post/getOnePost/${id}`, tokenHeaders)
+}
+
+const addNewLike = (dataLikes) => {
+   return axios.post(urlBase + `/post/newLike`, dataLikes, tokenHeaders)
 }
 
 // CONNECT / SIGNUP 
@@ -27,4 +31,4 @@ const signupRequest = (body) => {
 }
 
 
-export { newPostRequest, getAllPost, getOnePost, connectRequest, signupRequest };
+export { newPostRequest, getAllPost, getOnePost, addNewLike, connectRequest, signupRequest };
