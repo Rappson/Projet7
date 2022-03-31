@@ -28,6 +28,13 @@ const OnePost = () => {
             })
     }, [])
 
+    const requestPostLike = () => {
+        addNewLike({
+            like: dataLikes.likeData,
+            post_id: id
+        })
+    }
+
     const handleLike = () => {
         if(dataLikes !== 1){
             setDataLikes({
@@ -35,14 +42,14 @@ const OnePost = () => {
                 like: true,
                 dislike: false
             })
-            addNewLike(dataLikes.likeData)
+            requestPostLike()
         }else{
             setDataLikes({
                 likeData: 0,
                 like: false,
                 dislike: false
             })
-            addNewLike(dataLikes.likeData)
+            requestPostLike()
         }
     }
 
@@ -53,7 +60,7 @@ const OnePost = () => {
                 like: false,
                 dislike: true
             })
-            addNewLike(dataLikes.likeData)
+            requestPostLike()
         }else{
             setDataLikes({
                 likeData: 0,
@@ -61,9 +68,9 @@ const OnePost = () => {
                 dislike: false
             })
         }
-        addNewLike(dataLikes.likeData)
+        requestPostLike()
     }
-
+    
 
     return <div className='content'>
         <Header />
@@ -74,6 +81,7 @@ const OnePost = () => {
                     <h2 className='post-title'>{postObject.title}</h2>
                     <p className='post-body'>{postObject.body}</p>
                 </div>
+                <button className='delete-post-btn'>Supprimer</button>
             </div>
 
             <div className='right-side'>
