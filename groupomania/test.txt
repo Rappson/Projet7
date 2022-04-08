@@ -1,0 +1,61 @@
+            //faire les infos dans getOnePost
+
+            IMPORTANT:
+            Faire le transfert de dossier(mettre le dossier backend au meme niveau que le front)
+            Lors du transfert verifier qu'il y a un fichier pckg.json par dossier
+
+ERREUR A REGLER 
+            regelr le probleme de la premiere connexion
+            s'informer pour mettre en place useContext pour init le token avant la redirection : 
+            https://medium.com/geekculture/how-to-use-context-api-and-jwt-to-maintain-user-sessions-eb5602e83a03
+            Probleme dans la page onePost: le logo se charge pas alors que le chemin est redirigé vers le fichier de l'image
+
+ADMIN
+            PRISE D'INFORMATIONS:
+            s'informer sur la gestion d'admin
+
+LIKE
+            faire la gestion des likes
+            gerer les doubles clicks
+            le nbr de like
+
+COMMENT
+            faire la gestion des commentaires
+
+
+            SECONDAIRE
+            //faire l'interceptor https://github.com/axios/axios#interceptors
+
+            Faire le css pour les differents types de taille d'ecran
+            |-> page de connexion : le header mettrre le flexbox en column
+            |-> Page d'accueil : ajouter un bouton pour faire défiler les parametres
+
+            Faire le réarengmenet du css
+                 
+            verifier des caracteres speciaux dans l'ajout d'un post avec joi
+
+
+            --------------------------------------------------------------------
+
+
+let deleteRequest = `delete from likes where user_id = ${data.id}`
+                db.execute(deleteRequest)
+
+
+                let sql = `SELECT * FROM likes WHERE user_id = ${req.body.userId}`
+        db.execute(sql)
+        .then((response) => {
+            let deleteRequest = `delete from likes where user_id = ${response[0][0].id}`
+            db.execute(deleteRequest)
+            .then(() =>{
+                let addLike = `INSERT INTO likes (user_id, likeData, post_id)
+                VALUES ("${req.body.userId}",
+                   "${req.body.like}",
+                   "${req.body.post_id}")`
+                   return db.execute(addLike)
+            })
+            .catch((error) => console.log(error))
+        })
+        .catch((error) => {
+            console.log(error);
+        })
