@@ -10,12 +10,7 @@ import Header from "../homepage-components/Header";
 const OnePost = () => {
     const { id } = useParams();
     const [ postObject, setPostObject ] = useState({})
-    const [ dataLikes , setDataLikes ] = useState({
-        likeData: 0,
-        like: false,
-        dislike: false
-    })
-    // const postId = postObject.id;
+    const [ dataLikes , setDataLikes ] = useState({ likeData: 0 })
 
     useEffect(() => {
         getOnePost(id)
@@ -38,16 +33,12 @@ const OnePost = () => {
     const handleLike = () => {
         if(dataLikes.likeData !== 1){
             setDataLikes({
-                likeData: 1,
-                like: true,
-                dislike: false
+                likeData: 1
             })
             requestPostLike()
         }else{
             setDataLikes({
-                likeData: 0,
-                like: false,
-                dislike: false
+                likeData: 0
             })
             requestPostLike()
         }
@@ -56,16 +47,12 @@ const OnePost = () => {
     const handleDislike = () => {
         if(dataLikes.likeData !== -1){
             setDataLikes({
-                likeData: -1,
-                like: false,
-                dislike: true
+                likeData: -1
             })
             requestPostLike()
         }else{
             setDataLikes({
-                likeData: 0,
-                like: false,
-                dislike: false
+                likeData: 0
             })
         }
         requestPostLike()

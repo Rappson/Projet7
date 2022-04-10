@@ -6,3 +6,12 @@ exports.deleteLikes = async (req) => {
     return db.execute(sql)
 };
 
+exports.alreadyLiked = async (req) => {
+    let sql = `SELECT * FROM likes WHERE user_id = ${req.body.userId} AND post_id = ${req.params.id}`
+    let isLiked = await db.execute(sql)
+    try {
+        return isLiked[ 0 ][ 0 ].likeData
+    } catch {
+        return null
+    }
+}

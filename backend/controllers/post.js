@@ -68,19 +68,26 @@ exports.getAllPosts = (req, res, next) => {
         })
 }
 
-exports.getOnePost = (req, res, next) => {
-    let sql = `SELECT post.id, title, body, created_at, nom, prenom,
+exports.getOnePost = async (req, res, next) => {
+   likes.alreadyLiked(req)
+    .then((post) => {
+        let sql = `SELECT post.id, title, body, created_at, nom, prenom,
      (select count(*) from likes WHERE post_id = ${req.params.id} AND likeData = 1) AS likes, nbr_comment,
       (select count(*) from likes WHERE post_id = ${req.params.id} AND likeData = -1) AS dislikes,
       user_id FROM post INNER JOIN user ON post.user_id = user.id WHERE post.id = ${req.params.id}`
+      console.log(post);
+      /* faire la gestion du retour de la fonction alreadyLiked:
+      SI le retour est une valeur recuperer la valeur et la renvoyer dans la reponse (res)
+      SINON renvoyer false a la response */
     return db.execute(sql)
         .then((post) => res.status(200).json(post[ 0 ][ 0 ]))
         .catch((error) => res.status(404).json(error))
+    })
 }
 
 exports.likes = async (req, res, next) => {
     await likes.deleteLikes(req)
-        .then(() => {
+    .then(() => {
             let sql = `INSERT INTO likes (user_id, likeData, post_id)
         VALUES ("${req.body.userId}",
            "${req.body.like}",
