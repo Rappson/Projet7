@@ -21,7 +21,7 @@ const addNewLike = (dataLikes) => {
    return axios.post(urlBase + `/post/newLike`, dataLikes, tokenHeaders)
 }
 const deleteItem = (id) => {
-   return axios.delete(urlBase + `/post/delete/${id}`)
+   return axios.delete(urlBase + `/post/deletePost/${id}`, tokenHeaders)
 }
 
 // CONNECT / SIGNUP 

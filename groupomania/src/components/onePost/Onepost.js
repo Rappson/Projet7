@@ -1,7 +1,7 @@
 import { React, useState } from 'react'
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getOnePost, addNewLike } from "../services/callAPI";
+import { getOnePost, addNewLike, deleteItem } from "../services/callAPI";
 import "../../style/homepage/header.css"
 import '../../style/onePost.css';
 import Header from "../homepage-components/Header";
@@ -17,6 +17,8 @@ const OnePost = () => {
             .then((response) => {
                 console.log(response.data);
                 setPostObject(response.data)
+                setDataLikes({likeData: response.data.isLiked})
+                console.log(dataLikes);
             })
             .catch((error) => {
                 console.log(error);
@@ -57,6 +59,10 @@ const OnePost = () => {
         }
         requestPostLike()
     }
+
+    const handleDelete = () => {
+        deleteItem(id)
+    }
     
 
     return <div className='content'>
@@ -68,7 +74,7 @@ const OnePost = () => {
                     <h2 className='post-title'>{postObject.title}</h2>
                     <p className='post-body'>{postObject.body}</p>
                 </div>
-                <button className='delete-post-btn'>Supprimer</button>
+                <button className='delete-post-btn' onClick={handleDelete}>Supprimer</button>
             </div>
 
             <div className='right-side'>
