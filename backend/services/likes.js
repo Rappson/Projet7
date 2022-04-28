@@ -12,6 +12,6 @@ exports.alreadyLiked = async (req) => {
     try {
         return isLiked[ 0 ][ 0 ].likeData
     } catch {
-        return null
+        return 0
     }
 }

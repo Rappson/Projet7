@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './style/index.css';
+import {tokenContext} from './components/connect-components/Header'
 // eslint-disable-next-line
 import { BrowserRouter as Router, Route, Routes as Switch, Link } from "react-router-dom";
 
@@ -10,8 +11,7 @@ import errorPage from './components/error';
 /* pages */
 import ConnectPage from './pages/ConnectPage'
 import Homepage from './pages/homePage'
-import OnePost from './components/onePost/Onepost'
-// const { OnePost } = require('./components/onePost/Onepost')
+import OnePostPage from './pages/OnePost';
 
 
 ReactDOM.render(
@@ -19,13 +19,15 @@ ReactDOM.render(
     <div>
       <Router>
         <Switch>
-          <Route path='/' element={ConnectPage()} />
+          <tokenContext.provider>
+            <Route path='/' element={ConnectPage()} />
 
-          <Route path='/homepage' element={Homepage()} />
+            <Route path='/homepage' element={Homepage()} />
 
-          <Route path='post/:id' element={<OnePost/>}/>
+            <Route path='post/:id' element={OnePostPage()} />
 
-          <Route path='/error' element={errorPage()} />
+            <Route path='/error' element={errorPage()} />
+          </tokenContext.provider>
         </Switch>
       </Router>
 

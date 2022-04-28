@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react';
 import { connectUrl } from '../../url';
 import { connectRequest } from '../services/callAPI';
 import "../../style/connect.css"
-import { React } from 'react'
+import { React, createContext } from 'react'
 
 
 // eslint-disable-next-line
 import { BrowserRouter as Router, Route, Routes as Switch, Link, useNavigate } from "react-router-dom";
 
 function Connect() {
-    const navigate = useNavigate ();
+    const navigate = useNavigate();
 
     const [ IsVisible, setIsVisible ] = useState(false);
-    
+
     useEffect(() => {
         localStorage.removeItem('jwtToken')
     }, [])
@@ -38,13 +38,14 @@ function Connect() {
         e.preventDefault()
         connectRequest(log)
             .then((response) => {
-                // utiliser useContext
+                const tokenContext = createContext(response.data.token)
+                console.log(tokenContext);
                 localStorage.setItem('jwtToken', response.data.token)
                 navigate(`/homepage`)
             })
-         .catch(() => {
-            setIsVisible(prevProps => !prevProps)
-         })
+            .catch(() => {
+                setIsVisible(prevProps => !prevProps)
+            })
 
         /*       test.url@test.com      */
     }

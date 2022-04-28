@@ -15,9 +15,10 @@ ADMIN
             s'informer sur la gestion d'admin
 
 LIKE
-            faire la gestion des likes
-            gerer les doubles clicks
-            le nbr de like
+            //faire la gestion des likes
+            //gerer les doubles clicks
+            
+            /!\le nbr de like
 
 COMMENT
             faire la gestion des commentaires
