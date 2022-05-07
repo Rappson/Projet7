@@ -4,14 +4,21 @@ import CreateNewPost from "./NewPost";
 import { getAllPost } from '../services/callAPI';
 import { putDate } from '../services/time'
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react/cjs/react.development";
+import { tokenContext } from "../services/useToken";
+
 
 function Post() {
     const [ listOfPosts, setListOfPosts ] = useState([]);
 
+    const [tokenState, settokenState] = useContext(tokenContext)
+    console.log(tokenState);
+
+
     const navigate = useNavigate ();
 
     const getPost = () => {
-        getAllPost()
+        getAllPost(tokenState)
             .then((response) => {
                 setListOfPosts(response.data);
             })

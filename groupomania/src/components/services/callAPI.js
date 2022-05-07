@@ -4,14 +4,18 @@ import axios from "axios";
 
 
 const tokenHeaders = { headers: { Authorization: localStorage.getItem('jwtToken') } };
+const takeToken = (test) => {
+   return { headers: { Authorization: test } }
+}
+
 
 // POST / CREATE NEW POST
 const newPostRequest = (body) => {
    return axios.post(urlBase + '/post/newPost', body, tokenHeaders)
 }
 
-const getAllPost = () => {
-   return axios.get(urlBase + '/post/getPost', tokenHeaders)
+const getAllPost = (token) => {
+   return axios.get(urlBase + '/post/getPost', takeToken(token))
 }
 
 const getOnePost = (id) => {

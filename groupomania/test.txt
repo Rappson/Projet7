@@ -36,6 +36,14 @@ COMMENT
             verifier des caracteres speciaux dans l'ajout d'un post avec joi
 
 
+A VOIR 
+            LIKES
+            ajout de like ligne 45
+
+            useContext
+
+            
+
             --------------------------------------------------------------------
 
 

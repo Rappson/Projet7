@@ -30,18 +30,20 @@ const OnePost = () => {
             })
     }, [])
 
-    const requestPostLike = () => {
+    const requestPostLike = (dataLikes) => {
         addNewLike({
-            like: dataLikes.likeData,
+            like: dataLikes,
             post_id: id
         })
     }
 
     const handleLike = () => {
+        let likeValue = 0;
         if (dataLikes.likeData !== 1) {
             setDataLikes({
                 likeData: 1
             })
+            likeValue = 1
             postObject.likes = postObject.likes + 1
         } else {
             setDataLikes({
@@ -49,13 +51,16 @@ const OnePost = () => {
             })
             postObject.likes = postObject.likes - 1
         }
+        requestPostLike(likeValue)
     }
 
     const handleDislike = () => {
+        let likeValue = 0;
         if (dataLikes.likeData !== -1) {
             setDataLikes({
                 likeData: -1
             })
+            likeValue = -1;
             postObject.dislikes = postObject.dislikes + 1
         } else {
             setDataLikes({
@@ -63,11 +68,8 @@ const OnePost = () => {
             })
             postObject.dislikes = postObject.dislikes - 1
         }
+        requestPostLike(likeValue)
     }
-
-    useEffect(() => {
-        requestPostLike()
-    }, [ dataLikes ])
 
     const handleDelete = () => {
         deleteItem(id)

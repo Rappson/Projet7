@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { connectUrl } from '../../url';
 import { connectRequest } from '../services/callAPI';
 import "../../style/connect.css"
-import { React, createContext } from 'react'
+import { tokenContext } from '../services/useToken';
+import { React, useContext } from 'react'
 
 
 // eslint-disable-next-line
@@ -12,6 +13,10 @@ function Connect() {
     const navigate = useNavigate();
 
     const [ IsVisible, setIsVisible ] = useState(false);
+
+    
+    const [tokenState, settokenState] = useContext(tokenContext)
+    
 
     useEffect(() => {
         localStorage.removeItem('jwtToken')
@@ -38,9 +43,7 @@ function Connect() {
         e.preventDefault()
         connectRequest(log)
             .then((response) => {
-                const tokenContext = createContext(response.data.token)
-                console.log(tokenContext);
-                localStorage.setItem('jwtToken', response.data.token)
+                settokenState(response.data.token)
                 navigate(`/homepage`)
             })
             .catch(() => {
