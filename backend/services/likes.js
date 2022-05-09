@@ -16,17 +16,29 @@ exports.alreadyLiked = async (req) => {
     }
 }
 
-exports.likeCount = async (req) => {
-    let nbrLikes = `SELECT COUNT(*) AS nbrLikes FROM likes where post_id = ${req.body.post_id} AND likeData = 1`
-    // let testgrouppby = `SELECT likeData, COUNT(*) AS nbrLike FROM likes where post_id = ${req.body.post_id} GROUP BY likeData`
+exports.likeCount = async (postId) => {
+    let nbrLikes = `SELECT COUNT(*) AS nbrLikes FROM likes where post_id = ${postId} AND likeData = 1`
 
-    db.execute(`${nbrLikes}`)
+    db.execute(nbrLikes)
         .then((response) => {
-            console.log(response[0][0].nbrLikes);
-            let countNbrLikes = response[0][0].nbrLikes;
-            /* UPDATE `groupomania`.`post` SET `likes` = '5' WHERE (`id` = '1'); */
-            let sql = `UPDATE post SET likes = ${countNbrLikes} where id = ${req.body.post_id}`
-
+            let countNbrLikes = response[ 0 ][ 0 ].nbrLikes;
+            let sql = `UPDATE post SET likes = ${countNbrLikes} where id = ${postId}`
+            db.execute(sql)
+            return countNbrLikes
         })
         .catch((error) => console.log(error))
+}
+
+exports.dislikeCount = async (postId) => {
+    let nbrDislikes = `SELECT COUNT(*) AS nbrDislikes FROM likes where post_id = ${postId} AND likeData = -1`
+
+    db.execute(nbrDislikes)
+    .then((response) => {
+        let countNbrDislikes = response[0][0].nbrDislikes
+
+        let sql = `UPDATE post SET dislikes = ${countNbrDislikes} where id = ${postId}`
+        db.execute(sql)
+        return countNbrDislikes
+    })
+    .catch((err) => console.log(err))
 }

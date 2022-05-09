@@ -70,3 +70,9 @@ let deleteRequest = `delete from likes where user_id = ${data.id}`
         .catch((error) => {
             console.log(error);
         })
+
+
+
+
+
+            // let testgrouppby = `SELECT likeData, COUNT(*) AS nbrLike FROM likes where post_id = ${req.body.post_id} GROUP BY likeData`

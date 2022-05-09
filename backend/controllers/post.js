@@ -69,6 +69,9 @@ exports.getAllPosts = (req, res, next) => {
 }
 
 exports.getOnePost = async (req, res, next) => {
+    likes.likeCount(req.params.id)
+    likes.dislikeCount(req.params.id)
+    
     likes.alreadyLiked(req)
         .then((likedData) => {
             let sql = `SELECT post.id, title, body, created_at, nom, prenom,
@@ -112,9 +115,6 @@ exports.likes = async (req, res, next) => {
 
             return db.execute(sql)
                 .then((response) => {
-                    console.log(req.body);
-                    likes.likeCount(req)
-
                     res.status(201).json(response[ 0 ][ 0 ])
                 })
                 .catch((error) => res.status(400).json(error))
