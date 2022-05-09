@@ -69,41 +69,54 @@ exports.getAllPosts = (req, res, next) => {
 }
 
 exports.getOnePost = async (req, res, next) => {
-   likes.alreadyLiked(req)
-    .then((likedData) => {
-        let sql = `SELECT post.id, title, body, created_at, nom, prenom,
+    likes.alreadyLiked(req)
+        .then((likedData) => {
+            let sql = `SELECT post.id, title, body, created_at, nom, prenom,
      (select count(*) from likes WHERE post_id = ${req.params.id} AND likeData = 1) AS likes, nbr_comment,
       (select count(*) from likes WHERE post_id = ${req.params.id} AND likeData = -1) AS dislikes,
       user_id FROM post INNER JOIN user ON post.user_id = user.id WHERE post.id = ${req.params.id}`
-      console.log(likedData);
-      /* faire la gestion du retour de la fonction alreadyLiked:
-      SI le retour est une valeur recuperer la valeur et la renvoyer dans la reponse (res)
-      SINON renvoyer false a la response */
-    return db.execute(sql)
-        .then((post) => {
-            post[0][0].isLiked = likedData
-            res.status(200).json(post[ 0 ][ 0 ])
+            console.log(likedData);
+            /* faire la gestion du retour de la fonction alreadyLiked:
+            SI le retour est une valeur recuperer la valeur et la renvoyer dans la reponse (res)
+            SINON renvoyer false a la response */
+            return db.execute(sql)
+                .then((post) => {
+                    post[ 0 ][ 0 ].isLiked = likedData
+                    res.status(200).json(post[ 0 ][ 0 ])
+                })
+                .catch((error) => res.status(404).json(error))
         })
-        .catch((error) => res.status(404).json(error))
-    })
 }
 
 exports.deletePost = (req, res, next) => {
     let sql = `DELETE FROM post WHERE id = ${req.params.id};`
     return db.execute(sql)
-    .then((item) => res.status(200).json(item))
-    .catch((error) => res.status(400).json(error))
+        .then((item) => res.status(200).json(item))
+        .catch((error) => res.status(400).json(error))
 }
 
 exports.likes = async (req, res, next) => {
     await likes.deleteLikes(req)
-    .then(() => {
+        .then(() => {
+            /* req.body.like = action demandée
+            action deja realisée a renvoyer dans la reponse
+            
+            que faire avec?
+            */
+            let sql2 = `SELECT * from likes WHERE post_id = ${req.body.post_id}`
+
             let sql = `INSERT INTO likes (user_id, likeData, post_id)
         VALUES ("${req.body.userId}",
            "${req.body.like}",
            "${req.body.post_id}")`
+
             return db.execute(sql)
-                .then((response) => res.status(201).json(response[ 0 ][ 0 ]))
+                .then((response) => {
+                    console.log(req.body);
+                    likes.likeCount(req)
+
+                    res.status(201).json(response[ 0 ][ 0 ])
+                })
                 .catch((error) => res.status(400).json(error))
         })
         .catch((err) => {
