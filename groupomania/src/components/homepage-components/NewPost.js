@@ -1,9 +1,13 @@
-import { useState } from "react/cjs/react.development";
+import { useState, useContext } from "react/cjs/react.development";
 import "../../style/homepage/header.css";
 import { newPostRequest } from '../services/callAPI';
+import { tokenContext } from "../services/useToken";
 
 
 function CreateNewPost({onPostCreated}) {
+
+    const [tokenState, settokenState] = useContext(tokenContext)
+
 
     const [ Post, setPost ] = useState({
         title: '',
@@ -22,7 +26,7 @@ function CreateNewPost({onPostCreated}) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        newPostRequest(Post)
+        newPostRequest(Post, tokenState)
         .then((response) => {
             onPostCreated(response.data)
             setIsVisible(prevProps => (!prevProps))

@@ -5,9 +5,10 @@
             Lors du transfert verifier qu'il y a un fichier pckg.json par dossier
 
 ERREUR A REGLER 
-            regelr le probleme de la premiere connexion
+            //regelr le probleme de la premiere connexion
             s'informer pour mettre en place useContext pour init le token avant la redirection : 
             https://medium.com/geekculture/how-to-use-context-api-and-jwt-to-maintain-user-sessions-eb5602e83a03
+
             Probleme dans la page onePost: le logo se charge pas alors que le chemin est redirigé vers le fichier de l'image
 
 ADMIN
@@ -19,6 +20,7 @@ LIKE
             //gerer les doubles clicks
             
             /!\le nbr de like
+            faire le nbr de likes coté backend
 
 COMMENT
             faire la gestion des commentaires

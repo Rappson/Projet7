@@ -4,29 +4,29 @@ import axios from "axios";
 
 
 const tokenHeaders = { headers: { Authorization: localStorage.getItem('jwtToken') } };
-const takeToken = (test) => {
-   return { headers: { Authorization: test } }
+const takeToken = (keyToken) => {
+   return { headers: { Authorization: keyToken } }
 }
 
 
 // POST / CREATE NEW POST
-const newPostRequest = (body) => {
-   return axios.post(urlBase + '/post/newPost', body, tokenHeaders)
+const newPostRequest = (body, token) => {
+   return axios.post(urlBase + '/post/newPost', body, takeToken(token))
 }
 
 const getAllPost = (token) => {
    return axios.get(urlBase + '/post/getPost', takeToken(token))
 }
 
-const getOnePost = (id) => {
-   return axios.get(urlBase + `/post/getOnePost/${id}`, tokenHeaders)
+const getOnePost = (id, token) => {
+   return axios.get(urlBase + `/post/getOnePost/${id}`, takeToken(token))
 }
 
-const addNewLike = (dataLikes) => {
-   return axios.post(urlBase + `/post/newLike`, dataLikes, tokenHeaders)
+const addNewLike = (dataLikes, token) => {
+   return axios.post(urlBase + `/post/newLike`, dataLikes, takeToken(token))
 }
-const deleteItem = (id) => {
-   return axios.delete(urlBase + `/post/deletePost/${id}`, tokenHeaders)
+const deleteItem = (id, token) => {
+   return axios.delete(urlBase + `/post/deletePost/${id}`, takeToken(token))
 }
 
 // CONNECT / SIGNUP 

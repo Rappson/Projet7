@@ -12,7 +12,6 @@ function Post() {
     const [ listOfPosts, setListOfPosts ] = useState([]);
 
     const [tokenState, settokenState] = useContext(tokenContext)
-    console.log(tokenState);
 
 
     const navigate = useNavigate ();
