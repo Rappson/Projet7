@@ -12,7 +12,7 @@ const OnePost = () => {
     const { id } = useParams();
     const [ postObject, setPostObject ] = useState({})
     const [ dataLikes, setDataLikes ] = useState({ likeData: 0 })
-    const [tokenState, settokenState] = useContext(tokenContext)
+    const [ tokenState, settokenState ] = useContext(tokenContext)
 
 
     /* isLiked = si l'user a deja like ou pas:
@@ -26,18 +26,27 @@ const OnePost = () => {
                 console.log(response.data);
                 setPostObject(response.data)
                 setDataLikes({ likeData: response.data.isLiked })
-                console.log(dataLikes);
             })
             .catch((error) => {
                 console.log(error);
             })
     }, [])
 
-    const requestPostLike = (dataLikes) => {
+    const requestPostLike = (value) => {
         addNewLike({
-            like: dataLikes,
+            like: value,
             post_id: id
         }, tokenState)
+            .then((response) => {
+                console.log(response.data);
+                setPostObject({
+                    ...postObject,
+                    likes: response.data.likes,
+                    dislikes: response.data.dislikes
+                })
+            }).catch((err) => {
+                console.log(err);
+            })
     }
 
     const handleLike = () => {
@@ -47,14 +56,13 @@ const OnePost = () => {
                 likeData: 1
             })
             likeValue = 1
-            postObject.likes = postObject.likes + 1
         } else {
             setDataLikes({
                 likeData: 0
             })
-            postObject.likes = postObject.likes - 1
         }
         requestPostLike(likeValue)
+
     }
 
     const handleDislike = () => {
@@ -64,21 +72,17 @@ const OnePost = () => {
                 likeData: -1
             })
             likeValue = -1;
-            postObject.dislikes = postObject.dislikes + 1
         } else {
             setDataLikes({
                 likeData: 0
             })
-            postObject.dislikes = postObject.dislikes - 1
         }
         requestPostLike(likeValue)
+
     }
 
     const handleDelete = () => {
         deleteItem(id, tokenState)
-        .then(()=>{
-            Navigate('/homepage')
-        })
     }
 
     return <div className='content'>

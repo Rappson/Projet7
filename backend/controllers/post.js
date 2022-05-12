@@ -71,7 +71,7 @@ exports.getAllPosts = (req, res, next) => {
 exports.getOnePost = async (req, res, next) => {
     likes.likeCount(req.params.id)
     likes.dislikeCount(req.params.id)
-    
+
     likes.alreadyLiked(req)
         .then((likedData) => {
             let sql = `SELECT post.id, title, body, created_at, nom, prenom,
@@ -99,6 +99,7 @@ exports.deletePost = (req, res, next) => {
 }
 
 exports.likes = async (req, res, next) => {
+
     await likes.deleteLikes(req)
         .then(() => {
             /* req.body.like = action demandée
@@ -106,16 +107,34 @@ exports.likes = async (req, res, next) => {
             
             que faire avec?
             */
-            let sql2 = `SELECT * from likes WHERE post_id = ${req.body.post_id}`
+
 
             let sql = `INSERT INTO likes (user_id, likeData, post_id)
         VALUES ("${req.body.userId}",
            "${req.body.like}",
            "${req.body.post_id}")`
 
-            return db.execute(sql)
-                .then((response) => {
-                    res.status(201).json(response[ 0 ][ 0 ])
+            db.execute(sql)
+                .then(async () => {
+                    await likes.likeCount(req.body.post_id)
+                    await likes.dislikeCount(req.body.post_id)
+
+
+                    let sql = `SELECT likes, dislikes FROM post WHERE id = ${req.body.post_id}`
+
+                    let post = await db.execute(sql)
+                    try {
+                        console.log(post[ 0 ][ 0 ]);
+                        /* let isLiked = await likes.alreadyLiked(req)
+                        console.log(isLiked);
+
+                        post[ 0 ][ 0 ].isLiked = isLiked */
+
+                        res.status(201).json(post[ 0 ][ 0 ])
+                    } catch {
+                        res.status(404).json('impossible de récuperer le post')
+                    }
+
                 })
                 .catch((error) => res.status(400).json(error))
         })

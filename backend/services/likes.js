@@ -33,12 +33,12 @@ exports.dislikeCount = async (postId) => {
     let nbrDislikes = `SELECT COUNT(*) AS nbrDislikes FROM likes where post_id = ${postId} AND likeData = -1`
 
     db.execute(nbrDislikes)
-    .then((response) => {
-        let countNbrDislikes = response[0][0].nbrDislikes
+        .then((response) => {
+            let countNbrDislikes = response[ 0 ][ 0 ].nbrDislikes
 
-        let sql = `UPDATE post SET dislikes = ${countNbrDislikes} where id = ${postId}`
-        db.execute(sql)
-        return countNbrDislikes
-    })
-    .catch((err) => console.log(err))
+            let sql = `UPDATE post SET dislikes = ${countNbrDislikes} where id = ${postId}`
+            db.execute(sql)
+            return countNbrDislikes
+        })
+        .catch((err) => console.log(err))
 }
