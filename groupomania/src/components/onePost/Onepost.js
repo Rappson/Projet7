@@ -38,13 +38,12 @@ const OnePost = () => {
             post_id: id
         }, tokenState)
             .then((response) => {
+                console.log(response.data);
                 setPostObject({
                     ...postObject,
                     likes: response.data.likes,
                     dislikes: response.data.dislikes
                 })
-                console.log('dataLikes = ' + dataLikes);
-                console.log('postObject = ' + postObject);
             }).catch((err) => {
                 console.log(err);
             })
@@ -53,6 +52,7 @@ const OnePost = () => {
 
     const handleLike = () => {
         let likeValue = 0;
+
         if (dataLikes.likeData !== 1) {
             setDataLikes({
                 likeData: 1
@@ -62,6 +62,7 @@ const OnePost = () => {
             setDataLikes({
                 likeData: 0
             })
+            likeValue = 0
         }
         requestPostLike(likeValue)
 
@@ -78,6 +79,7 @@ const OnePost = () => {
             setDataLikes({
                 likeData: 0
             })
+            likeValue = 0
         }
         requestPostLike(likeValue)
 

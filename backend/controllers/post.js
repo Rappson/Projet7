@@ -116,7 +116,7 @@ exports.likes = async (req, res, next) => {
 
             db.execute(sql)
                 .then(async () => {
-                    let likeTab = [];
+                    let likeObject = {};
                     let like = await likes.likeCount(req.body.post_id)
                     let dislike = await likes.dislikeCount(req.body.post_id)
 
@@ -124,6 +124,7 @@ exports.likes = async (req, res, next) => {
 
                     let post = await db.execute(sql)
                     try {
+                        console.log(post[ 0 ][ 0 ]);
                         /* let isLiked = await likes.alreadyLiked(req)
                         console.log(isLiked);
 
