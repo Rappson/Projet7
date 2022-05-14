@@ -1,6 +1,6 @@
 import { React, useState, useContext } from 'react'
 import { useEffect } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getOnePost, addNewLike, deleteItem } from "../services/callAPI";
 import "../../style/homepage/header.css"
 import '../../style/onePost.css';
@@ -15,22 +15,28 @@ const OnePost = () => {
     const [ tokenState, settokenState ] = useContext(tokenContext)
 
 
-    /* isLiked = si l'user a deja like ou pas:
+    /* 
+    je recupere le post et l'affiche (postObject)
+    a chaque changement de likes (useEffect), j'appelle la fonction qui va chercher le post
+    
+    *
 
-    faut remettre a 0 lorsque l'user clique sur le bouton
-    et ajoutez 1 ou enlevez 1 en fonction de la requete */
+    peut etre avoir une données liked, disliked ou null */
 
-    useEffect(() => {
+    const primaryFuction = () => {
         getOnePost(id, tokenState)
             .then((response) => {
                 console.log(response.data);
                 setPostObject(response.data)
-                setDataLikes({ likeData: response.data.isLiked })
             })
             .catch((error) => {
                 console.log(error);
             })
-    }, [])
+    }
+
+    useEffect(() => {
+        primaryFuction()
+    }, [dataLikes])
 
     const requestPostLike = (value) => {
         addNewLike({
