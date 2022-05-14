@@ -116,15 +116,14 @@ exports.likes = async (req, res, next) => {
 
             db.execute(sql)
                 .then(async () => {
-                    await likes.likeCount(req.body.post_id)
-                    await likes.dislikeCount(req.body.post_id)
-
+                    let likeTab = [];
+                    let like = await likes.likeCount(req.body.post_id)
+                    let dislike = await likes.dislikeCount(req.body.post_id)
 
                     let sql = `SELECT likes, dislikes FROM post WHERE id = ${req.body.post_id}`
 
                     let post = await db.execute(sql)
                     try {
-                        console.log(post[ 0 ][ 0 ]);
                         /* let isLiked = await likes.alreadyLiked(req)
                         console.log(isLiked);
 

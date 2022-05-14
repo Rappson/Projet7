@@ -23,8 +23,7 @@ exports.likeCount = async (postId) => {
         .then((response) => {
             let countNbrLikes = response[ 0 ][ 0 ].nbrLikes;
             let sql = `UPDATE post SET likes = ${countNbrLikes} where id = ${postId}`
-            db.execute(sql)
-            return countNbrLikes
+            return db.execute(sql)
         })
         .catch((error) => console.log(error))
 }
@@ -37,8 +36,7 @@ exports.dislikeCount = async (postId) => {
             let countNbrDislikes = response[ 0 ][ 0 ].nbrDislikes
 
             let sql = `UPDATE post SET dislikes = ${countNbrDislikes} where id = ${postId}`
-            db.execute(sql)
-            return countNbrDislikes
+            return db.execute(sql)
         })
         .catch((err) => console.log(err))
 }

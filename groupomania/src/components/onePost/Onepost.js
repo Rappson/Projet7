@@ -38,15 +38,17 @@ const OnePost = () => {
             post_id: id
         }, tokenState)
             .then((response) => {
-                console.log(response.data);
                 setPostObject({
                     ...postObject,
                     likes: response.data.likes,
                     dislikes: response.data.dislikes
                 })
+                console.log('dataLikes = ' + dataLikes);
+                console.log('postObject = ' + postObject);
             }).catch((err) => {
                 console.log(err);
             })
+
     }
 
     const handleLike = () => {
@@ -84,6 +86,7 @@ const OnePost = () => {
     const handleDelete = () => {
         deleteItem(id, tokenState)
     }
+
 
     return <div className='content'>
         <Header />
