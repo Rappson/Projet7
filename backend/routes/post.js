@@ -9,6 +9,8 @@ router.post('/newPost', auth, postController.createNewPost);
 router.get('/getPost', auth, postController.getAllPosts);
 router.get('/getOnePost/:id', auth, postController.getOnePost);
 router.delete('/deletePost/:id', auth, postController.deletePost)
+
 router.post('/newLike', auth, postController.likes)
+router.post('/newComment', auth, postController.createNewComment);
 
 module.exports = router

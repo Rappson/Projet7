@@ -35,10 +35,19 @@
 }
 
 .container-all-comments{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border: 1px solid black;
     height: 15rem;
     padding: 5px;
     margin-top: 3px;
+}
+
+.new-comment-area{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
 }
 
 .post-title{

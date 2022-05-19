@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 
-const tokenHeaders = { headers: { Authorization: localStorage.getItem('jwtToken') } };
+// const tokenHeaders = { headers: { Authorization: localStorage.getItem('jwtToken') } };
 const takeToken = (keyToken) => {
    return { headers: { Authorization: keyToken } }
 }
@@ -25,6 +25,15 @@ const getOnePost = (id, token) => {
 const addNewLike = (dataLikes, token) => {
    return axios.post(urlBase + `/post/newLike`, dataLikes, takeToken(token))
 }
+
+const addNewComment = (body, token) => {
+   return axios.post(urlBase + `/post/newComment`, body, takeToken(token))
+}
+
+const getComments = (token) => {
+   return axios.get(urlBase + `/post/getComments`)
+}
+
 const deleteItem = (id, token) => {
    return axios.delete(urlBase + `/post/deletePost/${id}`, takeToken(token))
 }
@@ -39,4 +48,4 @@ const signupRequest = (body) => {
 }
 
 
-export { newPostRequest, getAllPost, getOnePost, addNewLike, deleteItem, connectRequest, signupRequest };
+export { newPostRequest, getAllPost, getOnePost, addNewLike, addNewComment, getComments, deleteItem, connectRequest, signupRequest };

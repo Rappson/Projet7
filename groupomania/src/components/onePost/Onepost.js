@@ -1,7 +1,7 @@
 import { React, useState, useContext } from 'react'
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getOnePost, addNewLike, deleteItem } from "../services/callAPI";
+import { getOnePost, addNewLike, addNewComment, deleteItem } from "../services/callAPI";
 import "../../style/homepage/header.css"
 import '../../style/onePost.css';
 import Header from "../homepage-components/Header";
@@ -13,6 +13,7 @@ const OnePost = () => {
     const [ postObject, setPostObject ] = useState({})
     const [ dataLikes, setDataLikes ] = useState({ likeData: 0 })
     const [ tokenState, settokenState ] = useContext(tokenContext)
+    const [ commentTab, setcommentTab ] = useState([])
 
 
     /* 
@@ -23,7 +24,7 @@ const OnePost = () => {
 
     peut etre avoir une données liked, disliked ou null */
 
-    const primaryFuction = () => {
+    const primaryFunction = () => {
         getOnePost(id, tokenState)
             .then((response) => {
                 console.log(response.data);
@@ -35,7 +36,7 @@ const OnePost = () => {
     }
 
     useEffect(() => {
-        primaryFuction()
+        primaryFunction()
     }, [dataLikes])
 
     const requestPostLike = (value) => {
@@ -55,6 +56,31 @@ const OnePost = () => {
             })
 
     }
+
+    const handleComment = (e) => {
+        e.preventDefault()
+        const body = e.target.children[0].value;
+        const postId = id;
+         addNewComment({
+             body: body,
+             postId: postId
+         }, tokenState)
+         .then((res) =>{
+             const value = res.data
+             console.log(value);
+             setcommentTab([
+                 ...commentTab,
+                 value
+             ])
+         })
+         .catch((err) => {
+             console.log(err);
+         })
+    }
+
+    useEffect(() => {
+        console.log(commentTab);
+    }, [commentTab])
 
     const handleLike = () => {
         let likeValue = 0;
@@ -115,7 +141,11 @@ const OnePost = () => {
                     <button className={postObject.isLiked === -1 ? 'dislikes-active' : 'dislikes'} onClick={handleDislike}><i className="fas fa-heart-broken">{postObject.dislikes}</i></button>
                 </div>
                 <div className='container-all-comments'>
-                    <p>il n'y a aucun commentaires pour le moment !</p>
+                    {postObject.nbr_comment === 0 ? <p>il n'y a aucun commentaires pour le moment !</p> : <p>il y a un commentaire</p>}
+
+                    <form className='new-comment-area' onSubmit={handleComment}>
+                    <input  type='text' placeholder='ajouter un commentaire sur ce post' ></input>
+                    </form>
                 </div>
             </div>
 

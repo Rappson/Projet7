@@ -1,4 +1,5 @@
 const Post = require('../models/post')
+const Comment = require('../models/comment')
 const db = require('../config/db');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv').config()
@@ -6,6 +7,7 @@ const dotenv = require('dotenv').config()
 // SERVICES
 const Joi = require('joi');
 const joiNewPost = require('../services/joi/new-post');
+const joiNewComment = require('../services/joi/new-comment')
 const likes = require('../services/likes')
 
 exports.createNewPost = (req, res, next) => {
@@ -53,6 +55,41 @@ exports.createNewPost = (req, res, next) => {
             .catch((error) => {
                 console.log(error);
                 res.status(500).json({ error })
+            })
+    }
+}
+
+exports.createNewComment = (req, res, next) => {
+    const newCommentValidate = joiNewComment.validate({
+        userId: req.body.userId,
+        postId: req.body.postId,
+        body: req.body.body
+    })
+
+    let comment = new Comment(
+        newCommentValidate.value.userId,
+        newCommentValidate.value.postId,
+        newCommentValidate.value.body
+    )
+
+    if (newCommentValidate.error) {
+        res.status(401).json({ message: newCommentValidate.error.details[ 0 ].message })
+    } else {
+        comment.save()
+            .then((response) => {
+                console.log(response[ 0 ]);
+                let sql = `SELECT * FROM comment WHERE post_id = ${newCommentValidate.value.postId}`
+                db.execute(sql)
+                    .then((comment) => {
+                        res.status(200).json(comment[ 0 ][ 0 ])
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        res.status(500).json(err)
+                    })
+            })
+            .catch((err) => {
+                console.log(err);
             })
     }
 }
