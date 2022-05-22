@@ -31,6 +31,7 @@
     width: 50rem;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     border: 5px solid rgb(56, 197, 253);
 }
 
@@ -39,9 +40,10 @@
     flex-direction: column;
     justify-content: space-between;
     border: 1px solid black;
-    height: 15rem;
+    height: 30rem;
     padding: 5px;
     margin-top: 3px;
+    overflow-y: scroll;
 }
 
 .new-comment-area{
@@ -57,4 +59,11 @@
 
 .delete-post-btn{
     margin: 5px;
+}
+
+.username{
+    font-weight: bold;
+}
+.one_comment{
+    border-bottom: 1px solid;
 }

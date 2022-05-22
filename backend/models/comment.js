@@ -18,7 +18,7 @@ class Comment {
 
         let created_at = `${YYYY}-${MM}-${DD} ${hh}:${mm}`
 
-        let sql = `INSERT INTO comment (user_id, post_id, body, created_at) 
+        let sql = `INSERT INTO comments (user_id, post_id, body, created_at) 
         VALUES(
             "${this.userId}",
             "${this.postId}",

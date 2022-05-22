@@ -30,8 +30,8 @@ const addNewComment = (body, token) => {
    return axios.post(urlBase + `/post/newComment`, body, takeToken(token))
 }
 
-const getComments = (token) => {
-   return axios.get(urlBase + `/post/getComments`)
+const getComments = (id, token) => {
+   return axios.get(urlBase + `/post/getComments/${id}`, takeToken(token))
 }
 
 const deleteItem = (id, token) => {

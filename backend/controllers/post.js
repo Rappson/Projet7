@@ -10,6 +10,7 @@ const joiNewPost = require('../services/joi/new-post');
 const joiNewComment = require('../services/joi/new-comment')
 const likes = require('../services/likes')
 
+//POST
 exports.createNewPost = (req, res, next) => {
     /* FAIRE la colomne "date de creation" dans post BDD
     
@@ -77,11 +78,11 @@ exports.createNewComment = (req, res, next) => {
     } else {
         comment.save()
             .then((response) => {
-                console.log(response[ 0 ]);
-                let sql = `SELECT * FROM comment WHERE post_id = ${newCommentValidate.value.postId}`
+                console.log(response);
+                let sql = `SELECT comments.id, user_id, post_id, body, created_at, nom, prenom FROM comments INNER JOIN user ON user.id = comments.user_id WHERE post_id = ${newCommentValidate.value.postId} `
                 db.execute(sql)
-                    .then((comment) => {
-                        res.status(200).json(comment[ 0 ][ 0 ])
+                    .then((comments) => {
+                        res.status(200).json(comments[ 0 ])
                     })
                     .catch((err) => {
                         console.log(err);
@@ -94,7 +95,39 @@ exports.createNewComment = (req, res, next) => {
     }
 }
 
+exports.likes = async (req, res, next) => {
+    likes.deleteLikes(req)
+        .then(() => {
+            let sql = `INSERT INTO likes (user_id, likeData, post_id)
+        VALUES ("${req.body.userId}",
+           "${req.body.like}",
+           "${req.body.post_id}")`
 
+            db.execute(sql)
+                .then(async () => {
+                    await likes.likeCount(req.body.post_id)
+                    await likes.dislikeCount(req.body.post_id)
+
+                    let sql = `SELECT * FROM post WHERE id = ${req.body.post_id}`
+
+                    try {
+                        let post = await db.execute(sql)
+                        let isLiked = await likes.alreadyLiked(req.body.userId, req.body.post_id)
+    
+                        post[ 0 ][ 0 ].isLiked = isLiked
+
+                        res.status(201).json(post[ 0 ][ 0 ])
+                    } catch {
+                        res.status(404).json('impossible de récuperer le post')
+                    }
+                }) // FIN DU THEN
+                .catch((error) => res.status(400).json(error))
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+}
+//GET
 exports.getAllPosts = (req, res, next) => {
     let sql = 'SELECT post.id, title, body, created_at, nom, prenom, likes, nbr_comment, dislikes, user_id FROM post INNER JOIN user ON post.user_id = user.id order by created_at DESC;';
     return db.execute(sql)
@@ -109,7 +142,7 @@ exports.getOnePost = async (req, res, next) => {
     likes.likeCount(req.params.id)
     likes.dislikeCount(req.params.id)
 
-    likes.alreadyLiked(req)
+    likes.alreadyLiked(req.body.userId, req.params.id)
         .then((likedData) => {
             let sql = `SELECT post.id, title, body, created_at, nom, prenom,
      (select count(*) from likes WHERE post_id = ${req.params.id} AND likeData = 1) AS likes, nbr_comment,
@@ -128,51 +161,23 @@ exports.getOnePost = async (req, res, next) => {
         })
 }
 
+exports.getAllComments = (req, res, next) => {
+    let sql = `SELECT comments.id, user_id, post_id, body, created_at, nom, prenom FROM comments INNER JOIN user ON user.id = comments.user_id WHERE post_id = ${req.params.id}`
+    return db.execute(sql)
+        .then((response) => {
+            console.log(response[0]);
+            response[ 0 ].nbr_comment = response[ 0 ].length
+            res.status(200).json(response[ 0 ])
+        })
+        .catch((err) => {
+            res.status(404).json(err)
+        })
+}
+
+//DELETE
 exports.deletePost = (req, res, next) => {
     let sql = `DELETE FROM post WHERE id = ${req.params.id};`
     return db.execute(sql)
         .then((item) => res.status(200).json(item))
         .catch((error) => res.status(400).json(error))
-}
-
-exports.likes = async (req, res, next) => {
-    /* 
-    j'envoie les données dans la table likes
-    je fais la liaison des tables : post et likes pour mettre a jour les likes dans la table post
-    et je retourne la table post
-      */
-
-    await likes.deleteLikes(req)
-        .then(() => {
-            let sql = `INSERT INTO likes (user_id, likeData, post_id)
-        VALUES ("${req.body.userId}",
-           "${req.body.like}",
-           "${req.body.post_id}")`
-
-            db.execute(sql)
-                .then(async () => {
-                    let likeObject = {};
-                    let like = await likes.likeCount(req.body.post_id)
-                    let dislike = await likes.dislikeCount(req.body.post_id)
-
-                    let sql = `SELECT * FROM post WHERE id = ${req.body.post_id}`
-
-                    let post = await db.execute(sql)
-                    try {
-                        console.log(post[ 0 ][ 0 ]);
-                        /* let isLiked = await likes.alreadyLiked(req)
-                        console.log(isLiked);
-    
-                        post[ 0 ][ 0 ].isLiked = isLiked */
-
-                        res.status(201).json(post[ 0 ][ 0 ])
-                    } catch {
-                        res.status(404).json('impossible de récuperer le post')
-                    }
-                }) // FIN DU THEN
-                .catch((error) => res.status(400).json(error))
-        })
-        .catch((err) => {
-            console.log(err);
-        })
 }
