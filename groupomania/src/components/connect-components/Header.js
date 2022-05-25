@@ -55,17 +55,17 @@ function Connect() {
 
 
     return <header>
-        <div id="connect" className="d-flex flex-row align-items-center p-3">
+        <div id="connect" className="d-flex flex-md-row flex-column align-items-center p-3">
             <a href={connectUrl}><img src="images/icon-left-font-monochrome-white.png" alt='logo' id="icon-connect" /></a>
 
             {/* formulaire */}
-            <form id='form-connect' className="d-flex flex-row" onSubmit={handleSubmit}>
-                <div id="connect-input" className='m-2'>
+            <form id='form-connect' className="d-flex flex-column flex-md-row align-items-center flex-sm-row" onSubmit={handleSubmit}>
+                <div id="connect-input" className='d-flex flex-column flex-lg-row align-items-center align-self-md-stretch m-2'>
                     <label htmlFor="email" className='m-2 text-white'>Email</label>
                     <input type="text" id="email" name="email" value={log.email} onChange={handleChange} />
                 </div>
 
-                <div>
+                <div className='d-flex flex-column flex-lg-row align-items-center align-self-md-stretch align-self-center'>
                     <label htmlFor="password" className='m-2 text-white'>Mot de passe</label>
                     <input type="password" id="password" name="password" value={log.password} onChange={handleChange} />
 
