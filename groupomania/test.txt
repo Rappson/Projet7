@@ -24,6 +24,7 @@ LIKE
 
 COMMENT
             faire la gestion des commentaires
+            rajouter delete comment
 
 
             SECONDAIRE

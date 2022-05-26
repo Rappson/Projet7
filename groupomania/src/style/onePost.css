@@ -67,3 +67,16 @@
 .one_comment{
     border-bottom: 1px solid;
 }
+
+@media (max-width : 768px){
+    .container-onePost{
+        display: flex;
+        flex-direction: column;
+    }
+    .left-side{
+        width: 100%;
+    }
+    .container-all-comments{
+        height: 15rem;
+    }
+} 

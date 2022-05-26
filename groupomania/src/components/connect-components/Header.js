@@ -56,7 +56,7 @@ function Connect() {
 
     return <header>
         <div id="connect" className="d-flex flex-md-row flex-column align-items-center p-3">
-            <a href={connectUrl}><img src="images/icon-left-font-monochrome-white.png" alt='logo' id="icon-connect" /></a>
+            <a href={connectUrl} className="d-md-inline d-none"><img src="images/icon-left-font-monochrome-white.png" alt='logo' id="icon-connect" /></a>
 
             {/* formulaire */}
             <form id='form-connect' className="d-flex flex-column flex-md-row align-items-center flex-sm-row" onSubmit={handleSubmit}>

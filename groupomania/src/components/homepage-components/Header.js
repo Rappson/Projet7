@@ -8,7 +8,7 @@ function Header() {
         localStorage.removeItem('jwtToken');
     }
     
-    const iconBack = <i className="fa-solid fa-arrow-left"></i>;
+    const iconBack = <i className="fa fa-house"></i>;
     const logo = <img src="images/icon-left-font-monochrome-white.png" alt='logo' id="icon-connect" />
 
     return <header>
@@ -18,7 +18,7 @@ function Header() {
 
             {/* Bouton de recherche */}
             <div id="header-center" className="default-menu">
-                <form className="form-inline d-flex flex-row my-2 my-lg-0">
+                <form className="form-inline d-none d-md-flex flex-row my-2 my-lg-0">
                     <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
                     <button id="search-btn" className="btn btn-outline-primary my-2 my-sm-0" type="submit"><i className="fas fa-search"></i></button>
                 </form>
@@ -27,7 +27,8 @@ function Header() {
 
             {/* Menu */}
             <div id="menu">
-                <a href={'http://' + connectUrl} onClick={deleteToken} className="bar-item">Déconnexion</a>
+                <a href={'http://' + connectUrl} onClick={deleteToken} className="btn d-lg-none bar-item"><i className="fa fa-door-open"></i></a>
+                <a href={'http://' + connectUrl} onClick={deleteToken} className="btn d-none d-lg-inline bar-item">Déconnexion</a>
             </div>
         </div>
     </header>
