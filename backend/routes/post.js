@@ -8,9 +8,10 @@ const postController = require('../controllers/post')
 router.post('/newPost', auth, postController.createNewPost);
 router.get('/getPost', auth, postController.getAllPosts);
 router.get('/getOnePost/:id', auth, postController.getOnePost);
-router.delete('/deletePost/:id', auth, postController.deletePost)
-router.get('/getComments/:id', auth, postController.getAllComments)
-router.post('/newLike', auth, postController.likes)
+router.delete('/deletePost/:id', auth, postController.deletePost);
+router.delete('/deleteComment/:id', postController.deleteComment);
+router.get('/getComments/:id', auth, postController.getAllComments);
+router.post('/newLike', auth, postController.likes);
 router.post('/newComment', auth, postController.createNewComment);
 
 module.exports = router

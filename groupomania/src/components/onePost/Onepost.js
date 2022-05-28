@@ -1,7 +1,7 @@
 import { React, useState, useContext } from 'react'
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getOnePost, addNewLike, addNewComment, deleteItem, getComments } from "../services/callAPI";
+import { getOnePost, addNewLike, addNewComment, deleteItem, getComments, deleteComment } from "../services/callAPI";
 import "../../style/homepage/header.css"
 import '../../style/onePost.css';
 import Header from "../homepage-components/Header";
@@ -89,8 +89,6 @@ const OnePost = () => {
     }
 
     useEffect(() => {
-console.log(commentTab);
-
         const countComment = commentTab.length
         setPostObject({
             ...postObject,
@@ -136,10 +134,21 @@ console.log(commentTab);
     const handleDelete = () => {
         deleteItem(id, tokenState)
     }
+    const handleDeleteComment = (e) => {
+        e.preventDefault()
+        const positionCommentInArray = e.target.id
+        const commentId = commentTab[positionCommentInArray].id
+        deleteComment(commentId, tokenState)
+        .then((response) => {
+            
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }
 
 
     return <div className='content'>
-        <Header />
 
         <div className='container-onePost'>
             <div className='left-side'>
@@ -161,7 +170,10 @@ console.log(commentTab);
                         {commentTab.map((value, i) => {
                             return (
                                 <section className='one_comment' key={i}>
-                                    <p className='username'>{value.prenom +' '+ value.nom}</p>
+                                    <div className='d-flex justify-content-between' id='topside'>
+                                        <p className='username'>{value.prenom + ' ' + value.nom}</p>
+                                        <button className='btn btn-primary' id={i} onClick={handleDeleteComment}><i className="fa fa-trash"></i></button>
+                                    </div>
                                     <p className='body'>{value.body}</p>
                                     <p className='created-date'>{putDate(value.created_at)}</p>
                                 </section>

@@ -113,7 +113,7 @@ exports.likes = async (req, res, next) => {
                     try {
                         let post = await db.execute(sql)
                         let isLiked = await likes.alreadyLiked(req.body.userId, req.body.post_id)
-    
+
                         post[ 0 ][ 0 ].isLiked = isLiked
 
                         res.status(201).json(post[ 0 ][ 0 ])
@@ -154,6 +154,7 @@ exports.getOnePost = async (req, res, next) => {
             SINON renvoyer false a la response */
             return db.execute(sql)
                 .then((post) => {
+                    console.log(post[ 0 ][ 0 ]);
                     post[ 0 ][ 0 ].isLiked = likedData
                     res.status(200).json(post[ 0 ][ 0 ])
                 })
@@ -165,7 +166,7 @@ exports.getAllComments = (req, res, next) => {
     let sql = `SELECT comments.id, user_id, post_id, body, created_at, nom, prenom FROM comments INNER JOIN user ON user.id = comments.user_id WHERE post_id = ${req.params.id}`
     return db.execute(sql)
         .then((response) => {
-            console.log(response[0]);
+            console.log(response[ 0 ]);
             response[ 0 ].nbr_comment = response[ 0 ].length
             res.status(200).json(response[ 0 ])
         })
@@ -180,4 +181,16 @@ exports.deletePost = (req, res, next) => {
     return db.execute(sql)
         .then((item) => res.status(200).json(item))
         .catch((error) => res.status(400).json(error))
+}
+
+exports.deleteComment = (req, res, next) => {
+    let sql = `DELETE FROM comments WHERE id = ${req.params.id}`
+
+    return db.execute(sql)
+        .then((response) => {
+            res.status(200).json(response)
+        })
+        .catch((err) => {
+            res.status(400).json(err)
+        })
 }
