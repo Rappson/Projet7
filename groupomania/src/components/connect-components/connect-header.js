@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react';
-import { connectUrl } from '../../url';
+import { React, useEffect, useState, useContext } from 'react';
 import { connectRequest } from '../services/callAPI';
 import "../../style/connect.css"
 import { tokenContext } from '../services/useToken';
-import { React, useContext } from 'react'
-
-
 // eslint-disable-next-line
 import { BrowserRouter as Router, Route, Routes as Switch, Link, useNavigate } from "react-router-dom";
+
+
 
 function Connect() {
     const navigate = useNavigate();
@@ -56,7 +54,7 @@ function Connect() {
 
     return <header>
         <div id="connect" className="d-flex flex-md-row flex-column align-items-center p-3">
-            <a href={connectUrl} className="d-md-inline d-none"><img src="images/icon-left-font-monochrome-white.png" alt='logo' id="icon-connect" /></a>
+            <Link to={"/"} className="d-md-inline d-none"><img src="/images/icon-left-font-monochrome-white.png" alt='logo' id="icon-connect" /></Link>
 
             {/* formulaire */}
             <form id='form-connect' className="d-flex flex-column flex-md-row align-items-center flex-sm-row" onSubmit={handleSubmit}>
