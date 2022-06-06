@@ -1,4 +1,4 @@
-import { React, useContext } from 'react'
+import { React, useContext, useEffect } from 'react'
 import { useParams } from "react-router-dom";
 import { tokenContext } from '../services/useToken';
 import { putDate } from "../services/time";
@@ -19,7 +19,6 @@ const Comment = ({ commentTab, setcommentTab }) => {
         }, tokenState)
             .then((res) => {
                 const value = res.data
-                console.log(value);
                 setcommentTab(value)
             })
             .catch((err) => {
@@ -27,13 +26,21 @@ const Comment = ({ commentTab, setcommentTab }) => {
             })
     }
 
+/* il faut inserer l'ID dans le nouveau commentaire afin de pouvoir le supprimer sans actualiser */
+
     const handleDeleteComment = (e) => {
         e.preventDefault()
         const positionCommentInArray = e.target.id
+        console.log(e.target);
         const commentId = commentTab[ positionCommentInArray ].id
         deleteComment(commentId, tokenState)
             .then((response) => {
-
+                const newCommentTab = commentTab
+                console.log(newCommentTab);
+                // faut supprimer l'élément du tableau puis reset le tableau
+                newCommentTab.splice(positionCommentInArray, 1)
+                setcommentTab(newCommentTab)
+                console.log(newCommentTab);
             })
             .catch((err) => {
                 console.log(err);
@@ -47,7 +54,7 @@ const Comment = ({ commentTab, setcommentTab }) => {
                     <section className='one_comment' key={i}>
                         <div className='d-flex d-column justify-content-between pt-2' id='topside'>
                             <p className='username'>{value.prenom + ' ' + value.nom}</p>
-                            <button className='btn btn-primary' id={i} onClick={handleDeleteComment}><i className="fa fa-trash"></i></button>
+                            <button className='btn btn-primary' id={i} onClick={handleDeleteComment}><i className="fa fa-trash" id={i}></i></button>
                         </div>
                         <p className='body'>{value.body}</p>
                         <p className='created-date'>{putDate(value.created_at)}</p>
@@ -57,7 +64,7 @@ const Comment = ({ commentTab, setcommentTab }) => {
         </div>}
 
         <form className='new-comment-area' onSubmit={handleComment}>
-            <input id='input-comment' type='text' placeholder='ajouter un commentaire sur ce post'></input>
+            <input id='input-comment' autoFocus type='text' placeholder='ajouter un commentaire sur ce post'></input>
         </form>
     </div>)
 }

@@ -31,13 +31,16 @@ const OnePost = () => {
             .then((response) => {
                 response.data.nbr_comment = commentTab.length
                 setPostObject(response.data)
-                console.log(response);
             })
             .catch((error) => {
                 console.log(error);
             })
 
-        getComments(id, tokenState)
+            
+        }, [ dataLikes ])
+
+        useEffect(() => {
+            getComments(id, tokenState)
             .then((resp) => {
                 const value = resp.data
                 setcommentTab(value)
@@ -45,7 +48,7 @@ const OnePost = () => {
             .catch((err) => {
                 console.log(err);
             })
-    }, [ dataLikes ])
+        }, [dataLikes])
 
     const requestPostLike = (value) => {
 
@@ -54,7 +57,6 @@ const OnePost = () => {
             post_id: id
         }, tokenState)
             .then((response) => {
-                console.log(response.data);
                 setPostObject((prev) => ({
                     ...prev,
                     likes: response.data.likes,
