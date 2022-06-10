@@ -28,8 +28,8 @@ function Header() {
 
             {/* Menu */}
             <div id="menu">
-                <Link to={'http://' + connectUrl} onClick={deleteToken} className="btn d-lg-none bar-item"><i className="fa fa-door-open"></i></Link>
-                <Link to={'http://' + connectUrl} onClick={deleteToken} className="btn d-none d-lg-inline bar-item">Déconnexion</Link>
+                <Link to={'/'} onClick={deleteToken} className="btn d-lg-none bar-item"><i className="fa fa-door-open"></i></Link>
+                <Link to={'/'} onClick={deleteToken} className="btn d-none d-lg-inline bar-item">Déconnexion</Link>
             </div>
         </div>
     </header>

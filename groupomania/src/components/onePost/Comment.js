@@ -4,13 +4,14 @@ import { tokenContext } from '../services/useToken';
 import { putDate } from "../services/time";
 import { addNewComment, deleteComment } from "../services/callAPI";
 
-const Comment = ({ commentTab, setcommentTab }) => {
+const Comment = ({ commentTab, setcommentTab, postObject }) => {
     const { id } = useParams();
     const [ tokenState, settokenState ] = useContext(tokenContext)
 
 
     const handleComment = (e) => {
         e.preventDefault()
+        console.log(commentTab);
         const body = e.target.children[ 0 ].value;
         const postId = id;
         addNewComment({
@@ -54,7 +55,7 @@ const Comment = ({ commentTab, setcommentTab }) => {
                     <section className='one_comment' key={i}>
                         <div className='d-flex d-column justify-content-between pt-2' id='topside'>
                             <p className='username'>{value.prenom + ' ' + value.nom}</p>
-                            <button className='btn btn-primary' id={i} onClick={handleDeleteComment}><i className="fa fa-trash" id={i}></i></button>
+                            <button className={commentTab[i].isOwned === true ? 'btn btn-primary' : 'btn btn-primary d-none'} id={i} onClick={handleDeleteComment}><i className="fa fa-trash" id={i}></i></button>
                         </div>
                         <p className='body'>{value.body}</p>
                         <p className='created-date'>{putDate(value.created_at)}</p>
@@ -64,7 +65,7 @@ const Comment = ({ commentTab, setcommentTab }) => {
         </div>}
 
         <form className='new-comment-area' onSubmit={handleComment}>
-            <input id='input-comment' autoFocus type='text' placeholder='ajouter un commentaire sur ce post'></input>
+            <input id='input-comment' autoFocus type='text' placeholder='Ajouter un commentaire sur ce post'></input>
         </form>
     </div>)
 }

@@ -54,7 +54,6 @@ exports.createNewPost = (req, res, next) => {
                     .catch(() => res.status(500).json({ message: 'Accès impossible aux données' }))
             })
             .catch((error) => {
-                console.log(error);
                 res.status(500).json({ error })
             })
     }
@@ -78,19 +77,17 @@ exports.createNewComment = (req, res, next) => {
     } else {
         comment.save()
             .then((response) => {
-                console.log(response);
                 let sql = `SELECT comments.id, user_id, post_id, body, created_at, nom, prenom FROM comments INNER JOIN user ON user.id = comments.user_id WHERE post_id = ${newCommentValidate.value.postId} `
                 db.execute(sql)
                     .then((comments) => {
                         res.status(200).json(comments[ 0 ])
                     })
                     .catch((err) => {
-                        console.log(err);
                         res.status(500).json(err)
                     })
             })
             .catch((err) => {
-                console.log(err);
+                res.status(404).json(err)
             })
     }
 }
@@ -124,7 +121,8 @@ exports.likes = async (req, res, next) => {
                 .catch((error) => res.status(400).json(error))
         })
         .catch((err) => {
-            console.log(err);
+            res.status(404).json(err)
+
         })
 }
 //GET
@@ -133,7 +131,6 @@ exports.getAllPosts = (req, res, next) => {
     return db.execute(sql)
         .then((post) => res.status(200).json(post[ 0 ]))
         .catch((error) => {
-            console.log(error);
             req.status(500).json({ error })
         })
 }
@@ -148,13 +145,14 @@ exports.getOnePost = async (req, res, next) => {
      (select count(*) from likes WHERE post_id = ${req.params.id} AND likeData = 1) AS likes, nbr_comment,
       (select count(*) from likes WHERE post_id = ${req.params.id} AND likeData = -1) AS dislikes,
       user_id FROM post INNER JOIN user ON post.user_id = user.id WHERE post.id = ${req.params.id}`
-            console.log(likedData);
-            /* faire la gestion du retour de la fonction alreadyLiked:
-            SI le retour est une valeur recuperer la valeur et la renvoyer dans la reponse (res)
-            SINON renvoyer false a la response */
+            
             return db.execute(sql)
                 .then((post) => {
-                    console.log(post[ 0 ][ 0 ]);
+                    if (post[ 0 ][ 0 ].user_id === req.body.userId) {
+                        post[ 0 ][ 0 ].isOwned = true
+                    } else {
+                        post[ 0 ][ 0 ].isOwned = false
+                    }
                     post[ 0 ][ 0 ].isLiked = likedData
                     res.status(200).json(post[ 0 ][ 0 ])
                 })
@@ -166,11 +164,21 @@ exports.getAllComments = (req, res, next) => {
     let sql = `SELECT comments.id, user_id, post_id, body, created_at, nom, prenom FROM comments INNER JOIN user ON user.id = comments.user_id WHERE post_id = ${req.params.id}`
     return db.execute(sql)
         .then((response) => {
-            console.log(response[ 0 ]);
+            let i = 0;
+            while (i < response[ 0 ].length) {
+                if (req.body.userId === response[ 0 ][ i ].user_id) {
+                    response[ 0 ][ i ].isOwned = true
+                } else {
+                    response[ 0 ][ i ].isOwned = false
+                }
+                i++
+            }
+
             response[ 0 ].nbr_comment = response[ 0 ].length
             res.status(200).json(response[ 0 ])
         })
         .catch((err) => {
+            console.log(err);
             res.status(404).json(err)
         })
 }

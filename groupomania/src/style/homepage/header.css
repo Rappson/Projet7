@@ -24,6 +24,7 @@
   }
   #new-post-link{
     cursor: pointer;
+    border: 0;
     margin-top: 10px;
   }
   

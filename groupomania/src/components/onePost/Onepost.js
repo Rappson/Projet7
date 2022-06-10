@@ -13,6 +13,7 @@ const OnePost = () => {
     const [ dataLikes, setDataLikes ] = useState({ likeData: 0 })
     const [ tokenState ] = useContext(tokenContext)
     const [ commentTab, setcommentTab ] = useState([])
+    const [ btnValue, setBtnValue] = useState('Supprimer')
 
 
 
@@ -51,7 +52,6 @@ const OnePost = () => {
         }, [dataLikes])
 
     const requestPostLike = (value) => {
-
         addNewLike({
             like: value,
             post_id: id
@@ -114,8 +114,16 @@ const OnePost = () => {
 
     }
 
-    const handleDelete = () => {
-        deleteItem(id, tokenState)
+    const handleDelete = (e) => {
+        e.preventDefault()
+        if(postObject.isOwned){
+            deleteItem(id, tokenState)
+        } else {
+            setBtnValue('Non ! Tu ne peux pas faire ça ;)')
+            window.setTimeout(() => {
+                setBtnValue('Supprimer')
+            }, 2000)
+        }
     }
 
 
@@ -127,7 +135,8 @@ const OnePost = () => {
                     <h2 className='post-title'>{postObject.title}</h2>
                     <p className='post-body'>{postObject.body}</p>
                 </div>
-                <button className='delete-post-btn' onClick={handleDelete}>Supprimer</button>
+
+                <button className={postObject.isOwned === true ? "delete-post-btn d-inline" : "delete-post-btn d-none"} onClick={handleDelete}>{btnValue}</button>
             </div>
 
             <div className='right-side'>
@@ -136,7 +145,7 @@ const OnePost = () => {
                     <a href="#input-comment" className='comments btn btn-secondary'><i className="fas fa-comment-medical" href=".new-comment-area">{postObject.nbr_comment}</i></a>
                     <button className={postObject.isLiked === -1 ? 'dislikes-active' : 'dislikes'} onClick={handleDislike}><i className="fas fa-heart-broken">{postObject.dislikes}</i></button>
                 </div>
-                <Comment commentTab={commentTab} setcommentTab={setcommentTab} />
+                <Comment commentTab={commentTab} setcommentTab={setcommentTab} postObject={postObject} />
             </div>
 
         </div>
