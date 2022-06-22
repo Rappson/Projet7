@@ -2,12 +2,13 @@ const db = require('../config/db')
 
 class User {
     // schema user
-    constructor(name, firstName, email, birthday, password) {
+    constructor(name, firstName, email, birthday, password, admin) {
         this.name = name;
         this.firstName = firstName;
         this.email = email;
         this.birthday = birthday;
         this.password = password;
+        this.admin
     }
 
     /* fonction sql :

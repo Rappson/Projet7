@@ -1,5 +1,5 @@
 import { React, useState, useContext, useEffect } from 'react'
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getOnePost, addNewLike, deleteItem, getComments } from "../services/callAPI";
 import "../../style/homepage/header.css"
 import '../../style/onePost.css';
@@ -13,9 +13,7 @@ const OnePost = () => {
     const [ dataLikes, setDataLikes ] = useState({ likeData: 0 })
     const [ tokenState ] = useContext(tokenContext)
     const [ commentTab, setcommentTab ] = useState([])
-    const [ btnValue, setBtnValue] = useState('Supprimer')
-
-
+    const [ btnValue, setBtnValue ] = useState('Supprimer')
 
 
     /* 
@@ -36,20 +34,19 @@ const OnePost = () => {
             .catch((error) => {
                 console.log(error);
             })
+    }, [ dataLikes ])
 
-            
-        }, [ dataLikes ])
-
-        useEffect(() => {
-            getComments(id, tokenState)
+    useEffect(() => {
+        getComments(id, tokenState)
             .then((resp) => {
                 const value = resp.data
+                console.log(value);
                 setcommentTab(value)
             })
             .catch((err) => {
                 console.log(err);
             })
-        }, [dataLikes])
+    }, [])
 
     const requestPostLike = (value) => {
         addNewLike({
@@ -116,7 +113,7 @@ const OnePost = () => {
 
     const handleDelete = (e) => {
         e.preventDefault()
-        if(postObject.isOwned){
+        if (postObject.isOwned) {
             deleteItem(id, tokenState)
         } else {
             setBtnValue('Non ! Tu ne peux pas faire ça ;)')

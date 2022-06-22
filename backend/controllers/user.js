@@ -56,7 +56,7 @@ exports.login = (req, res, next) => {
         password: req.body.password
     })
 
-    let sql = `select * from user where email = '${logValidate.value.email}'`;
+    let sql = `select * from user where email = '${logValidate.value.email}'`; 
     db.execute(sql)
         .then(([ rows ]) => {
             const user = rows[ 0 ]

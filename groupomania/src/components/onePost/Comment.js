@@ -1,4 +1,4 @@
-import { React, useContext, useEffect } from 'react'
+import { React, useContext, useEffect, useState } from 'react'
 import { useParams } from "react-router-dom";
 import { tokenContext } from '../services/useToken';
 import { putDate } from "../services/time";
@@ -8,18 +8,24 @@ const Comment = ({ commentTab, setcommentTab, postObject }) => {
     const { id } = useParams();
     const [ tokenState, settokenState ] = useContext(tokenContext)
 
+    const [ commentValue, setcommentValue ] = useState("")
+    const [ array, setArray ] = useState(commentTab)
+
 
     const handleComment = (e) => {
         e.preventDefault()
-        console.log(commentTab);
         const body = e.target.children[ 0 ].value;
         const postId = id;
         addNewComment({
             body: body,
-            postId: postId
+            postId: postId, 
+            isOwned: true
         }, tokenState)
             .then((res) => {
+                console.log(commentValue);
                 const value = res.data
+                console.log(value);
+                setcommentValue("")
                 setcommentTab(value)
             })
             .catch((err) => {
@@ -27,12 +33,15 @@ const Comment = ({ commentTab, setcommentTab, postObject }) => {
             })
     }
 
+    const inputComment = (e) => {
+        setcommentValue(e.target.value)
+    }
+
 /* il faut inserer l'ID dans le nouveau commentaire afin de pouvoir le supprimer sans actualiser */
 
     const handleDeleteComment = (e) => {
         e.preventDefault()
         const positionCommentInArray = e.target.id
-        console.log(e.target);
         const commentId = commentTab[ positionCommentInArray ].id
         deleteComment(commentId, tokenState)
             .then((response) => {
@@ -65,7 +74,7 @@ const Comment = ({ commentTab, setcommentTab, postObject }) => {
         </div>}
 
         <form className='new-comment-area' onSubmit={handleComment}>
-            <input id='input-comment' autoFocus type='text' placeholder='Ajouter un commentaire sur ce post'></input>
+            <input id='input-comment' autoFocus type='text' placeholder='Ajouter un commentaire sur ce post' onChange={inputComment} value={commentValue}></input>
         </form>
     </div>)
 }
