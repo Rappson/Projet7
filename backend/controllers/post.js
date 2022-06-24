@@ -10,7 +10,7 @@ const joiNewPost = require('../services/joi/new-post');
 const joiNewComment = require('../services/joi/new-comment')
 const likes = require('../services/likes')
 
-//POST
+//CREATE
 exports.createNewPost = (req, res, next) => {
     /* FAIRE la colomne "date de creation" dans post BDD
     
@@ -80,9 +80,20 @@ exports.createNewComment = (req, res, next) => {
                 let sql = `SELECT comments.id, user_id, post_id, body, created_at, nom, prenom FROM comments INNER JOIN user ON user.id = comments.user_id WHERE post_id = ${newCommentValidate.value.postId} `
                 db.execute(sql)
                     .then((comments) => {
+                        console.log(comments[ 0 ][ 0 ].user_id);
+                        let i = 0;
+                        while (i < comments[ 0 ].length) {
+                            if (req.body.userId === comments[ 0 ][ i ].user_id) {
+                                comments[ 0 ][ i ].isOwned = true
+                            } else {
+                                comments[ 0 ][ i ].isOwned = false
+                            }
+                            i++
+                        }
                         res.status(200).json(comments[ 0 ])
                     })
                     .catch((err) => {
+                        console.log(err);
                         res.status(500).json(err)
                     })
             })
@@ -125,7 +136,7 @@ exports.likes = async (req, res, next) => {
 
         })
 }
-//GET
+//READ
 exports.getAllPosts = (req, res, next) => {
     let sql = 'SELECT post.id, title, body, created_at, nom, prenom, likes, nbr_comment, dislikes, user_id FROM post INNER JOIN user ON post.user_id = user.id order by created_at DESC;';
     return db.execute(sql)
@@ -145,7 +156,7 @@ exports.getOnePost = async (req, res, next) => {
      (select count(*) from likes WHERE post_id = ${req.params.id} AND likeData = 1) AS likes, nbr_comment,
       (select count(*) from likes WHERE post_id = ${req.params.id} AND likeData = -1) AS dislikes,
       user_id FROM post INNER JOIN user ON post.user_id = user.id WHERE post.id = ${req.params.id}`
-            
+
             return db.execute(sql)
                 .then((post) => {
                     if (post[ 0 ][ 0 ].user_id === req.body.userId) {
@@ -181,6 +192,20 @@ exports.getAllComments = (req, res, next) => {
             console.log(err);
             res.status(404).json(err)
         })
+}
+
+//UPDATE
+exports.updatePost = (req, res, next) => {
+    let sql = `UPDATE post SET body = ${req.body.body} and title = ${req.body.title} where id = ${req.params.id}`
+    db.execute(sql)
+    .then((response) => {
+        console.log(response);
+        res.status(200).json(response)
+    })
+    .catch((err) => {
+        console.log(err);
+        res.status(404).json(err)
+    })
 }
 
 //DELETE

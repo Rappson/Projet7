@@ -9,7 +9,6 @@ const Comment = ({ commentTab, setcommentTab, postObject }) => {
     const [ tokenState, settokenState ] = useContext(tokenContext)
 
     const [ commentValue, setcommentValue ] = useState("")
-    const [ array, setArray ] = useState(commentTab)
 
 
     const handleComment = (e) => {
@@ -45,7 +44,7 @@ const Comment = ({ commentTab, setcommentTab, postObject }) => {
         const commentId = commentTab[ positionCommentInArray ].id
         deleteComment(commentId, tokenState)
             .then((response) => {
-                const newCommentTab = commentTab
+                const newCommentTab = [...commentTab]
                 console.log(newCommentTab);
                 // faut supprimer l'élément du tableau puis reset le tableau
                 newCommentTab.splice(positionCommentInArray, 1)

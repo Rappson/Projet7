@@ -48,7 +48,7 @@ function Post() {
             return (
                 <section className="container-post " key={key}>
                     <h4 htmlFor='body-post' className="title-post">{value.title}</h4>
-                    <div className="username">{value.nom + value.prenom}</div>
+                    <div className="username">{value.nom + ' ' + value.prenom}</div>
 
                     <div className="container-body" onClick={() => handleClick(value.id)}>
                         <div className="body-post" name="body-post"> {value.body}</div>
@@ -56,11 +56,6 @@ function Post() {
                         <div className="created-date">{putDate(value.created_at)}</div>
                     </div>
 
-                    <div className="container-btn">
-                        <button className="post-likes"><i className="far fa-heart">{value.likes}</i></button>
-                        <button className="btn-post-comment"><i className="fas fa-comment-medical">{value.nbr_comment}</i></button>
-                        <button className="post-dislikes"><i className="fas fa-heart-broken">{value.dislikes}</i></button>
-                    </div>
                 </section>
             )
         })}

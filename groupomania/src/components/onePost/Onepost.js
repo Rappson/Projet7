@@ -14,6 +14,9 @@ const OnePost = () => {
     const [ tokenState ] = useContext(tokenContext)
     const [ commentTab, setcommentTab ] = useState([])
     const [ btnValue, setBtnValue ] = useState('Supprimer')
+    const [ updateArea, setupdateArea ] = useState({
+        isActive: false
+    })
 
 
     /* 
@@ -65,8 +68,6 @@ const OnePost = () => {
             })
 
     }
-
-
 
     useEffect(() => {
         const countComment = commentTab.length
@@ -123,6 +124,10 @@ const OnePost = () => {
         }
     }
 
+    const handleUpdate = (e) => {
+
+    }
+
 
     return <div className='content'>
 
@@ -133,8 +138,33 @@ const OnePost = () => {
                     <p className='post-body'>{postObject.body}</p>
                 </div>
 
-                <button className={postObject.isOwned === true ? "delete-post-btn d-inline" : "delete-post-btn d-none"} onClick={handleDelete}>{btnValue}</button>
-            </div>
+                <button className={postObject.isOwned === true ? "delete-post-btn d-inline btn btn-danger" : "delete-post-btn d-none"} onClick={handleDelete}>{btnValue}</button>
+                
+                    <button type="button" className={postObject.isOwned === true ? "btn btn-warning d-inline" : "btn btn-warning d-none"} data-toggle="modal" data-target="#exampleModalCenter">
+                        Modifier
+                    </button>
+
+
+                    <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div className="modal-dialog modal-dialog-centered" role="document">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div className="modal-body">
+                                    ...
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" className="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div></div>
+
 
             <div className='right-side'>
                 <div className='container-likes'>
