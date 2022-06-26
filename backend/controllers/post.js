@@ -7,8 +7,10 @@ const dotenv = require('dotenv').config()
 // SERVICES
 const Joi = require('joi');
 const joiNewPost = require('../services/joi/new-post');
-const joiNewComment = require('../services/joi/new-comment')
-const likes = require('../services/likes')
+const joiNewComment = require('../services/joi/new-comment');
+const joiUpdatePost = require('../services/joi/update-post');
+const likes = require('../services/likes');
+const { NewDate } = require('../services/create-date');
 
 //CREATE
 exports.createNewPost = (req, res, next) => {
@@ -196,16 +198,34 @@ exports.getAllComments = (req, res, next) => {
 
 //UPDATE
 exports.updatePost = (req, res, next) => {
-    let sql = `UPDATE post SET body = ${req.body.body} and title = ${req.body.title} where id = ${req.params.id}`
+    console.log(req.body);
+
+    const updatePostValidate = joiUpdatePost.validate({
+        userId: req.body.userId,
+        title: req.body.title,
+        body: req.body.body
+    })
+
+    let d = new Date();
+
+    let DD = d.getDate();
+    let MM = d.getMonth() + 1;
+    let YYYY = d.getFullYear();
+    let hh = d.getHours();
+    let mm = d.getMinutes();
+
+    let created_at = `${YYYY}-${MM}-${DD} ${hh}:${mm}`
+
+    let sql = `UPDATE post SET body = '${updatePostValidate.value.body}', title = '${updatePostValidate.value.title}', created_at = '${created_at}' where id = ${req.params.id}`
     db.execute(sql)
-    .then((response) => {
-        console.log(response);
-        res.status(200).json(response)
-    })
-    .catch((err) => {
-        console.log(err);
-        res.status(404).json(err)
-    })
+        .then((response) => {
+            console.log(response);
+            res.status(200).json(response)
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(404).json(err)
+        })
 }
 
 //DELETE

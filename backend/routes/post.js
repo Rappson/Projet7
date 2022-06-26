@@ -11,7 +11,7 @@ router.post('/newComment', auth, postController.createNewComment);
 router.get('/getPost', auth, postController.getAllPosts);
 router.get('/getOnePost/:id', auth, postController.getOnePost);
 router.get('/getComments/:id', auth, postController.getAllComments);
-router.get('/updatePost/:id', auth, postController.updatePost);
+router.put('/updatePost/:id', auth, postController.updatePost);
 router.delete('/deletePost/:id', auth, postController.deletePost);
 router.delete('/deleteComment/:id', postController.deleteComment);
 

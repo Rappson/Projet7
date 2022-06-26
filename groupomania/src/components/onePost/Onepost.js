@@ -5,6 +5,7 @@ import "../../style/homepage/header.css"
 import '../../style/onePost.css';
 import { tokenContext } from '../services/useToken';
 import Comment from './Comment';
+import UpdatePostBtn from './UpdateButton';
 
 
 const OnePost = () => {
@@ -14,9 +15,7 @@ const OnePost = () => {
     const [ tokenState ] = useContext(tokenContext)
     const [ commentTab, setcommentTab ] = useState([])
     const [ btnValue, setBtnValue ] = useState('Supprimer')
-    const [ updateArea, setupdateArea ] = useState({
-        isActive: false
-    })
+
 
 
     /* 
@@ -43,7 +42,6 @@ const OnePost = () => {
         getComments(id, tokenState)
             .then((resp) => {
                 const value = resp.data
-                console.log(value);
                 setcommentTab(value)
             })
             .catch((err) => {
@@ -124,9 +122,6 @@ const OnePost = () => {
         }
     }
 
-    const handleUpdate = (e) => {
-
-    }
 
 
     return <div className='content'>
@@ -137,9 +132,11 @@ const OnePost = () => {
                     <h2 className='post-title'>{postObject.title}</h2>
                     <p className='post-body'>{postObject.body}</p>
                 </div>
+                <div id='btn-area'>
+                    <button className={postObject.isOwned === true ? "delete-post-btn d-inline btn btn-danger" : "delete-post-btn d-none"} onClick={handleDelete}>{btnValue}</button>
+                    <UpdatePostBtn isOwned={postObject.isOwned} postObject={postObject} setPostObject={setPostObject} />
+                </div>
 
-                <button className={postObject.isOwned === true ? "delete-post-btn d-inline btn btn-danger" : "delete-post-btn d-none"} onClick={handleDelete}>{btnValue}</button>
-                <updatePostBtn postObject={postObject} setPostObject={setPostObject}/>
             </div>
 
 

@@ -43,6 +43,11 @@ const deleteItem = (id, token) => {
    return axios.delete(urlBase + `/post/deletePost/${id}`, takeToken(token))
 }
 
+//UPDATE
+const updatePost = (id, newBody, token) => {
+   return axios.put(urlBase + `/post/updatePost/${id}`, newBody, takeToken(token))
+}
+
 // CONNECT / SIGNUP 
 const connectRequest = (body) => {
    return axios.post(urlBase + `/auth/login`, body)
@@ -53,4 +58,16 @@ const signupRequest = (body) => {
 }
 
 
-export { newPostRequest, getAllPost, getOnePost, addNewLike, addNewComment, getComments, deleteItem, deleteComment, connectRequest, signupRequest };
+export {
+   newPostRequest,
+   getAllPost,
+   getOnePost,
+   addNewLike,
+   addNewComment,
+   getComments,
+   deleteItem,
+   deleteComment,
+   updatePost,
+   connectRequest,
+   signupRequest
+};
