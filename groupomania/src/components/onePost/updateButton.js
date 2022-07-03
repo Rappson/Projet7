@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { tokenContext } from '../services/useToken';
 import { updatePost } from "../services/callAPI";
 
-const UpdatePostBtn = ({ isOwned, postObject, setPostObject }) => {
+const UpdatePostBtn = ({ submitUpdate, postObject, setPostObject }) => {
     const { id } = useParams();
     const [ modifiedContent, setModifiedContent ] = useState(null)
     const [ title, setTitle ] = useState(postObject.title)
@@ -11,6 +11,18 @@ const UpdatePostBtn = ({ isOwned, postObject, setPostObject }) => {
 
     const [ tokenState ] = useContext(tokenContext)
 
+
+    /* A VERIFIER
+    
+    POUR EVITER L ERREUR DES LE CHARGEMENT DE LA PAGE JE PEUX:
+    - METTRE LE STATE A "NULL" (TITLE, BODY)
+    - FAIRE UN USE EFFECT POUR SET LES STATES (TITLE, BODY) 
+    - RAJOUTER UNE CONDITION POUR EVITER LES BOUCLES 
+    
+                        -------------
+    
+    FAIRE UN BOUTTON TEMPORAIRE POUR LA VALIDATION DU SUBMIT
+    COMMENT FAIRE UNE CONDITION TERNAIRE */
 
     useEffect(() => {
         if (title === undefined || body === undefined) {
@@ -33,29 +45,25 @@ const UpdatePostBtn = ({ isOwned, postObject, setPostObject }) => {
         setBody(target)
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         setModifiedContent(() => ({
             title: title,
             body: body
         }))
+        updatePost(id, modifiedContent, tokenState)
+            .then((res) => {
+                console.log(res);
+                submitUpdate(title, body)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
 
-    useEffect(() => {
-        if (modifiedContent != null) {
-            updatePost(id, modifiedContent, tokenState)
-                .then((response) => {
-                    console.log(response);
-                    setModifiedContent(null)
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
-        }
-    }, [ modifiedContent ])
 
     return <div className="container">
-        <button type="button" className={isOwned === true ? "btn btn-warning d-inline" : "btn btn-warning d-none"} data-toggle="modal" data-target="#exampleModalCenter">
+        <button type="button" className={postObject.isOwned === true ? "btn btn-warning d-inline" : "btn btn-warning d-none"} data-toggle="modal" data-target="#exampleModalCenter">
             Modifier
         </button>
 
@@ -76,7 +84,7 @@ const UpdatePostBtn = ({ isOwned, postObject, setPostObject }) => {
                         </div>
                         <div className="modal-body d-flex flex-column" id='update-body'>
                             <label className="m-2 font-weight-bold" htmlFor="body">texte</label>
-                            <textarea name='body' onChange={handleBody} value={body}></textarea>
+                            <input type="text" name='body' onChange={handleBody} value={body}></input>
                         </div>
                     </form>
                     <div className="modal-footer">

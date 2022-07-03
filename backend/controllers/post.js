@@ -198,8 +198,6 @@ exports.getAllComments = (req, res, next) => {
 
 //UPDATE
 exports.updatePost = (req, res, next) => {
-    console.log(req.body);
-
     const updatePostValidate = joiUpdatePost.validate({
         userId: req.body.userId,
         title: req.body.title,
@@ -219,8 +217,7 @@ exports.updatePost = (req, res, next) => {
     let sql = `UPDATE post SET body = '${updatePostValidate.value.body}', title = '${updatePostValidate.value.title}', created_at = '${created_at}' where id = ${req.params.id}`
     db.execute(sql)
         .then((response) => {
-            console.log(response);
-            res.status(200).json(response)
+            res.status(200).json(response[0])
         })
         .catch((err) => {
             console.log(err);

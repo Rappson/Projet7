@@ -122,6 +122,14 @@ const OnePost = () => {
         }
     }
 
+    const submitUpdate = (title, body) => {
+        setPostObject({
+            ...postObject,
+            title: title,
+            body: body
+        })
+    }
+
 
 
     return <div className='content'>
@@ -134,7 +142,7 @@ const OnePost = () => {
                 </div>
                 <div id='btn-area'>
                     <button className={postObject.isOwned === true ? "delete-post-btn d-inline btn btn-danger" : "delete-post-btn d-none"} onClick={handleDelete}>{btnValue}</button>
-                    <UpdatePostBtn isOwned={postObject.isOwned} postObject={postObject} setPostObject={setPostObject} />
+                    <UpdatePostBtn submitUpdate={submitUpdate} postObject={postObject} setPostObject={setPostObject} />
                 </div>
 
             </div>
