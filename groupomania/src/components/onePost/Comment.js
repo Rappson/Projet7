@@ -17,7 +17,7 @@ const Comment = ({ commentTab, setcommentTab, postObject }) => {
         const postId = id;
         addNewComment({
             body: body,
-            postId: postId, 
+            postId: postId,
             isOwned: true
         }, tokenState)
             .then((res) => {
@@ -36,20 +36,18 @@ const Comment = ({ commentTab, setcommentTab, postObject }) => {
         setcommentValue(e.target.value)
     }
 
-/* il faut inserer l'ID dans le nouveau commentaire afin de pouvoir le supprimer sans actualiser */
+    /* il faut inserer l'ID dans le nouveau commentaire afin de pouvoir le supprimer sans actualiser */
 
     const handleDeleteComment = (e) => {
         e.preventDefault()
         const positionCommentInArray = e.target.id
         const commentId = commentTab[ positionCommentInArray ].id
         deleteComment(commentId, tokenState)
-            .then((response) => {
-                const newCommentTab = [...commentTab]
-                console.log(newCommentTab);
+            .then(() => {
+                const newCommentTab = [ ...commentTab ]
                 // faut supprimer l'élément du tableau puis reset le tableau
                 newCommentTab.splice(positionCommentInArray, 1)
                 setcommentTab(newCommentTab)
-                console.log(newCommentTab);
             })
             .catch((err) => {
                 console.log(err);
@@ -63,7 +61,7 @@ const Comment = ({ commentTab, setcommentTab, postObject }) => {
                     <section className='one_comment' key={i}>
                         <div className='d-flex d-column justify-content-between pt-2' id='topside'>
                             <p className='username'>{value.prenom + ' ' + value.nom}</p>
-                            <button className={commentTab[i].isOwned === true ? 'btn btn-primary' : 'btn btn-primary d-none'} id={i} onClick={handleDeleteComment}><i className="fa fa-trash" id={i}></i></button>
+                            <button className={commentTab[ i ].isOwned === true ? 'btn btn-primary' : 'btn btn-primary d-none'} id={i} onClick={handleDeleteComment}><i className="fa fa-trash" id={i}></i></button>
                         </div>
                         <p className='body'>{value.body}</p>
                         <p className='created-date'>{putDate(value.created_at)}</p>

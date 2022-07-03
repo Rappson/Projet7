@@ -10,11 +10,12 @@ import UpdatePostBtn from './UpdateButton';
 
 const OnePost = () => {
     const { id } = useParams();
+    const [ tokenState ] = useContext(tokenContext)
     const [ postObject, setPostObject ] = useState({})
     const [ dataLikes, setDataLikes ] = useState({ likeData: 0 })
-    const [ tokenState ] = useContext(tokenContext)
     const [ commentTab, setcommentTab ] = useState([])
     const [ btnValue, setBtnValue ] = useState('Supprimer')
+    const [ isAuthorized, setIsAuthorized ] = useState(false)
 
 
 
@@ -30,6 +31,10 @@ const OnePost = () => {
     useEffect(() => {
         getOnePost(id, tokenState)
             .then((response) => {
+                console.log(isAuthorized);
+                if(response.data.isOwned === true || response.data.admin === true){
+                    setIsAuthorized(true)
+                }
                 response.data.nbr_comment = commentTab.length
                 setPostObject(response.data)
             })
@@ -112,7 +117,7 @@ const OnePost = () => {
 
     const handleDelete = (e) => {
         e.preventDefault()
-        if (postObject.isOwned) {
+        if (isAuthorized) {
             deleteItem(id, tokenState)
         } else {
             setBtnValue('Non ! Tu ne peux pas faire ça ;)')

@@ -63,7 +63,7 @@ const UpdatePostBtn = ({ submitUpdate, postObject, setPostObject }) => {
 
 
     return <div className="container">
-        <button type="button" className={postObject.isOwned === true ? "btn btn-warning d-inline" : "btn btn-warning d-none"} data-toggle="modal" data-target="#exampleModalCenter">
+        <button type="button" className={postObject.isOwned === true || postObject.admin === true ? "btn btn-warning d-inline" : "btn btn-warning d-none"} data-toggle="modal" data-target="#exampleModalCenter">
             Modifier
         </button>
 

@@ -12,9 +12,9 @@ function Connect() {
 
     const [ IsVisible, setIsVisible ] = useState(false);
 
-    
-    const [tokenState, settokenState] = useContext(tokenContext)
-    
+
+    const [ tokenState, settokenState ] = useContext(tokenContext)
+
 
     useEffect(() => {
         localStorage.removeItem('jwtToken')
@@ -48,7 +48,6 @@ function Connect() {
                 setIsVisible(prevProps => !prevProps)
             })
 
-        /*       test.url@test.com      */
     }
 
 
@@ -71,7 +70,7 @@ function Connect() {
                 </div>
 
             </form>
-                <div id='error-content' className={IsVisible ? "visible" : "not-visible"}>L'utilisateur est introuvable ! merci de verifier le mail et/ou le mot de passe</div>
+            <div id='error-content' className={IsVisible ? "visible" : "not-visible"}>L'utilisateur est introuvable ! merci de verifier le mail et/ou le mot de passe</div>
         </div>
     </header>
 }

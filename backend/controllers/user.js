@@ -61,6 +61,7 @@ exports.login = (req, res, next) => {
         .then(([ rows ]) => {
             const user = rows[ 0 ]
             let userPassword = user.password;
+            console.log(user);
 
             /* SI aucun utilisateur n'a été trouvé */
             if (!user) {

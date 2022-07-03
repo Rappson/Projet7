@@ -161,13 +161,14 @@ exports.getOnePost = async (req, res, next) => {
 
             return db.execute(sql)
                 .then((post) => {
-                    if (post[ 0 ][ 0 ].user_id === req.body.userId) {
-                        post[ 0 ][ 0 ].isOwned = true
+                    if (post[ 0 ][ 0 ].user_id === req.body.userId || req.body.admin === true) {
+                        post[ 0 ][ 0 ].isOwned = true;
+                        post[ 0 ][ 0 ].admin = req.body.admin;
                     } else {
                         post[ 0 ][ 0 ].isOwned = false
-                    }
-                    post[ 0 ][ 0 ].isLiked = likedData
-                    res.status(200).json(post[ 0 ][ 0 ])
+                    };
+                    post[ 0 ][ 0 ].isLiked = likedData;
+                    res.status(200).json(post[ 0 ][ 0 ]);
                 })
                 .catch((error) => res.status(404).json(error))
         })
@@ -217,7 +218,7 @@ exports.updatePost = (req, res, next) => {
     let sql = `UPDATE post SET body = '${updatePostValidate.value.body}', title = '${updatePostValidate.value.title}', created_at = '${created_at}' where id = ${req.params.id}`
     db.execute(sql)
         .then((response) => {
-            res.status(200).json(response[0])
+            res.status(200).json(response[ 0 ])
         })
         .catch((err) => {
             console.log(err);
