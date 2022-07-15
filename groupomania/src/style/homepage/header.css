@@ -15,8 +15,8 @@
   }
   .bar-item:hover{
     color: black;
-    border: 1px solid #0d6efd;
-    background-color: #0d6efd;
+    border: 1px solid #FD2D01;
+    background-color: #FD2D01;
   }
   
   .fa-plus-circle, .fa-times-circle{
