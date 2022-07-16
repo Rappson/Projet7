@@ -47,13 +47,13 @@ function Post() {
         {listOfPosts.map((value, key) => {
             return (
                 <section className="container-post " key={key}>
-                    <h4 htmlFor='body-post' className="title-post">{value.title}</h4>
-                    <div className="username">{value.nom + ' ' + value.prenom}</div>
+                    <h4 htmlFor='body-post' className="title-post m-2">{value.title}</h4>
+                    <div className="username m-2">{value.nom + ' ' + value.prenom}</div>
 
                     <div className="container-body" onClick={() => handleClick(value.id)}>
-                        <div className="body-post" name="body-post"> {value.body}</div>
+                        <div className="body-post m-2" name="body-post"> {value.body}</div>
 
-                        <div className="created-date">{putDate(value.created_at)}</div>
+                        <div className="created-date m-2">{putDate(value.created_at)}</div>
                     </div>
 
                 </section>
