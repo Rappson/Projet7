@@ -45,6 +45,7 @@ const deleteItem = (id, token) => {
 
 //UPDATE
 const updatePost = (id, newBody, token) => {
+   console.log(newBody);
    return axios.put(urlBase + `/post/updatePost/${id}`, newBody, takeToken(token))
 }
 

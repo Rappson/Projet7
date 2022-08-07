@@ -1,15 +1,17 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { tokenContext } from '../services/useToken';
 import { updatePost } from "../services/callAPI";
 
 const UpdatePostBtn = ({ submitUpdate, postObject, setPostObject }) => {
     const { id } = useParams();
-    const [ modifiedContent, setModifiedContent ] = useState(null)
     const [ title, setTitle ] = useState(postObject.title)
     const [ body, setBody ] = useState(postObject.body)
 
     const [ tokenState ] = useContext(tokenContext)
+
+    const navigate = useNavigate();
+
 
 
     /* A VERIFIER
@@ -47,14 +49,15 @@ const UpdatePostBtn = ({ submitUpdate, postObject, setPostObject }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        setModifiedContent(() => ({
+        const modifiedContent = {
             title: title,
             body: body
-        }))
+        }
         updatePost(id, modifiedContent, tokenState)
             .then((res) => {
                 console.log(res);
                 submitUpdate(title, body)
+                navigate(`/post/${id}`)
             })
             .catch((err) => {
                 console.log(err);
@@ -77,20 +80,26 @@ const UpdatePostBtn = ({ submitUpdate, postObject, setPostObject }) => {
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
+
                     <form className="modal-container d-flex flex-column justify-content-center" onSubmit={handleSubmit}>
+
                         <div className='modal-body d-flex flex-column' id='update-title'>
                             <label className="m-2 font-weight-bold" htmlFor="title">Titre</label>
                             <input type='text' name="title" onChange={handleTitle} value={title}></input>
                         </div>
+
                         <div className="modal-body d-flex flex-column" id='update-body'>
                             <label className="m-2 font-weight-bold" htmlFor="body">texte</label>
                             <input type="text" name='body' onChange={handleBody} value={body}></input>
                         </div>
+
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                            {/* PAS BESOIN DE METTRE 2 FOIS ONCLICK */}
+                            <button type="submit" className="btn btn-warning">Save changes</button>
+                        </div>
                     </form>
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" onClick={handleSubmit} className="btn btn-warning">Save changes</button>
-                    </div>
+
                 </div>
             </div>
         </div>

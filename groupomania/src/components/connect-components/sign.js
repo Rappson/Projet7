@@ -56,7 +56,7 @@ const [ isSuccess, setIsSuccess ] = useState({
             {/* formulaire */}
             <form className="mx-5" onSubmit={handleSubmit}>
 
-                <div id="name" className="mt-3">
+                <div id="name" className="d-flex flex-column mt-3">
                     <label htmlFor="name" className="text-white">Nom&ensp;</label>
                     <input type="text" id="name" className="mr-1" name="name" value={sign.name} onChange={handleChange} />
 
@@ -64,17 +64,17 @@ const [ isSuccess, setIsSuccess ] = useState({
                     <input type="text" id="firstName" name="firstName" value={sign.firstName} onChange={handleChange} />
                 </div>
 
-                <div id="email" className="mt-2 mb-2">
+                <div id="email" className="d-flex flex-column mt-2 mb-2">
                     <label htmlFor="email" className="text-white">Email&ensp;</label>
                     <input type="email" id="email" name="email" value={sign.email} onChange={handleChange} />
                 </div>
 
                 <div id='date'>
-                    <label htmlFor="birthday" className="text-white">Date de naissance&ensp;</label>
+                    <label htmlFor="birthday" className="d-flex flex-column text-white">Date de naissance&ensp;</label>
                     <input type="date" id="birthday" name="birthday" value={sign.birthday} onChange={handleChange} />
                 </div>
 
-                <div id="password" className="mt-2 mb-2">
+                <div id="password" className="d-flex flex-column mt-2 mb-2">
                     <label htmlFor="password" className="text-white">Mot de passe&ensp;</label>
                     <input type="password" id="mdp" name="password" value={sign.password} onChange={handleChange} />
                 </div>
