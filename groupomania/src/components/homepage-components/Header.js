@@ -9,9 +9,7 @@ function Header() {
         localStorage.removeItem('jwtToken');
     }
     
-/*     const iconBack = <i className="fa fa-chevron-left"></i>;
-    const logo = <img src="images/icon-left-font-monochrome-white.png" alt='logo' id="icon-connect" />
- */
+
     return <header>
         {/* Logo */}
         <div id="connect" className="d-flex flex-row justify-content-between align-items-center p-3">

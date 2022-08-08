@@ -55,7 +55,6 @@ const UpdatePostBtn = ({ submitUpdate, postObject, setPostObject }) => {
         }
         updatePost(id, modifiedContent, tokenState)
             .then((res) => {
-                console.log(res);
                 submitUpdate(title, body)
                 navigate(`/post/${id}`)
             })

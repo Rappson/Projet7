@@ -18,16 +18,6 @@ const OnePost = () => {
     const [ isAuthorized, setIsAuthorized ] = useState(false)
 
 
-
-    /* 
-    je recupere le post et l'affiche (postObject)
-    a chaque changement de likes (useEffect), j'appelle la fonction qui va chercher le post
-    
-    *
-
-    peut etre avoir une données liked, disliked ou null */
-
-
     useEffect(() => {
         getOnePost(id, tokenState)
             .then((response) => {

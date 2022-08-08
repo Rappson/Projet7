@@ -36,7 +36,7 @@ const [ isSuccess, setIsSuccess ] = useState({
                 success: true
             })
         })
-        .catch((response) => {
+        .catch(() => {
             setIsSuccess({
                 message: 'Un probleme est survenue, merci de vérifier les informations',
                 success: false
@@ -55,7 +55,7 @@ const [ isSuccess, setIsSuccess ] = useState({
 
             {/* formulaire */}
             <form className="mx-5" onSubmit={handleSubmit}>
-
+                {/* NAME */}
                 <div id="name" className="d-flex flex-column mt-3">
                     <label htmlFor="name" className="text-white">Nom&ensp;</label>
                     <input type="text" id="name" className="mr-1" name="name" value={sign.name} onChange={handleChange} />
@@ -63,25 +63,28 @@ const [ isSuccess, setIsSuccess ] = useState({
                     <label htmlFor='firstName' className="text-white">Prénom&ensp;</label>
                     <input type="text" id="firstName" name="firstName" value={sign.firstName} onChange={handleChange} />
                 </div>
-
+                {/* EMAIL */}
                 <div id="email" className="d-flex flex-column mt-2 mb-2">
                     <label htmlFor="email" className="text-white">Email&ensp;</label>
                     <input type="email" id="email" name="email" value={sign.email} onChange={handleChange} />
                 </div>
 
+                {/* BIRTHDAY */}
                 <div id='date'>
                     <label htmlFor="birthday" className="d-flex flex-column text-white">Date de naissance&ensp;</label>
                     <input type="date" id="birthday" name="birthday" value={sign.birthday} onChange={handleChange} />
                 </div>
 
+                {/* PASSWORD */}
                 <div id="password" className="d-flex flex-column mt-2 mb-2">
                     <label htmlFor="password" className="text-white">Mot de passe&ensp;</label>
                     <input type="password" id="mdp" name="password" value={sign.password} onChange={handleChange} />
                 </div>
-
+                {/* SUBMIT */}
                 <input type="submit" value="S'inscrire" className='btn btn-primary my-2 border border-dark'></input>
             </form>
         </div>
+        {/* MESSAGE  */}
         <div id="success-message" className={isSuccess.success ? "text-success" : "text-danger"}>
             <p>{isSuccess.message}</p>
         </div>

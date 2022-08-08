@@ -16,7 +16,7 @@ function CreateNewPost({onPostCreated}) {
 
     const [ IsVisible, setIsVisible ] = useState(false);
 
-
+    /*  */
     const handleChange = (e) => {
         setPost((prevProps) => ({
             ...prevProps,
@@ -24,6 +24,7 @@ function CreateNewPost({onPostCreated}) {
         }));
     }
 
+    /* SOUMET LA REQUETE D'UN NOUVEAU POST */
     const handleSubmit = (e) => {
         e.preventDefault();
         newPostRequest(Post, tokenState)
