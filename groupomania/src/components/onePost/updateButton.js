@@ -10,7 +10,7 @@ const UpdatePostBtn = ({ submitUpdate, postObject, setPostObject }) => {
 
     const [ tokenState ] = useContext(tokenContext)
 
-    const navigate = useNavigate();
+    let navigate = useNavigate();
 
 
 
@@ -56,7 +56,7 @@ const UpdatePostBtn = ({ submitUpdate, postObject, setPostObject }) => {
         updatePost(id, modifiedContent, tokenState)
             .then((res) => {
                 submitUpdate(title, body)
-                navigate(`/post/${id}`)
+               document.getElementById("btn-close-update").click();
             })
             .catch((err) => {
                 console.log(err);
@@ -93,8 +93,7 @@ const UpdatePostBtn = ({ submitUpdate, postObject, setPostObject }) => {
                         </div>
 
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            {/* PAS BESOIN DE METTRE 2 FOIS ONCLICK */}
+                            <button type="button" className="btn btn-secondary" id="btn-close-update" data-dismiss="modal">Close</button>
                             <button type="submit" className="btn btn-warning">Save changes</button>
                         </div>
                     </form>
