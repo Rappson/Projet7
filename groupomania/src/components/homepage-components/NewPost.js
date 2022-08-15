@@ -16,7 +16,7 @@ function CreateNewPost({onPostCreated}) {
 
     const [ IsVisible, setIsVisible ] = useState(false);
 
-    /*  */
+  
     const handleChange = (e) => {
         setPost((prevProps) => ({
             ...prevProps,

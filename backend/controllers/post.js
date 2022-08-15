@@ -14,17 +14,7 @@ const { NewDate } = require('../services/create-date');
 
 //CREATE
 exports.createNewPost = (req, res, next) => {
-    /* FAIRE la colomne "date de creation" dans post BDD
-    
-    
-    comment sauvegarder les commentaires?
-    dans post, enregister les id des commentaires OU
-
-    enregistrer le nombres de commentaires et ensuite le répertorier dans des tables liées MAIS si il n'y a aucun commentaires comment faire? OU
-
-    faire une liste des utilisateurs qui ont commenter
-    
-    */
+  
     const newPostValidate = joiNewPost.validate({
         userId: req.body.userId,
         title: req.body.title,
@@ -138,6 +128,8 @@ exports.likes = async (req, res, next) => {
 
         })
 }
+
+
 //READ
 exports.getAllPosts = (req, res, next) => {
     let sql = 'SELECT post.id, title, body, created_at, nom, prenom, likes, nbr_comment, dislikes, user_id FROM post INNER JOIN user ON post.user_id = user.id order by created_at DESC;';
@@ -225,6 +217,7 @@ exports.updatePost = (req, res, next) => {
             res.status(404).json(err)
         })
 }
+
 
 //DELETE
 exports.deletePost = (req, res, next) => {

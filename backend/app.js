@@ -22,6 +22,7 @@ app.use((req, res, next) => {
 
 // routes de connexion/inscription
 app.use('/api/auth', userRoutes);
+// routes de publication
 app.use('/api/post', postRoutes)
 
 module.exports = app;

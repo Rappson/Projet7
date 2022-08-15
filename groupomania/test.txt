@@ -77,3 +77,20 @@ let deleteRequest = `delete from likes where user_id = ${data.id}`
 
 
             // let testgrouppby = `SELECT likeData, COUNT(*) AS nbrLike FROM likes where post_id = ${req.body.post_id} GROUP BY likeData`
+
+
+
+- Présenter en mobile
+- Parler de Joi plus tard dans le technique, parler plus de la validation.
+- (On peut tester ça: on crée un user)
+- Parler de déconnexion plus tard (à la fin) ne pas mélanger l’explication des fonctionnalités
+- Présenter un post ayant des likes et commentaires.
+- (Incrémentation?? Une personne peut liker qu’une seule fois)
+- Présenter la partie Admin.
+- Démontrer la BDD et expliquer la structure
+- Parler rapidement des dossiers générés par réaction-app et plus en détail de la conception des dossiers créés (compétents, pages…).
+- Pas trop de détail (paramètre, fonction…)
+- Présenter (fonctionnel component, context, State, effect)
+- Utilisation de mysql2 et ne pas un ORM
+- Présenter les models
+- Explication cors bof (ce n’est pas une authentification)
