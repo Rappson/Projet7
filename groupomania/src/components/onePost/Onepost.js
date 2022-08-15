@@ -1,5 +1,5 @@
 import { React, useState, useContext, useEffect } from 'react'
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getOnePost, addNewLike, deleteItem, getComments } from "../services/callAPI";
 import "../../style/homepage/header.css"
 import '../../style/onePost.css';
@@ -16,6 +16,8 @@ const OnePost = () => {
     const [ commentTab, setcommentTab ] = useState([])
     const [ btnValue, setBtnValue ] = useState('Supprimer')
     const [ isAuthorized, setIsAuthorized ] = useState(false)
+
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -109,6 +111,9 @@ const OnePost = () => {
         e.preventDefault()
         if (isAuthorized) {
             deleteItem(id, tokenState)
+            .then(() => {
+                navigate("/homepage")
+            })
         } else {
             setBtnValue('Non ! Tu ne peux pas faire ça ;)')
             window.setTimeout(() => {
