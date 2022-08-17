@@ -88,7 +88,7 @@ let deleteRequest = `delete from likes where user_id = ${data.id}`
 - (Incrémentation?? Une personne peut liker qu’une seule fois)
 - Présenter la partie Admin.
 - Démontrer la BDD et expliquer la structure
-- Parler rapidement des dossiers générés par réaction-app et plus en détail de la conception des dossiers créés (compétents, pages…).
+- Parler rapidement des dossiers générés par réact-app et plus en détail de la conception des dossiers créés (components, pages…).
 - Pas trop de détail (paramètre, fonction…)
 - Présenter (fonctionnel component, context, State, effect)
 - Utilisation de mysql2 et ne pas un ORM

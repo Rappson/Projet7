@@ -13,6 +13,6 @@ router.get('/getOnePost/:id', auth, postController.getOnePost);
 router.get('/getComments/:id', auth, postController.getAllComments);
 router.put('/updatePost/:id', auth, postController.updatePost);
 router.delete('/deletePost/:id', auth, postController.deletePost);
-router.delete('/deleteComment/:id', postController.deleteComment);
+router.delete('/deleteComment/:id', auth, postController.deleteComment);
 
 module.exports = router
