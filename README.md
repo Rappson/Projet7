@@ -32,3 +32,8 @@ Tout d'abord pensez à cloner le projet dans un dossier en local, et à l'ouvrir
 ### `nodemon start`
 
 -Faire un "nodemon start" 
+
+
+## Base de donnée
+
+-Importez le dossier "backend/BDD" pour importer la base de donnée
