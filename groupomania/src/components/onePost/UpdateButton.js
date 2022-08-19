@@ -84,12 +84,12 @@ const UpdatePostBtn = ({ submitUpdate, postObject, setPostObject }) => {
 
                         <div className='modal-body d-flex flex-column' id='update-title'>
                             <label className="m-2 font-weight-bold" htmlFor="title">Titre</label>
-                            <input type='text' name="title" onChange={handleTitle} value={title}></input>
+                            <input id="title" type='text' name="title" onChange={handleTitle} value={title}></input>
                         </div>
 
                         <div className="modal-body d-flex flex-column" id='update-body'>
                             <label className="m-2 font-weight-bold" htmlFor="body">texte</label>
-                            <input type="text" name='body' onChange={handleBody} value={body}></input>
+                            <input type="text" id="body" name='body' onChange={handleBody} value={body}></input>
                         </div>
 
                         <div className="modal-footer">

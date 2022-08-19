@@ -42,7 +42,7 @@ function CreateNewPost({onPostCreated}) {
     return (
         <div className="container-form-newPost">
             {/* create nw post */}
-            <button id="new-post-link" onClick={MakeVisible} > <i className={IsVisible ? "fas fa-times-circle" : "fas fa-plus-circle"}></i></button>
+            <button id="new-post-link" onClick={MakeVisible} > Nouvelle  <i className={IsVisible ? "fas fa-times-circle" : "fas fa-plus-circle"}></i> publication</button>
 
 
             {IsVisible &&

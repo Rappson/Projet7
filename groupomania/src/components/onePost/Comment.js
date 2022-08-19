@@ -13,8 +13,9 @@ const Comment = ({ commentTab, setcommentTab, postObject }) => {
 
     const handleComment = (e) => {
         e.preventDefault()
-        const body = e.target.children[ 0 ].value;
+        const body = e.target.children[ 0 ].children[ 0 ].value
         const postId = id;
+        console.log(body);
         addNewComment({
             body: body,
             postId: postId,
@@ -61,7 +62,7 @@ const Comment = ({ commentTab, setcommentTab, postObject }) => {
                     <section className='one_comment' key={i}>
                         <div className='d-flex d-column justify-content-between pt-2' id='topside'>
                             <p className='username'>{value.prenom + ' ' + value.nom}</p>
-                            <button className={commentTab[ i ].isOwned === true ? 'btn btn-primary' : 'btn btn-primary d-none'} id={i} onClick={handleDeleteComment}><i className="fa fa-trash" id={i}></i></button>
+                            <button className={commentTab[ i ].isOwned === true ? 'btn btn-primary' : 'btn btn-primary d-none'} id={i} onClick={handleDeleteComment}><i className="fa fa-trash" id={i}></i> Supprimer</button>
                         </div>
                         <p className='body'>{value.body}</p>
                         <p className='created-date'>{putDate(value.created_at)}</p>
@@ -71,7 +72,9 @@ const Comment = ({ commentTab, setcommentTab, postObject }) => {
         </div>}
 
         <form className='new-comment-area' onSubmit={handleComment}>
-            <input id='input-comment' autoFocus type='text' placeholder='Ajouter un commentaire sur ce post' onChange={inputComment} value={commentValue}></input>
+            <label htmlFor='input-comment'>Votre commentaire :
+                <input id='input-comment' autoFocus type='text' placeholder='Ajouter un commentaire sur ce post' onChange={inputComment} value={commentValue}></input>
+            </label>
         </form>
     </div>)
 }
