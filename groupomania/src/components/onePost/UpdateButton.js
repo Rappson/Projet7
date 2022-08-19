@@ -54,7 +54,7 @@ const UpdatePostBtn = ({ submitUpdate, postObject, setPostObject }) => {
             body: body
         }
         updatePost(id, modifiedContent, tokenState)
-            .then((res) => {
+            .then(() => {
                 submitUpdate(title, body)
                document.getElementById("btn-close-update").click();
             })
