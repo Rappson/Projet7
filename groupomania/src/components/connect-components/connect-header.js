@@ -34,6 +34,7 @@ function Connect() {
             ...prevProps,
             [ e.target.name ]: e.target.value
         }));
+        console.log(log);
     }
 
     //function to submit
@@ -58,17 +59,19 @@ function Connect() {
             {/* formulaire */}
             <form id='form-connect' className="d-flex flex-column flex-md-row align-items-center" onSubmit={handleSubmit}>
                 <div id="connect-input" className='d-flex flex-column flex-md-row align-items-center align-self-md-stretch m-2'>
-                    <label htmlFor="email" className='m-2 text-white'>Email</label>
-                    <input type="text" id="email" name="email" value={log.email} onChange={handleChange} />
+                    <label htmlFor="mail" className='m-2 text-white'>Email
+                        <input type="text" id='mail' name="email" value={log.email} onChange={handleChange} />
+                    </label>
                 </div>
 
                 <div className='d-flex flex-column flex-md-row align-items-center align-self-md-stretch align-self-center'>
-                    <label htmlFor="password" className='m-2 text-white'>Mot de passe</label>
-                    <input type="password" id="password" name="password" value={log.password} onChange={handleChange} />
-
-                    <input type="submit" value="Se connecter" id="connect-button" className='m-2 btn btn-primary border border-dark' />
+                    <label htmlFor="mdp" className='m-2 text-white'>Mot de passe
+                        <input type="password" id='mdp' name="password" value={log.password} onChange={handleChange} />
+                    </label>
                 </div>
 
+
+                <input type="submit" value="Se connecter" id="connect-button" className='m-2 btn btn-primary border border-dark' />
             </form>
             <div id='error-content' className={IsVisible ? "visible" : "not-visible"}>L'utilisateur est introuvable ! merci de verifier le mail et/ou le mot de passe</div>
         </div>

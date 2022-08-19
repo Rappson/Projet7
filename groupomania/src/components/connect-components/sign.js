@@ -78,7 +78,7 @@ const [ isSuccess, setIsSuccess ] = useState({
                 {/* PASSWORD */}
                 <div id="password" className="d-flex flex-column mt-2 mb-2">
                     <label htmlFor="password" className="text-white">Mot de passe&ensp;</label>
-                    <input type="password" id="mdp" name="password" value={sign.password} onChange={handleChange} />
+                    <input type="password" id="password" name="password" value={sign.password} onChange={handleChange} />
                 </div>
                 {/* SUBMIT */}
                 <input type="submit" value="S'inscrire" className='btn btn-primary my-2 border border-dark'></input>
